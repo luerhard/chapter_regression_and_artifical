@@ -1,0 +1,9 @@
+diff.html
+old.md
+main.pdf
+main.odt
+**/__pycache__/**
+out/**
+*.log
+.ztr-directory
+*-eps-converted-to.pdf
