@@ -3,30 +3,24 @@
 csl: rsc/library/style.csl # See https://www.zotero.org/styles for more styles.
 bibliography: rsc/library/references.json
 
-title: 'My academic Paper'
+title: 'Regression and Artificial Intelligence'
 
 authors:
-    - John Doe:
-        institute: [wuppi, stutti]
-        email: john@doe.com
-    - Jane Doe:
-        institute: wuppi
-        email: janedoe@wuppertal.com
-    - Jack Barnes:
-        institute: bro
-        email: janedoe@wuppertal.com
+    - Raphael Heiberger:
+        institute: stuttgart
+        email: raphael.heiberger@sowi.uni-stuttgart.de
         correspondence: yes
-
+    - Lukas Erhard:
+        institute: stuttgart
+        email: lukas.erhard@sowi.uni-stuttgart.de
 institutes:
-    bro: Best Uni Ever
-    wuppi: Universität Wuppertal
-    stutti: Universität Stuttgart
+    stuttgart: University of Stuttgart, Seidenstraße 36, 70714 Stuttgart, Germany
 
 date: \today
 
 abstract: 'Hier Vorgang ihm als reiße. Ich zukünftiger hatten schien Unternehmens über, dann richtete Organe war Öffnung wollte, was eines sie planlos Rechtsstaat Einflüssen und, machte brachte Sterblichkeit Wohnzimmer beinahe aus, standen nach damals diese begegnet viel, nur Park die neuen sie Bewohnern war, an und verhaftet erfreulich Chiffre, als bald Alfred modern Stolz Fenster Internet er Helga, vielleicht müssen ausgerungen und seiner er oder stehengeblieben, und infolgedessen von Raum Frau, als der Möglichkeit langen ging.'
 
-keywords: 'Schlagworte, Worte'
+keywords: 'regression, artifical intelligence, machine learning'
 
 titlepage: true
 toc: false # Table of contents
@@ -35,74 +29,52 @@ toc: false # Table of contents
 
 # Introduction
 
-Ich schreibe jetzt meine Einleitung.
+The research in the social sciences has been shifting towards a new era.
+In the prior century, the focus laid mainly on variable based, theory and hypothesis driven approaches to give answers to societal questions, the availability of more and more data opens possibilities and creates the need for new forms of analysis.
 
-Wir schreiben hier eine _Einleitung_ in kursiv sowie ein bisschen Text in **Fett**. Dabei updatest sich der Text quasi in Echtzeit. 
-Wir können hier so viel schreiben, wie wir wollen. @cheng:Miningresearchtrends.2015
-This is my super important Article. This is me ! I will reference stuff here [@jonesMultiUniversityResearchTeams.2008, 23].
+While classical social science, as practiced since the second half of the last century, is based on a set of well-defined and elaborated rules, the emergence of ever-new data sets create the need (and possibility) to approach questions in a new way. <!-- McFarland et al., 2015, Sociology in the Era of Big Data ... -->
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+# Classical Knowledge Acquisition in the Social Sciences
 
-# Theory
+<!--%Popper-->
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi eget mauris pharetra et ultrices. Feugiat pretium nibh ipsum consequat nisl. Fermentum odio eu feugiat pretium. Viverra nam libero justo laoreet. Fermentum leo vel orci porta non pulvinar neque. Ultricies mi quis hendrerit dolor magna eget est lorem. Facilisis mauris sit amet massa vitae tortor condimentum. Nisi scelerisque eu ultrices vitae auctor eu augue. Ultrices mi tempus imperdiet nulla. Pharetra pharetra massa massa ultricies. Fusce ut placerat orci nulla pellentesque. 
+The standard way: Take a theory, create some hypothesis, operationalize said hypothesis, take a random sample of individuals out of your population, run your model against it.
+If your difference in means (results) holds true in your population (is significant), hip hip hurray, you can reject you null hypothesis and have gained knowledge about your population. <!--% halt in ausformuliert. -->
 
-![This is a cat !](rsc/images/Figure_1.eps){#fig:cat .center width="100%"}
+This approach bears some shortcomings:
 
-As you can see in Figure {@fig:cat}, this is cute.
+1. What if your sample size is large?
+    Many of the frequentist approaches are very prone to large sample sizes (e.g., all the chi-squared based test-statistics).
+    Testing for significance with very large sample sizes will almost always generate significant results, rendering those tests useless.
 
-Massa tincidunt dui ut ornare lectus. Curabitur vitae nunc sed velit. Arcu felis bibendum ut tristique et egestas quis. Tellus elementum sagittis vitae et leo duis. Et ultrices neque ornare aenean euismod elementum nisi quis.
+2. What if your sample is not independent and identically distributed? <!--% prozessgeneriert -->
+    Many new datasets do not oblige to the rules for classical hypothesis testing
 
+3. What if you have data about the entire population? <!--%all tweets, news articles, users of a platform etc. --> Then, running tests for significance becomes completely irrelevant.
 
+4. What if you have no theory, you can derive hypothesis from? This is especially important for social media networks, where the rules of engagement might differ quite substantially from 'normal' social behaviour or where you cannot specify your population.
 
-# Methods {#sec:methods}
-
-Contrary to popular belief, Lorem Ipsum is not specific text. See chapter {@sec:theory} for more details.
-
-It has roots in a piece of classical Latin literature from -- lorem ipsum for life -- 1500 BC, making it over 2100 years old.
-Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
-
-Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 1 Mio BC. This book is a treatise on the theory of ethics, very popular during the Renaissance.
-The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-nach [@boswell:MigrationEuropepaper.2005] sollte das jetzt mal....
-
-Auch ist der Meinung, dass Karthago zerstört werden müsse.
-Hier ist noch mehr !!!
-\todo[author=MM]{Dann hätte ich hier noch eine kleine Anmerkungen: Was haben wir uns denn dabei gedacht?}
-\todo[author=KU]{Oh, das habe ich übersehen}
+# What is Machine Learning?
 
 
-## Submethods {#sec:submethods}
-hallo world[^1]. Der Rest kann in Kapitel {@sec:methods} nachgelesen werden. And this is: {@sec:submethods}
+<!--% transcript of McFarland, p. 20 -- rewrite, but basically this:-->
+See @mcfarland:SociologyEraBig.2016:
 
-### Subsubmethods
+In internet companies there are large assortments of engineers focused solely on improving prediction. For example, a company may have many records on their website’s usage, such as information on clicks, site referrals, posted texts, network positions, as well as time spent on each page, purchasing behavior, and product quality ratings. Most companies ask their engineers to take these data and develop models informing the company when a customer service effort, advertisement, or search result will lead users to purchase more goods, stay on the site longer, or otherwise become an ideal consumer. The engineer typically approaches this problem without any concern for theory and instead applies machine learning (Alpaydin 2004; Bishop 2007).Footnote 6 This proceeds when the engineer takes, say, half the collected data (the “training set”) and identifies a variety of user actions (and their timing) most associated with a desired outcome. In effect, the engineer trains a logit model on an outcome of interest and throws as many features (variables) as possible at it in order to develop highly predictive weights. Then the engineer utilizes these weights to create an algorithm and assesses whether it can accurately predict the desired outcome in the remaining data that were not used for training (the “test set”). When the algorithm reaches certain levels of accuracy, the engineer can use it to determine which users need a “push” so as to proceed in desired directions.
 
-Hier ist ein bisschen was in _italic. yeah_
+Machine learning is a powerful tool that has assisted companies in many domains with various engineering questions (Talley et al. 2011). In fact, machine learning is the foundation of machine translation: for instance, how Chinese is accurately translated into English. The algorithm proceeds by merely identifying common word sequences across verified translations, and as the “training set” of known translations grows, so does the probability of accurately “predicting” word associations in “test sets” of future text. The “theory” is nothing more than probabilities of word associations as identified by many known translations. There is no linguistic theory of how a language or translation works (in fact, theories are notoriously inaccurate at translation). All that is desired is an accurate translation—utility is paramount, while understanding and explanation are superfluous.
 
-## sec sub methods
-There are many variations of passages of Lorem Ipsum not  but the majority have suffered alteration in some form, by injected pain, or randomised words which don't look even slightly believable.
+When the machine learning approach is combined with theory and scientific research it can lead to surprising results. The atheoretical perspective of machine learning can reveal patterns a theory did not predict or a new way to formulate the theory that perhaps the analyst had overlooked. However, machine learning on its own (and by design) results in little to no understanding if there is no effort to derive a theory or explanation. In sum, the use of machine learning is atheoretical, but it is potentially powerful when used as an agnostic search for potential explanations. In contrast, theory is a somewhat narrow-minded but powerful tool in that it is a focusing device that identifies which constructs are to be selected and formed from the millions of possible variables (or features) and it afford potential explanations for how features interrelate. As such, the iterative combination of atheoretical induction and theory-led deduction can be quite powerful.
+<!--% copy paste McFarland Ende.-->
 
-We are currently in Section {@sec:sec-sub-methods}.
 
-If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
-ll the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-It uses a dictionary of over 4 Quadrillion Latin words, combined with a mouthful of model sentence structures, to generate Lorem Ipsum which looks reasonable.
-The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc[^2].
+# How does ML compare to classical approaches?
 
-I can only believe that what goes here will be RED. And this is green? see appendix {@ap:B}
+Many of the algorithms are the same, but the mindset and evaluation strategies differ.
 
-## Data
+In contrast to frequentist models, ML models usually do not have any usable, that is interpretable, coefficients.
+Model evaluation rather works by evaluating its predictive power.
 
-# Results
-
-## subresults
-
-A linked reference to Figure {@fig:cat}.
-
-# Discussion
-
-This part is reserved for the discussion.
-
-[^1]: This is my important footnote.
-[^2]: This is a second footnote.
-
+Compare:
+- Logistic regression
+- PCA vs Factor analysis
