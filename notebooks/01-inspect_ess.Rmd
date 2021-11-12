@@ -1,0 +1,24 @@
+---
+title: "01-inspect_ess"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(here)
+library(tibble)
+
+source(here("r", "load_data.R"))
+```
+
+## Load Data
+
+```{r}
+df <- load_data()
+df <- tibble::as_tibble(df)
+``` 
+
+```{r}
+df
+```
