@@ -7,3 +7,5 @@ out/**
 *.log
 .ztr-directory
 *-eps-converted-to.pdf
+.Rproj.user
+*.Rproj
