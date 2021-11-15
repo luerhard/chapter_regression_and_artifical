@@ -31,8 +31,12 @@ toc: false # Table of contents
 
 The research in the social sciences has been shifting towards a new era.
 In the prior century, the focus laid mainly on variable based, theory and hypothesis driven approaches to give answers to societal questions, the availability of more and more data opens possibilities and creates the need for new forms of analysis.
+While classical social science, as practiced since the second half of the last century, is based on a set of well-defined and elaborated rules, the emergence of ever-new data sets create the need (and possibility) to approach questions in a new way [@mcfarland:SociologyEraBig.2016].
 
-While classical social science, as practiced since the second half of the last century, is based on a set of well-defined and elaborated rules, the emergence of ever-new data sets create the need (and possibility) to approach questions in a new way. <!-- McFarland et al., 2015, Sociology in the Era of Big Data ... -->
+In this chapter, we will give an overview over some of the new methods, compare them to the approaches used in the 'classical' social social sciences, and point out some key differences and commonalities.
+To do this, we will first go into detail on some theoretical basis and show the differences in approach on a practical example with an exemplary analysis on ESS Data [@essround9:EuropeanSocialSurvey.2019].
+
+
 
 # Classical Knowledge Acquisition in the Social Sciences
 
