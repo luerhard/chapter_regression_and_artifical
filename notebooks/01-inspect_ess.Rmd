@@ -6,16 +6,19 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
-library(here)
-library(tibble)
+box::use(here[here])
+options(box.path = here())
 
-source(here("r", "load_data.R"))
+box::use(
+  tibble[as_tibble],
+  r/load_data
+)
 ```
 
 ## Load Data
 
 ```{r}
-df <- load_data()
+df <- load_data$ess9()
 df <- tibble::as_tibble(df)
 ``` 
 
