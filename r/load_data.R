@@ -1,11 +1,11 @@
-library(haven)
-library(here)
+box::use(haven)
 
-load_data <- function() {
+#' @export
+ess9 <- function() {
   path <- "data/ESS9e03_1.spss.zip"
 
   dir <- tempdir()
-  tempfile <- unzip(path, files = "ESS9e03_1.sav", exdir = dir)
+  tempfile <- utils::unzip(path, files = "ESS9e03_1.sav", exdir = dir)
   data <- haven::read_sav(tempfile)
 
   ignore_cols <- c("name", "essround", "edition", "proddate")
