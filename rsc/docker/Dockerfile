@@ -1,21 +1,25 @@
 FROM bitnami/minideb:latest
-MAINTAINER Lukas Erhard <luerhard@googlemail.com>
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -q; \
-    DEBIAN_FRONTEND=noninteractive \
-    apt-get install -qq git \
+    apt-get install -y git \
                         wget \
                         libfontconfig1 \
+                        python3 \
+                        make \
+                        ghostscript \
                         python3-pip; \
+    pip3 install --no-cache panflute \
+                        pantable \
+                        click==7.1.2 \
+                        pandoc-acronyms; \
+    apt-get purge -y --auto-remove python3-pip; \
+    apt-get clean; \
     rm -rf /var/lib/apt/lists/*
     
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 100; \
-    update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 100
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 100
 
-RUN pip install --no-cache panflute \
-                        pandoc-fignos \
-                        pandoc-secnos
-                            
 # Install TexLive with scheme-basic
 RUN wget https://mirror.clientvps.com/CTAN/systems/texlive/tlnet/install-tl-unx.tar.gz; \
     mkdir /install-tl-unx; \
@@ -31,9 +35,9 @@ RUN wget https://mirror.clientvps.com/CTAN/systems/texlive/tlnet/install-tl-unx.
 ENV PATH="/usr/local/texlive/2021/bin/x86_64-linux:${PATH}"
 
 # install pandoc
-RUN wget https://github.com/jgm/pandoc/releases/download/2.16.1/pandoc-2.16.1-1-amd64.deb; \
-    dpkg -i pandoc-2.16.1-1-amd64.deb; \
-    rm pandoc-2.16.1-1-amd64.deb
+RUN wget https://github.com/jgm/pandoc/releases/download/2.16.2/pandoc-2.16.2-1-amd64.deb; \
+    dpkg -i pandoc-2.16.2-1-amd64.deb; \
+    rm pandoc-2.16.2-1-amd64.deb
     
 WORKDIR /wrk
 
@@ -41,18 +45,26 @@ WORKDIR /wrk
 RUN tlmgr update --self && \
     tlmgr install \
         appendix \
+        beamer \
         booktabs \
         caption \
         cm-super \
+        collection-fontsrecommended \
         csquotes \
+        makeshape \
+        multirow \
+        epstopdf \
+        fancyvrb \
+        framed \
         float \
+        flowchart \
         latexdiff \
         latexmk \
         listings \
         preprint \
+        sfmath \
         setspace \
         tabulary \
+        textpos \
         todonotes \
         ulem
-        
-ENTRYPOINT ["docker/entrypoint.sh"]
