@@ -31,21 +31,29 @@ toc: false # Table of contents
 
 The research in the social sciences has been shifting towards a new era.
 In the prior century, the focus laid mainly on variable based, theory and hypothesis driven approaches to give answers to societal questions, the availability of more and more data opens possibilities and creates the need for new forms of analysis.
-While classical social science, as practiced since the second half of the last century, is based on a set of well-defined and elaborated rules, the emergence of ever-new data sets create the need (and possibility) to approach questions in a new way [@mcfarland:SociologyEraBig.2016].
+While classical social science, as practiced since the second half of the last century, is based on a set of well-defined and elaborated rules, the emergence of ever new datasets create the need (and possibility) to approach questions in a new way [@mcfarland:SociologyEraBig.2016].
 
 In this chapter, we will give an overview over some of the new methods, compare them to the approaches used in the 'classical' social social sciences, and point out some key differences and commonalities.
 To do this, we will first go into detail on some theoretical basis and show the differences in approach on a practical example with an exemplary analysis on ESS Data [@essround9:EuropeanSocialSurvey.2019].
 
 
+# Knowledge Acquisition in the Social Sciences
 
-# Classical Knowledge Acquisition in the Social Sciences
+The rising popularity of survey methods in the 1930s and 40s established a new era in the social sciences.
+This era was accompanied by new opportunities and the idea of inferential statistics made its way into the social sciences.
+It describes a way of generating knowledge about a small part of a population and generalizing this to its entirety [@krzywinski:ImportanceBeingUncertain.2013].
 
-<!--%Popper-->
+## Inferential statistics
 
-The standard way: Take a theory, create some hypothesis, operationalize said hypothesis, take a random sample of individuals out of your population, run your model against it.
-If your difference in means (results) holds true in your population (is significant), hip hip hurray, you can reject you null hypothesis and have gained knowledge about your population. <!--% halt in ausformuliert. -->
+Especially Karl Popper formalized the social sciences in the 1950s as founded on strong theories that are falsifiable \todo{CITE}.
+The idea of testing theory-based assumptions plays very well with the concept of inferential statistics.
+We can calculate the probabilty of being wrong and define threshholds upon which we accept or reject our assumptions.
 
-This approach bears some shortcomings:
+Since then, the linear model has become ubiquotous [@abbott:TranscendingGeneralLinear.1988].
+Questions around model _validity_ became central for the upcoming new methods.
+
+
+This approach, however, bears some shortcomings:
 
 1. What if your sample size is large?
     Many of the frequentist approaches are very prone to large sample sizes (e.g., all the chi-squared based test-statistics).
@@ -58,7 +66,7 @@ This approach bears some shortcomings:
 
 4. What if you have no theory, you can derive hypothesis from? This is especially important for social media networks, where the rules of engagement might differ quite substantially from 'normal' social behaviour or where you cannot specify your population.
 
-# What is Machine Learning?
+## Machine Learning
 
 
 <!--% transcript of McFarland, p. 20 -- rewrite, but basically this:-->
@@ -72,7 +80,7 @@ When the machine learning approach is combined with theory and scientific resear
 <!--% copy paste McFarland Ende.-->
 
 
-# How does ML compare to classical approaches?
+## How does ML compare to classical approaches?
 
 Many of the algorithms are the same, but the mindset and evaluation strategies differ.
 
@@ -82,3 +90,5 @@ Model evaluation rather works by evaluating its predictive power.
 Compare:
 - Logistic regression
 - PCA vs Factor analysis
+
+# Comparison by example: Immigration in Europe
