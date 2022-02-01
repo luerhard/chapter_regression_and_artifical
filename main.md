@@ -30,8 +30,13 @@ toc: false # Table of contents
 # Introduction
 
 The research in the social sciences has been shifting towards a new era.
-In the prior century, the focus laid mainly on variable based, theory and hypothesis driven approaches to give answers to societal questions, the availability of more and more data opens possibilities and creates the need for new forms of analysis.
+In the prior century, the focus laid mainly on variable based, theory and hypothesis driven approaches to give answers to societal questions.
+Data for such approaches was scarce, hard to come by and very expensive [@grimmer:MachineLearningSocial.2021].
+The availability of more and more data opens possibilities and creates the need for new forms of analyses.
 While classical social science, as practiced since the second half of the last century, is based on a set of well-defined and elaborated rules, the emergence of ever new datasets create the need (and possibility) to approach questions in a new way [@mcfarland:SociologyEraBig.2016].
+Along with those new datasets, data sources, and the explosion in computing power, new analyzing techniques were also developed in a rapid fashion.
+Social scientists increasingly use those relatively newly developed techniques called machine learning. 
+This describes "a class of flexible algorithmic and statistical techniques for prediction and dimension reduction" [@grimmer:MachineLearningSocial.2021, 396].
 
 In this chapter, we will give an overview over some of the new methods, compare them to the approaches used in the 'classical' social social sciences, and point out some key differences and commonalities.
 To do this, we will first go into detail on some theoretical basis and show the differences in approach on a practical example with an exemplary analysis on ESS Data [@essround9:EuropeanSocialSurvey.2019].
@@ -41,12 +46,12 @@ To do this, we will first go into detail on some theoretical basis and show the 
 
 The rising popularity of survey methods in the 1930s and 40s established a new era in the social sciences.
 This era was accompanied by new opportunities and the idea of inferential statistics made its way into the social sciences.
-It describes a way of generating knowledge about a small part of a population and generalizing this to its entirety [@krzywinski:ImportanceBeingUncertain.2013].
+The widely agreed upon approach to social science is mainly based on Karl Poppers formalizations in the 1950s \todo{CITE}.
+Falsifiable hypotheses, founded on strong theories, build the foundation for the idea of testing theory-based assumptions.
+It describes a way of generating knowledge about a small part of a population and generalizing this to its entirety [@krzywinski:Importancebeinguncertain.2013].
 
 ## Inferential statistics
 
-Especially Karl Popper formalized the social sciences in the 1950s as founded on strong theories that are falsifiable \todo{CITE}.
-The idea of testing theory-based assumptions plays very well with the concept of inferential statistics.
 We can calculate the probabilty of being wrong and define threshholds upon which we accept or reject our assumptions.
 
 Since then, the linear model has become ubiquotous [@abbott:TranscendingGeneralLinear.1988].
