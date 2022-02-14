@@ -11,17 +11,205 @@ options(box.path = here())
 
 box::use(
   tibble[as_tibble],
-  r/load_data
+  r / load_data,
+  r / utils
 )
+
+library(dplyr)
+library(ggplot2)
+library(haven)
+library(skimr)
 ```
+
+```{r, include=FALSE}
+get_skimmers.haven_labelled <- function(column) {
+  modify_default_skimmers("numeric", new_skim_type = "haven_labelled")
+}
+```
+
 
 ## Load Data
 
 ```{r}
-df <- load_data$ess1()
+df <- load_data$ess1(raw = TRUE)
 df <- tibble::as_tibble(df)
 ``` 
 
+# Main variables
+
+## Age
+
 ```{r}
-df
+utils$find_var_by_label(df, "age of respondent")
+
+df %>%
+  select(agea) %>%
+  summary()
+```
+
+## Born in country
+
+```{r}
+utils$find_var_by_label(df, "born in")
+
+df %>%
+  select(brncntr) %>%
+  mutate(brncntr = as_factor(brncntr)) %>%
+  summary()
+```
+
+## Dependent Variables
+
+### People from poorer countries in Europe
+
+```{r}
+utils$find_var_by_label(df, "poorer countries in europe")
+
+df %>%
+  select(eimpcnt) %>%
+  mutate(eimpcnt = as_factor(eimpcnt)) %>%
+  summary()
+```
+### People from poorer countries outside Europe
+
+```{r}
+utils$find_var_by_label(df, "poorer countries outside europe")
+
+df %>%
+  select(impcntr) %>%
+  mutate(impcntr = as_factor(impcntr)) %>%
+  summary()
+```
+
+### People from richer countries in europe
+
+```{r}
+utils$find_var_by_label(df, "richer countries in europe")
+
+df %>%
+  select(eimrcnt) %>%
+  mutate(eimrcnt = as_factor(eimrcnt)) %>%
+  summary()
+```
+
+### People from richer countries outside europe
+
+```{r}
+utils$find_var_by_label(df, "richer countries outside europe")
+
+df %>%
+  select(imrcntr) %>%
+  mutate(imrcntr = as_factor(imrcntr)) %>%
+  summary()
+```
+
+
+## Education
+
+## Educational attainment
+
+```{r}
+utils$find_var_by_label(df, "^highest level of education$")
+
+df %>%
+  select(edulvla) %>%
+  mutate(edulvla = as_factor(edulvla)) %>%
+  summary()
+```
+
+
+
+### Years of schooling
+
+```{r}
+utils$find_var_by_label(df, "years of full-time education")
+
+df %>%
+  mutate(eduyrs = as_factor(eduyrs)) %>%
+  select(eduyrs) %>%
+  summary()
+```
+
+
+## Gender
+
+```{r}
+utils$find_var_by_label(df, "gender")
+
+df %>%
+  mutate(gndr = as_factor(gndr)) %>%
+  select(gndr) %>%
+  summary()
+```
+
+## Income
+
+```{r}
+utils$find_var_by_label(df, "household's income")
+
+df %>%
+  mutate(hincfel = as_factor(hincfel)) %>%
+  select(hincfel) %>%
+  summary()
+```
+
+## Minority Area
+
+```{r}
+utils$find_var_by_label(df, "current living area")
+
+df %>%
+  mutate(acetalv = as_factor(acetalv)) %>%
+  select(acetalv) %>%
+  summary()
+```
+
+## Partisan Right
+
+```{r}
+utils$find_var_by_label(df, "scale")
+
+df %>%
+  mutate(lrscale = as_factor(lrscale)) %>%
+  select(lrscale) %>%
+  summary()
+```
+
+
+# Prepare func
+```{r}
+prepare <- function(df) {
+  df <- df %>%
+    select(
+      acetalv,
+      agea,
+      brncntr,
+      edulvla,
+      eduyrs,
+      eimpcnt,
+      eimrcnt,
+      gndr,
+      hincfel,
+      impcntr,
+      imrcntr,
+      lrscale
+    ) %>%
+    mutate(
+      acetalv = haven::as_factor(acetalv),
+      brncntr = haven::as_factor(brncntr),
+      edulvla = haven::as_factor(edulvla),
+      eimpcnt = haven::as_factor(eimpcnt),
+      eimrcnt = haven::as_factor(eimrcnt),
+      gndr = haven::as_factor(gndr),
+      hincfel = haven::as_factor(hincfel),
+      impcntr = haven::as_factor(impcntr),
+      imrcntr = haven::as_factor(imrcntr)
+    )
+}
+
+
+
+df %>%
+  prepare() %>%
+  skim()
 ```
