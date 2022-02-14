@@ -32,7 +32,6 @@ get_skimmers.haven_labelled <- function(column) {
 
 ```{r}
 df <- load_data$ess1(raw = TRUE)
-df <- tibble::as_tibble(df)
 ``` 
 
 # Main variables
