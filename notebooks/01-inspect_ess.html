@@ -167,15 +167,38 @@ pre code {
 
 </div>
 
-
-<div id="load-data" class="section level2">
-<h2>Load Data</h2>
-<pre class="r"><code>df &lt;- load_data$ess1(raw = TRUE)</code></pre>
+<div id="TOC">
+<ul>
+<li><a href="#main-variables"><span class="toc-section-number">1</span> Main variables</a>
+<ul>
+<li><a href="#age"><span class="toc-section-number">1.1</span> Age</a></li>
+<li><a href="#born-in-country"><span class="toc-section-number">1.2</span> Born in country</a></li>
+<li><a href="#dependent-variables"><span class="toc-section-number">1.3</span> Dependent Variables</a>
+<ul>
+<li><a href="#people-from-poorer-countries-in-europe"><span class="toc-section-number">1.3.1</span> People from poorer countries in Europe</a></li>
+<li><a href="#people-from-poorer-countries-outside-europe"><span class="toc-section-number">1.3.2</span> People from poorer countries outside Europe</a></li>
+<li><a href="#people-from-richer-countries-in-europe"><span class="toc-section-number">1.3.3</span> People from richer countries in Europe</a></li>
+<li><a href="#people-from-richer-countries-outside-europe"><span class="toc-section-number">1.3.4</span> People from richer countries outside Europe</a></li>
+</ul></li>
+<li><a href="#education"><span class="toc-section-number">1.4</span> Education</a></li>
+<li><a href="#educational-attainment"><span class="toc-section-number">1.5</span> Educational attainment</a>
+<ul>
+<li><a href="#years-of-schooling"><span class="toc-section-number">1.5.1</span> Years of schooling</a></li>
+</ul></li>
+<li><a href="#gender"><span class="toc-section-number">1.6</span> Gender</a></li>
+<li><a href="#income"><span class="toc-section-number">1.7</span> Income</a></li>
+<li><a href="#minority-area"><span class="toc-section-number">1.8</span> Minority Area</a></li>
+<li><a href="#partisan-right"><span class="toc-section-number">1.9</span> Partisan Right</a></li>
+</ul></li>
+<li><a href="#overall-summary"><span class="toc-section-number">2</span> Overall summary</a></li>
+</ul>
 </div>
-<div id="main-variables" class="section level1">
-<h1>Main variables</h1>
-<div id="age" class="section level2">
-<h2>Age</h2>
+
+<pre class="r"><code>df &lt;- load_data$ess1(raw = TRUE)</code></pre>
+<div id="main-variables" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Main variables</h1>
+<div id="age" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Age</h2>
 <pre class="r"><code>utils$find_var_by_label(df, &quot;age of respondent&quot;)</code></pre>
 <pre><code>## $agea
 ## [1] &quot;Age of respondent, calculated&quot;</code></pre>
@@ -191,8 +214,8 @@ pre code {
 ##  Max.   :110.00  
 ##  NA&#39;s   :402</code></pre>
 </div>
-<div id="born-in-country" class="section level2">
-<h2>Born in country</h2>
+<div id="born-in-country" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Born in country</h2>
 <pre class="r"><code>utils$find_var_by_label(df, &quot;born in&quot;)</code></pre>
 <pre><code>## $brncntr
 ## [1] &quot;Born in country&quot;
@@ -214,10 +237,10 @@ pre code {
 ##  No answer :    0  
 ##  NA&#39;s      :   82</code></pre>
 </div>
-<div id="dependent-variables" class="section level2">
-<h2>Dependent Variables</h2>
-<div id="people-from-poorer-countries-in-europe" class="section level3">
-<h3>People from poorer countries in Europe</h3>
+<div id="dependent-variables" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Dependent Variables</h2>
+<div id="people-from-poorer-countries-in-europe" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> People from poorer countries in Europe</h3>
 <pre class="r"><code>utils$find_var_by_label(df, &quot;poorer countries in europe&quot;)</code></pre>
 <pre><code>## $eimpcnt
 ## [1] &quot;Allow many/few immigrants from poorer countries in Europe&quot;</code></pre>
@@ -234,8 +257,8 @@ pre code {
 ##  (Other)                         :    0  
 ##  NA&#39;s                            : 2005</code></pre>
 </div>
-<div id="people-from-poorer-countries-outside-europe" class="section level3">
-<h3>People from poorer countries outside Europe</h3>
+<div id="people-from-poorer-countries-outside-europe" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> People from poorer countries outside Europe</h3>
 <pre class="r"><code>utils$find_var_by_label(df, &quot;poorer countries outside europe&quot;)</code></pre>
 <pre><code>## $impcntr
 ## [1] &quot;Allow many/few immigrants from poorer countries outside Europe&quot;</code></pre>
@@ -252,8 +275,8 @@ pre code {
 ##  (Other)                         :    0  
 ##  NA&#39;s                            : 2180</code></pre>
 </div>
-<div id="people-from-richer-countries-in-europe" class="section level3">
-<h3>People from richer countries in europe</h3>
+<div id="people-from-richer-countries-in-europe" class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> People from richer countries in Europe</h3>
 <pre class="r"><code>utils$find_var_by_label(df, &quot;richer countries in europe&quot;)</code></pre>
 <pre><code>## $eimrcnt
 ## [1] &quot;Allow many/few immigrants from richer countries in Europe&quot;</code></pre>
@@ -270,8 +293,8 @@ pre code {
 ##  (Other)                         :    0  
 ##  NA&#39;s                            : 2262</code></pre>
 </div>
-<div id="people-from-richer-countries-outside-europe" class="section level3">
-<h3>People from richer countries outside europe</h3>
+<div id="people-from-richer-countries-outside-europe" class="section level3" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> People from richer countries outside Europe</h3>
 <pre class="r"><code>utils$find_var_by_label(df, &quot;richer countries outside europe&quot;)</code></pre>
 <pre><code>## $imrcntr
 ## [1] &quot;Allow many/few immigrants from richer countries outside Europe&quot;</code></pre>
@@ -289,11 +312,11 @@ pre code {
 ##  NA&#39;s                            : 2332</code></pre>
 </div>
 </div>
-<div id="education" class="section level2">
-<h2>Education</h2>
+<div id="education" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Education</h2>
 </div>
-<div id="educational-attainment" class="section level2">
-<h2>Educational attainment</h2>
+<div id="educational-attainment" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Educational attainment</h2>
 <pre class="r"><code>utils$find_var_by_label(df, &quot;^highest level of education$&quot;)</code></pre>
 <pre><code>## $edulvla
 ## [1] &quot;Highest level of education&quot;</code></pre>
@@ -309,8 +332,8 @@ pre code {
 ##  Post-secondary non-tertiary education completed (ISCED 4):  601  
 ##  (Other)                                                  :   94  
 ##  NA&#39;s                                                     :  254</code></pre>
-<div id="years-of-schooling" class="section level3">
-<h3>Years of schooling</h3>
+<div id="years-of-schooling" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Years of schooling</h3>
 <pre class="r"><code>utils$find_var_by_label(df, &quot;years of full-time education&quot;)</code></pre>
 <pre><code>## $eduyrs
 ## [1] &quot;Years of full-time education completed&quot;</code></pre>
@@ -328,8 +351,8 @@ pre code {
 ##  NA&#39;s   :  642</code></pre>
 </div>
 </div>
-<div id="gender" class="section level2">
-<h2>Gender</h2>
+<div id="gender" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Gender</h2>
 <pre class="r"><code>utils$find_var_by_label(df, &quot;gender&quot;)</code></pre>
 <pre><code>## $dscrgnd
 ## [1] &quot;Discrimination of respondent&#39;s group: gender&quot;
@@ -388,8 +411,8 @@ pre code {
 ##  No answer:    0  
 ##  NA&#39;s     :   55</code></pre>
 </div>
-<div id="income" class="section level2">
-<h2>Income</h2>
+<div id="income" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Income</h2>
 <pre class="r"><code>utils$find_var_by_label(df, &quot;household&#39;s income&quot;)</code></pre>
 <pre><code>## $hincfel
 ## [1] &quot;Feeling about household&#39;s income nowadays&quot;</code></pre>
@@ -406,8 +429,8 @@ pre code {
 ##  (Other)                             :    0  
 ##  NA&#39;s                                : 2013</code></pre>
 </div>
-<div id="minority-area" class="section level2">
-<h2>Minority Area</h2>
+<div id="minority-area" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Minority Area</h2>
 <pre class="r"><code>utils$find_var_by_label(df, &quot;current living area&quot;)</code></pre>
 <pre><code>## $acetalv
 ## [1] &quot;People of minority race/ ethnic group in current living area&quot;</code></pre>
@@ -424,8 +447,8 @@ pre code {
 ##  No answer                               :    0  
 ##  NA&#39;s                                    :  849</code></pre>
 </div>
-<div id="partisan-right" class="section level2">
-<h2>Partisan Right</h2>
+<div id="partisan-right" class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> Partisan Right</h2>
 <pre class="r"><code>utils$find_var_by_label(df, &quot;scale&quot;)</code></pre>
 <pre><code>## $lrscale
 ## [1] &quot;Placement on left right scale&quot;</code></pre>
@@ -443,8 +466,8 @@ pre code {
 ##  NA&#39;s   : 5215</code></pre>
 </div>
 </div>
-<div id="prepare-func" class="section level1">
-<h1>Prepare func</h1>
+<div id="overall-summary" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Overall summary</h1>
 <pre class="r"><code>prepare &lt;- function(df) {
   df &lt;- df %&gt;%
     select(
