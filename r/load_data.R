@@ -1,5 +1,69 @@
 box::use(haven)
 
+prepare_ess1 <- function(df) {
+  df <- df %>%
+    select(
+      acetalv,
+      agea,
+      brncntr,
+      edulvla,
+      eduyrs,
+      eimpcnt,
+      eimrcnt,
+      gndr,
+      hincfel,
+      impcntr,
+      imrcntr,
+      lrscale
+    ) %>%
+    mutate(
+      acetalv = haven::as_factor(acetalv),
+      brncntr = haven::as_factor(brncntr),
+      edulvla = haven::as_factor(edulvla),
+      eimpcnt = haven::as_factor(eimpcnt),
+      eimrcnt = haven::as_factor(eimrcnt),
+      gndr = haven::as_factor(gndr),
+      hincfel = haven::as_factor(hincfel),
+      impcntr = haven::as_factor(impcntr),
+      imrcntr = haven::as_factor(imrcntr)
+    )
+}
+
+
+#' @export
+ess1 <- function(raw = FALSE) {
+  path <- "data/ESS1e06_6.spss.zip"
+
+  dir <- tempdir()
+  tempfile <- utils::unzip(path, files = "ESS1e06_6.sav", exdir = dir)
+  data <- haven::read_sav(tempfile)
+
+  ignore_cols <- c("name", "essround", "edition", "proddate")
+  data <- data[, !names(data) %in% ignore_cols]
+  unlink(dir, recursive = TRUE)
+
+  if (raw == F) {
+    data <- prepare_ess1(data)
+  }
+
+  return(data)
+}
+
+#' @export
+ess2 <- function() {
+  path <- "data/ESS2e03_6.spss.zip"
+
+  dir <- tempdir()
+  tempfile <- utils::unzip(path, files = "ESS2e03_6.sav", exdir = dir)
+  data <- haven::read_sav(tempfile)
+
+  ignore_cols <- c("name", "essround", "edition", "proddate")
+  data <- data[, !names(data) %in% ignore_cols]
+  unlink(dir, recursive = TRUE)
+
+  return(data)
+}
+
 #' @export
 ess9 <- function() {
   path <- "data/ESS9e03_1.spss.zip"
@@ -12,20 +76,5 @@ ess9 <- function() {
   data <- data[, !names(data) %in% ignore_cols]
   unlink(dir, recursive = TRUE)
 
-  return(data)
-}
-
-#' @export
-ess1 <- function() {
-  path <- "data/ESS1e06_6.spss.zip"
-  
-  dir <- tempdir()
-  tempfile <- utils::unzip(path, files = "ESS1e06_6.sav", exdir = dir)
-  data <- haven::read_sav(tempfile)
-  
-  ignore_cols <- c("name", "essround", "edition", "proddate")
-  data <- data[, !names(data) %in% ignore_cols]
-  unlink(dir, recursive = TRUE)
-  
   return(data)
 }
