@@ -1,8 +1,11 @@
 box::use(haven)
+box::use(dplyr)
+box::use(tibble[as_tibble])
+
 
 prepare_ess1 <- function(df) {
   df <- df %>%
-    select(
+    dplyr::select(
       acetalv,
       agea,
       brncntr,
@@ -16,7 +19,7 @@ prepare_ess1 <- function(df) {
       imrcntr,
       lrscale
     ) %>%
-    mutate(
+    dplyr::mutate(
       acetalv = haven::as_factor(acetalv),
       brncntr = haven::as_factor(brncntr),
       edulvla = haven::as_factor(edulvla),
@@ -45,7 +48,8 @@ ess1 <- function(raw = FALSE) {
   if (raw == F) {
     data <- prepare_ess1(data)
   }
-
+  
+  data <- tibble::as_tibble(data)
   return(data)
 }
 
