@@ -1,11 +1,15 @@
-box::use(haven)
-box::use(dplyr)
+box::use(
+  haven,
+  dplyr[`%>%`, select, filter],
+  tibble[as_tibble]
+  )
+
 box::use(tibble[as_tibble])
 
 
 prepare_ess1 <- function(df) {
   df <- df %>%
-    dplyr::select(
+    select(
       acetalv,
       agea,
       brncntr,
@@ -19,7 +23,7 @@ prepare_ess1 <- function(df) {
       imrcntr,
       lrscale
     ) %>%
-    dplyr::mutate(
+    mutate(
       acetalv = haven::as_factor(acetalv),
       brncntr = haven::as_factor(brncntr),
       edulvla = haven::as_factor(edulvla),
