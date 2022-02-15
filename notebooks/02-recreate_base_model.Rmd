@@ -1,0 +1,167 @@
+---
+title: "02-recreate_base_model"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(dplyr)
+library(DescTools)
+
+knitr::opts_chunk$set(echo = TRUE)
+
+box::use(here[here])
+options(box.path = here())
+
+box::use(
+  tibble[as_tibble],
+  r / load_data,
+  r / utils
+)
+```
+
+```{r}
+df <- load_data$ess1()
+```
+
+
+```{r}
+reg_df <- df %>%
+  transmute(
+    av = case_when(
+      impcntr %in% c(
+        "Allow some",
+        "Allow many to come and live here"
+      ) ~ 1,
+      impcntr %in% c(
+        "Allow a few",
+        "Allow none"
+      ) ~ 0
+    ),
+    wght = pweight * dweight,
+    age = agea,
+    gender = gndr,
+    years_of_schooling = eduyrs,
+    country = cntry,
+    native = relevel(brncntr, "No"),
+    minority_area = as.numeric(acetalv),
+    partisan_right = lrscale,
+    income = hinctnt
+  )
+```
+
+```{r}
+
+orig_data_model8 <- list(
+  names = c("years_of_schooling", "age", "genderFemale", "income", "nativeYes", "minority_area", "partisan_right"),
+  effect = c(0.024, -0.002, 0.011, 0.014, -0.087, 0.031, -0.023),
+  se = c(0.002, 0.000, 0.012, 0.003, 0.020, 0.008, 0.003)
+)
+
+model_8 <- tibble::as_tibble(orig_data_model8)
+```
+
+# Models
+## recreated model
+
+```{r}
+formula_simple_model <- as.formula("
+  av ~ years_of_schooling +
+  age +
+  gender +
+  income +
+  native +
+  minority_area +
+  partisan_right +
+  country
+  ")
+
+model <- glm(
+  formula_simple_model,
+  family = binomial(link = "probit"),
+  weights = reg_df$wght,
+  data = reg_df,
+  x = TRUE
+)
+```
+
+```{r}
+summary(model)
+```
+```{r}
+nobs(model)
+logLik(model)
+PseudoR2(model)
+```
+
+
+```{r}
+res <- erer::maBina(model)
+
+our_model <- res$out %>%
+  mutate(names = row.names(res$out)) %>%
+  filter(!grepl("^country|^\\(", names)) %>%
+  left_join(model_8, by = "names", suffix = c("", ".orig")) %>%
+  mutate(
+    effect_diff = effect - effect.orig,
+    diff_ratio = round(abs(abs(effect_diff) / effect.orig), 2)
+  ) %>%
+  select(names, effect, effect.orig, effect_diff, diff_ratio)
+
+
+our_model
+```
+
+## model with additional interaction term
+
+This interaction term is mentioned in a footnote in the article.
+It does not seem to make sense here but gets the gender (and income) marginal effects way closer to the reported size.
+Additionally: The gender effect is not significant anymore (as it should not be -- regarding to the article) if the interaction term is included in the model.
+
+```{r}
+formula_wrong_but_closer_model <- as.formula("
+  av ~ years_of_schooling +
+  age +
+  gender +
+  income +
+  native +
+  minority_area +
+  partisan_right +
+  country +
+  gender * income
+  ")
+
+model <- glm(
+  formula_wrong_but_closer_model,
+  family = binomial(link = "probit"),
+  weights = reg_df$wght,
+  data = reg_df,
+  x = TRUE
+)
+
+summary(model)
+```
+
+```{r}
+nobs(model)
+logLik(model)
+PseudoR2(model)
+```
+
+```{r}
+res <- erer::maBina(model)
+
+our_model <- res$out %>%
+  mutate(names = row.names(res$out)) %>%
+  filter(!grepl("^country|^\\(", names)) %>%
+  left_join(model_8, by = "names", suffix = c("", ".orig")) %>%
+  mutate(
+    effect_diff = effect - effect.orig,
+    diff_ratio = round(abs(abs(effect_diff) / effect.orig), 2)
+  ) %>%
+  select(names, effect, effect.orig, effect_diff, diff_ratio)
+
+
+our_model
+```
+

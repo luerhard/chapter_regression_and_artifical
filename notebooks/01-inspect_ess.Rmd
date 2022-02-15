@@ -34,6 +34,7 @@ get_skimmers.haven_labelled <- function(column) {
 df <- load_data$ess1(raw = TRUE)
 ``` 
 
+
 # Main variables
 
 ## Age
@@ -54,6 +55,17 @@ utils$find_var_by_label(df, "born in")
 df %>%
   select(brncntr) %>%
   mutate(brncntr = as_factor(brncntr)) %>%
+  summary()
+```
+
+## Country
+
+```{r}
+utils$find_var_by_label(df, "^country$")
+
+df %>%
+  select(cntry) %>%
+  mutate(cntry = as_factor(cntry)) %>%
   summary()
 ```
 
@@ -141,12 +153,15 @@ df %>%
 
 ## Income
 
+### quasi metric
+
 ```{r}
-utils$find_var_by_label(df, "household's income")
+utils$find_var_by_label(df, "total net income")
+
+attributes(df$hinctnt)$labels
 
 df %>%
-  mutate(hincfel = as_factor(hincfel)) %>%
-  select(hincfel) %>%
+  select(hinctnt) %>%
   summary()
 ```
 
@@ -171,6 +186,14 @@ df %>%
   select(lrscale) %>%
   summary()
 ```
+
+
+## Weights
+
+```{r}
+df$pweight
+```
+
 
 # Overall summary
 
