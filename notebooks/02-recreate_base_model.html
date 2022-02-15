@@ -167,8 +167,26 @@ pre code {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#create-dataset"><span class="toc-section-number">1</span> Create Dataset</a></li>
+<li><a href="#models"><span class="toc-section-number">2</span> Models</a>
+<ul>
+<li><a href="#recreated-model"><span class="toc-section-number">2.1</span> recreated model</a></li>
+<li><a href="#model-with-additional-interaction-term"><span class="toc-section-number">2.2</span> model with additional interaction term</a></li>
+</ul></li>
+</ul>
+</div>
 
 <pre class="r"><code>df &lt;- load_data$ess1()</code></pre>
+<div id="create-dataset" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Create Dataset</h1>
+<p>Notes:</p>
+<ul>
+<li>AV Konstruktion wirkt recht beliebig</li>
+<li>Die 12-stufige gruppierte income Variable wird als metrisch angenommen</li>
+<li>Die 3-stufige ordinale minority_area ist merkwürdig. Nimmt man sie als metrisch an, kommt man recht nah an den angegebenen Effekt. Es wird aber auch nur ein Effekt in der Tabelle vermerkt.</li>
+</ul>
 <pre class="r"><code>reg_df &lt;- df %&gt;%
   transmute(
     av = case_when(
@@ -198,10 +216,11 @@ pre code {
 )
 
 model_8 &lt;- tibble::as_tibble(orig_data_model8)</code></pre>
-<div id="models" class="section level1">
-<h1>Models</h1>
-<div id="recreated-model" class="section level2">
-<h2>recreated model</h2>
+</div>
+<div id="models" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Models</h1>
+<div id="recreated-model" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> recreated model</h2>
 <pre class="r"><code>formula_simple_model &lt;- as.formula(&quot;
   av ~ years_of_schooling +
   age +
@@ -270,6 +289,12 @@ model &lt;- glm(
 ## AIC: 21321
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
+<p>Notes:</p>
+<ul>
+<li>Uns fehlen knapp 5.000 Fälle, um die Zahl im Artikel zu erreichen (orig: 28677)</li>
+<li>log Likelihood passt nicht. (orig: -17982.56)</li>
+<li>PseudoR2 passt nicht. (orig: 0.09) – keine Ahnung, welches die verwenden.</li>
+</ul>
 <pre class="r"><code>nobs(model)</code></pre>
 <pre><code>## [1] 24946</code></pre>
 <pre class="r"><code>logLik(model)</code></pre>
@@ -305,8 +330,8 @@ our_model</code></pre>
 ## 6      minority_area  0.029       0.031      -0.002       0.06
 ## 7     partisan_right -0.023      -0.023       0.000       0.00</code></pre>
 </div>
-<div id="model-with-additional-interaction-term" class="section level2">
-<h2>model with additional interaction term</h2>
+<div id="model-with-additional-interaction-term" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> model with additional interaction term</h2>
 <p>This interaction term is mentioned in a footnote in the article. It does not seem to make sense here but gets the gender (and income) marginal effects way closer to the reported size. Additionally: The gender effect is not significant anymore (as it should not be – regarding to the article) if the interaction term is included in the model.</p>
 <pre class="r"><code>formula_wrong_but_closer_model &lt;- as.formula(&quot;
   av ~ years_of_schooling +

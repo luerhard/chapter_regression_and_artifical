@@ -1,6 +1,9 @@
 ---
 title: "02-recreate_base_model"
-output: html_document
+output:
+  html_document:
+    toc: true
+    number_sections: true
 ---
 
 ```{r setup, include=FALSE}
@@ -24,6 +27,14 @@ box::use(
 df <- load_data$ess1()
 ```
 
+
+# Create Dataset
+
+Notes:
+
+- AV Konstruktion wirkt recht beliebig
+- Die 12-stufige gruppierte income Variable wird als metrisch angenommen
+- Die 3-stufige ordinale minority_area ist merkwürdig. Nimmt man sie als metrisch an, kommt man recht nah an den angegebenen Effekt. Es wird aber auch nur ein Effekt in der Tabelle vermerkt.
 
 ```{r}
 reg_df <- df %>%
@@ -88,6 +99,13 @@ model <- glm(
 ```{r}
 summary(model)
 ```
+
+Notes:
+
+- Uns fehlen knapp 5.000 Fälle, um die Zahl im Artikel zu erreichen (orig: 28677)
+- log Likelihood passt nicht. (orig: -17982.56)
+- PseudoR2 passt nicht. (orig: 0.09) -- keine Ahnung, welches die verwenden.
+
 ```{r}
 nobs(model)
 logLik(model)
