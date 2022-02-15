@@ -1,6 +1,6 @@
 box::use(
   haven,
-  dplyr[`%>%`, select, filter],
+  dplyr[`%>%`, select, filter, mutate],
   tibble[as_tibble]
   )
 
@@ -13,19 +13,24 @@ prepare_ess1 <- function(df) {
       acetalv,
       agea,
       brncntr,
+      cntry,
+      dweight,
       edulvla,
       eduyrs,
       eimpcnt,
       eimrcnt,
       gndr,
       hincfel,
+      hinctnt,
       impcntr,
       imrcntr,
-      lrscale
+      lrscale,
+      pweight
     ) %>%
     mutate(
       acetalv = haven::as_factor(acetalv),
       brncntr = haven::as_factor(brncntr),
+      cntry = haven::as_factor(cntry),
       edulvla = haven::as_factor(edulvla),
       eimpcnt = haven::as_factor(eimpcnt),
       eimrcnt = haven::as_factor(eimrcnt),
@@ -47,8 +52,7 @@ ess1 <- function(raw = FALSE) {
 
   ignore_cols <- c("name", "essround", "edition", "proddate")
   data <- data[, !names(data) %in% ignore_cols]
-  unlink(dir, recursive = TRUE)
-
+  
   if (raw == F) {
     data <- prepare_ess1(data)
   }
@@ -67,7 +71,6 @@ ess2 <- function() {
 
   ignore_cols <- c("name", "essround", "edition", "proddate")
   data <- data[, !names(data) %in% ignore_cols]
-  unlink(dir, recursive = TRUE)
 
   return(data)
 }
@@ -82,7 +85,6 @@ ess9 <- function() {
 
   ignore_cols <- c("name", "essround", "edition", "proddate")
   data <- data[, !names(data) %in% ignore_cols]
-  unlink(dir, recursive = TRUE)
 
   return(data)
 }
