@@ -9,3 +9,4 @@ out/**
 *-eps-converted-to.pdf
 .Rproj.user
 *.Rproj
+.Rhistory

@@ -2,6 +2,7 @@
 # Bibliography
 csl: rsc/library/style.csl # See https://www.zotero.org/styles for more styles.
 bibliography: rsc/library/references.json
+csquotes: true
 
 title: 'Regression and Artificial Intelligence'
 
@@ -46,17 +47,16 @@ To do this, we will first go into detail on some theoretical basis and show the 
 
 The rising popularity of survey methods in the 1930s and 40s established a new era in the social sciences.
 This era was accompanied by new opportunities and the idea of inferential statistics made its way into the social sciences.
-The widely agreed upon approach to social science is mainly based on Karl Poppers formalizations in the 1950s \todo{CITE}.
+The widely agreed upon approach to social science is mainly based on Karl Poppers formalizations in the 1950s [@popper:LogicScientificDiscovery.2010].
 Falsifiable hypotheses, founded on strong theories, build the foundation for the idea of testing theory-based assumptions.
 It describes a way of generating knowledge about a small part of a population and generalizing this to its entirety [@krzywinski:Importancebeinguncertain.2013].
 
 ## Inferential statistics
 
-We can calculate the probabilty of being wrong and define threshholds upon which we accept or reject our assumptions.
+We can calculate the probability of being wrong and define thresholds upon which we accept or reject our assumptions.
 
-Since then, the linear model has become ubiquotous [@abbott:TranscendingGeneralLinear.1988].
+Since then, the linear model has become ubiquitous [@abbott:TranscendingGeneralLinear.1988].
 Questions around model _validity_ became central for the upcoming new methods.
-
 
 This approach, however, bears some shortcomings:
 
@@ -85,15 +85,37 @@ When the machine learning approach is combined with theory and scientific resear
 <!--% copy paste McFarland Ende.-->
 
 
-## How does ML compare to classical approaches?
+## How does ML compare to traditional approaches?
 
-Many of the algorithms are the same, but the mindset and evaluation strategies differ.
+It might come as a surprise but often times the algorithms used in machine learning are quite similar, if not the same, as in the traditional quantitative social sciences.
+Logistic regression, OLS regressions, and principal component analysis, for example, are readily used in both camps. 
+Even though many of the algorithms are the same, the mindset, practical approach and evaluation strategies differ.
 
 In contrast to frequentist models, ML models usually do not have any usable, that is interpretable, coefficients.
 Model evaluation rather works by evaluating its predictive power.
 
-Compare:
-- Logistic regression
-- PCA vs Factor analysis
+
 
 # Comparison by example: Immigration in Europe
+
+To show some of the differences in mindsets, we will use an exemplary model and approach the problem from both angles.
+The chosen model is loosely based on the approach used by @davidov:ExplainingAttitudesImmigration.2012 and others; it has often been implemented in similar ways.
+It investigates the effect of human values on attitudes toward immigration.
+
+The explanandum, our dependent variable which we will call _reject_, is a measure wich represents _attitudes towards immigration_.
+It is a mean index consisting of three variables[^av] which have been shown to load strongly on a single dimension in a confirmatory factor analysis.
+To measure human values, we use the theory of basic human values [@schwartz:UniversalsContentStructure.1992] which is captured in the ESS surveys.
+The theory describes 10 basic values that are structured in two dimensions[^schwartz]: _conservation_ and _self-transcendence_.
+
+<!-- copied from davidov & meuleman 2012 -->
+Concrete expectations can be formulated regarding the relation between values and attitudes towards immigration. The motivational goals or preferences embedded in
+conservation values may be blocked by the arrival of immigrants (Sagiv and Schwartz 1995).
+Immigrants bring along changing traditions and norms and this may hinder pursuing conservation values that include appreciation of stability of society, and respect, commitment and acceptance of the customs and ideas that traditional culture or religion provide. In other words, the arrival of immigrants is coupled with potential societal changes that are opposite to the preferences of conservative individuals. Therefore, we expect conservative individuals to reject immigration. On the other hand, the motivational goals or preferences embedded in self-transcendence values (especially universalism) are promoted by the arrival of immigrants (Sagiv and Schwartz 1995; Davidov et al. 2008a). Self-transcendence values include understanding, appreciation, tolerance and protection for the welfare of people and for nature. The arrival of immigrants provides opportunities for individuals to realise these self- transcendent values. In other words, the arrival of immigrants is coupled with potential societal changes that are in harmony with the preferences of self-transcendent individuals. Thus, we expect self-transcendent individuals to support immigration.
+<!-- copy ende -->
+
+We control for _income_, which which is measured with the variable `hincfel` and asks about the feeling of the household's present income.
+This one is chosen over the objective household income to reduce the number of missing values.
+Additionally, we control for _age_ (`agea`), _relgiosity_ (`rlgdgr`), _education_ (`edcyrs`), self-position on a _left-right scale_ (`lrscale`), and _gender_ (`gndr`).
+
+[^av]: The variables used here are ask on a 4-point scale how many immigrants of different groups respondents would like to allow into their country. 1. many/few immigrants of different race/ethnic groups (as majority) `imdfetn`, 2.  many/few immigrants of same race/ethnic groups (as majority) `imsmetn`, 3. many/few immigrants from poorer countries outside Europe `impcntr`. All items are recoded so that higher levels indicate more accepted immigrants.
+[^schwartz]: The measures are construction according to the ESS website. All items were recoded so that higher levels indicate more agreement.

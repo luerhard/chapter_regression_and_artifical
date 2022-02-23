@@ -1,0 +1,156 @@
+---
+title: "02-create_schwartz_model"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE, echo=F}
+
+library(caret)
+library(DescTools)
+library(ggplot2)
+library(labelled)
+library(tidyverse)
+
+
+knitr::opts_chunk$set(echo = TRUE)
+
+options(box.path = here::here())
+
+box::use(r / load_data)
+```
+
+# Data
+
+```{r}
+ess <- load_data$ess1()
+```
+
+## Notes
+
+### Human values (Schwartz)
+
+- For an in-depth explanation of the theory and usage inside ESS, see [here](http://essedunet.nsd.uib.no/cms/topics/1/)
+- a list of dimensions and respective items can be found [here](http://essedunet.nsd.uib.no/cms/topics/1/4/1.html)
+- explanations for scaling / usage in regressions [here](https://www.europeansocialsurvey.org/docs/methodology/ESS_computing_human_values_scale.pdf)
+    - only use centered scores (MRAT score, see link).
+    - max 8 dimensions per reg to avoid multicolinearity.
+
+- `s_` stands for schwartz-dimension
+```{r}
+schwartz_cols <- c(
+  "imprich", "iprspot", "ipshabt", "ipsuces", "impfun", "ipgdtim",
+  "impdiff", "ipadvnt", "ipeqopt", "ipudrst", "impenv", "iphlppl",
+  "iplylfr", "ipmodst", "imptrad", "ipbhprp", "ipfrule", "impsafe",
+  "ipstrgv"
+)
+
+df <- ess %>%
+  mutate_at(
+    # reverse coding and substract mrat from all schwartz cols
+    all_of(schwartz_cols), list(~ recode(.,
+      "1" = 6, "2" = 5, "3" = 4, "4" = 3, "5" = 2, "6" = 1,
+      .keep_value_labels = F
+    ))
+  ) %>%
+  mutate(
+    # mrat = mean over all schwarz cols
+    mrat = rowMeans(across(all_of(schwartz_cols)))
+  ) %>%
+  mutate_at(
+    all_of(schwartz_cols), list(~ . - mrat)
+  ) %>%
+  transmute(
+    # controls
+    gender = recode(as_factor(gndr), "Male" = 0, "Female" = 1),
+    age = ifelse(agea > 18, agea, NA),
+    relig = rlgdgr,
+    educ = ifelse(eduyrs < 30, eduyrs, NA),
+    country = as_factor(cntry),
+    left_right = lrscale,
+    income = recode(hincfel, "1" = 4, "2" = 3, "3" = 2, "4" = 1, .keep_value_labels = F),
+    # AV
+    reject = rowMeans(across(c(imdfetn, imsmetn, impcntr))),
+    reject_bin = ifelse(reject > 2.5, 1, 0),
+    # Schwartz
+    # create values
+    # s_power = rowMeans(across(c(imprich, iprspot))),
+    # s_achievement = rowMeans(across(c(ipshabt, ipsuces))),
+    # s_hedonism = rowMeans(across(c(impfun, ipgdtim))),
+    # s_stimulation = rowMeans(across(c(impdiff, ipadvnt))),
+    # s_selfdirecton = rowMeans(across(c(ipcrtiv, impfree))),
+    # s_unversalism = rowMeans(across(c(ipeqopt, ipudrst, impenv))),
+    # s_benevolence = rowMeans(across(c(iphlppl, iplylfr))),
+    # s_tradition = rowMeans(across(c(ipmodst, imptrad))),
+    # s_conformity = rowMeans(across(c(ipbhprp, ipfrule))),
+    # s_security = rowMeans(across(c(impsafe, ipstrgv))),
+    # create dimensions
+    s_dim_conservation = rowMeans(across(c(impsafe, ipstrgv, ipfrule, ipbhprp, ipmodst, imptrad))),
+    s_dim_trancendence = rowMeans(across(c(ipeqopt, ipudrst, impenv, iphlppl, iplylfr)))
+  ) %>%
+  drop_na()
+```
+
+```{r}
+library(psych)
+
+descriptives <- describeBy(
+  df %>% mutate(
+    gender = as.numeric(gender)
+  ),
+  digits = 2
+)
+
+select_vars <- c(
+  "gender",
+  "age",
+  "relig",
+  "educ",
+  "left_right",
+  "income",
+  "reject_bin",
+  "s_dim_conservation",
+  "s_dim_trancendence"
+)
+
+desc_short <- descriptives %>%
+  mutate(names = row.names(descriptives)) %>%
+  select(names, n, mean, sd, min, max) %>%
+  filter(names %in% select_vars) %>%
+  mutate_if(is.numeric, round, 2)
+
+write_csv(desc_short, file.path("rsc", "tables", "descriptives.csv"))
+
+as.data.frame(desc_short)
+```
+
+
+```{r}
+form <- as.formula(
+  "reject_bin ~ gender +
+  age +
+  relig +
+  educ +
+  income +
+  s_dim_conservation +
+  s_dim_trancendence +
+  left_right +
+  country"
+)
+
+model <- glm(form, family = binomial(link = "logit"), data = df)
+
+summary(model)
+```
+
+```{r}
+PseudoR2(model, which = c("McFadden", "McFaddenAdj", "McKelveyZavoina", "Nagelkerke"))
+```
+
+```{r}
+pred <- predict(model, df, type = "response")
+pred <- as_factor(ifelse(pred > .5, 1, 0))
+confusionMatrix(as_factor(df$reject_bin), pred)
+```
