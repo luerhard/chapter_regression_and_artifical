@@ -1,5 +1,5 @@
 box::use(
-  haven,
+  haven[as_factor],
   dplyr[`%>%`, select, filter, mutate],
   tibble[as_tibble]
   )
@@ -9,24 +9,6 @@ box::use(tibble[as_tibble])
 
 prepare_ess1 <- function(df) {
   df <- df %>%
-    select(
-      acetalv,
-      agea,
-      brncntr,
-      cntry,
-      dweight,
-      edulvla,
-      eduyrs,
-      eimpcnt,
-      eimrcnt,
-      gndr,
-      hincfel,
-      hinctnt,
-      impcntr,
-      imrcntr,
-      lrscale,
-      pweight
-    ) %>%
     mutate(
       acetalv = haven::as_factor(acetalv),
       brncntr = haven::as_factor(brncntr),
@@ -39,26 +21,25 @@ prepare_ess1 <- function(df) {
       impcntr = haven::as_factor(impcntr),
       imrcntr = haven::as_factor(imrcntr)
     )
+  
+  return(df)
 }
 
 
 #' @export
 ess1 <- function(raw = FALSE) {
   path <- "data/ESS1e06_6.spss.zip"
-
+  filename <- "ESS1e06_6.sav"
   dir <- tempdir()
-  tempfile <- utils::unzip(path, files = "ESS1e06_6.sav", exdir = dir)
-  data <- haven::read_sav(tempfile)
+  
+  tempfile <- utils::unzip(path, files = filename, exdir = dir)
+  df <- haven::read_sav(tempfile)
 
   ignore_cols <- c("name", "essround", "edition", "proddate")
-  data <- data[, !names(data) %in% ignore_cols]
+  df <- df[, !names(df) %in% ignore_cols]
   
-  if (raw == F) {
-    data <- prepare_ess1(data)
-  }
-  
-  data <- tibble::as_tibble(data)
-  return(data)
+  df <- tibble::as_tibble(df)
+  return(df)
 }
 
 #' @export
