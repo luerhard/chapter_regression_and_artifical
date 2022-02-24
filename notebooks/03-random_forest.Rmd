@@ -1,0 +1,101 @@
+---
+title: "02-create_schwartz_model"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE, echo=F}
+
+library(caret)
+library(ggplot2)
+library(dplyr)
+library(doParallel)
+
+
+knitr::opts_chunk$set(echo = TRUE)
+
+options(box.path = here::here())
+
+box::use(r / load_data)
+```
+
+# Data
+
+```{r}
+ess <- load_data$ess1()
+```
+
+```{r}
+df <- load_data$preprocess(ess)
+```
+
+```{r}
+
+set.seed(1337)
+
+form <- as.formula(
+  "reject_bin ~ gender +
+  age +
+  relig +
+  educ +
+  income +
+  s_dim_conservation +
+  s_dim_trancendence +
+  left_right +
+  country"
+)
+
+
+ctrl <- trainControl(
+  method = "cv",
+  number = 5,
+  savePredictions = "final"
+)
+
+tunegrid <- expand.grid(
+  mtry = c(2, 5, 10, 15)
+)
+
+cl <- makePSOCKcluster(4)
+registerDoParallel(cl)
+
+model <- train(
+  form,
+  method = "rf",
+  data = df,
+  metric = "Accuracy",
+  tuneGrid = tunegrid,
+  trControl = ctrl
+)
+
+stopCluster(cl)
+```
+
+```{r}
+print(model)
+```
+
+```{r}
+confusionMatrix(model)
+```
+
+
+```{r}
+confusionMatrix(model$pred$pred, model$pred$obs)
+```
+
+```{r}
+
+library(forcats)
+
+feat_importance <- varImp(model)$importance %>%
+  arrange(Overall) %>%
+  mutate(names = fct_inorder(row.names(.))) %>%
+  filter(!grepl("^country", names))
+
+ggplot(feat_importance, aes(x = Overall, y = names)) +
+  geom_bar(stat = "identity", show.legend = FALSE, ) +
+  theme_minimal()
+```
