@@ -84,6 +84,7 @@ When the machine learning approach is combined with theory and scientific resear
 <!--% copy paste McFarland Ende.-->
 
 - Supervised vs. unsupervised vs. reinforcement learning, see @jordan:MachineLearning.2015\todo{write}
+- Regression vs. classification problems
 
 ## How does ML compare to traditional approaches?
 
@@ -127,6 +128,9 @@ We have a plethora of pseudo $R^2$ measures to assess goodness-of-fit, or the Ak
 The basic idea behind these procedures in the social sciences is always to use all available data to fit the best possible model and to use one of the above-mentioned measures to tell us how well our model fits the underlying data.
 Herein lies the probably biggest difference to what machine learners do.
 In constraining themselves to rather 'simple' linear models, only including variables (and interaction effects) that do have a strong foundation in theory, traditional statistics avoids a very big problem in the machine learning realm: _overfitting_.
+
+### Splitting data
+
 Overfitting describes a phenomenon where a complex model with a lot of parameters is able to fit the underlying data very well but fails to predict unseen (new) data points.
 To overcome this, it has become customary split the data set into multiple parts and only to use part of the data to train the model and the rest of the data to evaluate the predictive performance.
 We call this the _train-test-split_.
@@ -139,6 +143,28 @@ It describes an approach in which the data is split into $K$ equally sized parts
 $K$ is often times $3$ or $5$ in these cases.
 This is repeated $K$ times until every part of the data has been the test set exactly once.
 Usually, the average over all $K$ model validation metrics is taken, resulting in numbers where all parts of the data are part of the training _and_ the validation step for the computational cost of having to train $K$ models instead of one in order to validate.
+
+### Evaluation metrics
+
+$$
+Accuracy = \frac{TP + TN}{TP + FP + FN + TN}
+$$
+
+$$
+Precision = \frac{TP}{TP + FP}
+$$
+$$
+Recall = \frac{TP}{TP + FN}
+$$
+
+$$
+F1 = 2 * \frac{Precision * Recall}{Precision + Recall}
+$$
+
+
+
+- confusion matrix
+- specificity / sensitivity ? 
 
 ## Lasso Regression
 
