@@ -30,24 +30,23 @@ toc: false # Table of contents
 
 # Introduction
 
-The research in the social sciences has been shifting towards a new era.
-In the prior century, the focus laid mainly on variable based, theory and hypothesis driven approaches to give answers to societal questions.
-Data for such approaches was scarce, hard to come by and very expensive [@grimmer:MachineLearningSocial.2021].
-The availability of more and more data opens possibilities and creates the need for new forms of analyses.
+Research in the social sciences has been shifting towards a new era.
+In the prior century, the focus laid mainly on variable-based, theory and hypothesis-driven approaches to give answers to societal questions.
+Data for such approaches was scarce, hard to come by, and very expensive [@grimmer:MachineLearningSocial.2021].
+The availability of more and more data opens possibilities and creates the need for new forms of analysis.
 While classical social science, as practiced since the second half of the last century, is based on a set of well-defined and elaborated rules, the emergence of ever new datasets create the need (and possibility) to approach questions in a new way [@mcfarland:SociologyEraBig.2016].
 Along with those new datasets, data sources, and the explosion in computing power, new analyzing techniques were also developed in a rapid fashion.
 Social scientists increasingly use those relatively newly developed techniques called machine learning. 
 This describes "a class of flexible algorithmic and statistical techniques for prediction and dimension reduction" [@grimmer:MachineLearningSocial.2021, 396].
 
-In this chapter, we will give an overview over some of the new methods, compare them to the approaches used in the 'classical' social social sciences, and point out some key differences and commonalities.
-To do this, we will first go into detail on some theoretical basis and show the differences in approach on a practical example with an exemplary analysis on ESS Data [@essround9:EuropeanSocialSurvey.2019].
-
+In this chapter, we will give an overview of some of the new methods, compare them to the approaches used in the 'classical' social sciences\todo{decide on consistent name}, and point out some key differences and commonalities.
+To do this, we will first go into detail on some theoretical basis and show the differences in approach on a practical example with an exemplary analysis on ESS Data [@essround9:EuropeanSocialSurvey.2019]\todo{use correct ess version(s)}.
 
 # Knowledge Acquisition in the Social Sciences
 
 The rising popularity of survey methods in the 1930s and 40s established a new era in the social sciences.
 This era was accompanied by new opportunities and the idea of inferential statistics made its way into the social sciences.
-The widely agreed upon approach to social science is mainly based on Karl Poppers formalizations in the 1950s [@popper:LogicScientificDiscovery.2010].
+The widely agreed-upon approach to social science is mainly based on Karl Popper's formalizations in the 1950s [@popper:LogicScientificDiscovery.2010]\todo{sinnvolle engl. Edition finden}.
 Falsifiable hypotheses, founded on strong theories, build the foundation for the idea of testing theory-based assumptions.
 It describes a way of generating knowledge about a small part of a population and generalizing this to its entirety [@krzywinski:Importancebeinguncertain.2013].
 
@@ -61,15 +60,15 @@ Questions around model _validity_ became central for the upcoming new methods.
 This approach, however, bears some shortcomings:
 
 1. What if your sample size is large?
-    Many of the frequentist approaches are very prone to large sample sizes (e.g., all the chi-squared based test-statistics).
+    Many of the frequentist approaches are very prone to large sample sizes (e.g., all the chi-squared-based test-statistics).
     Testing for significance with very large sample sizes will almost always generate significant results, rendering those tests useless.
 
 2. What if your sample is not independent and identically distributed? <!--% prozessgeneriert -->
     Many new datasets do not oblige to the rules for classical hypothesis testing
 
-3. What if you have data about the entire population? <!--%all tweets, news articles, users of a platform etc. --> Then, running tests for significance becomes completely irrelevant.
+3. What if you have data about the entire population? <!--%all tweets, news articles, users of a platform, etc. --> Then, running tests for significance becomes completely irrelevant.
 
-4. What if you have no theory, you can derive hypothesis from? This is especially important for social media networks, where the rules of engagement might differ quite substantially from 'normal' social behaviour or where you cannot specify your population.
+4. What if you have no theory, you can derive hypotheses from? This is especially important for social media networks, where the rules of engagement might differ quite substantially from 'normal' social behavior or where you cannot specify your population.
 
 ## Machine Learning
 
@@ -84,6 +83,7 @@ Machine learning is a powerful tool that has assisted companies in many domains 
 When the machine learning approach is combined with theory and scientific research it can lead to surprising results. The atheoretical perspective of machine learning can reveal patterns a theory did not predict or a new way to formulate the theory that perhaps the analyst had overlooked. However, machine learning on its own (and by design) results in little to no understanding if there is no effort to derive a theory or explanation. In sum, the use of machine learning is atheoretical, but it is potentially powerful when used as an agnostic search for potential explanations. In contrast, theory is a somewhat narrow-minded but powerful tool in that it is a focusing device that identifies which constructs are to be selected and formed from the millions of possible variables (or features) and it afford potential explanations for how features interrelate. As such, the iterative combination of atheoretical induction and theory-led deduction can be quite powerful.
 <!--% copy paste McFarland Ende.-->
 
+- Supervised vs. unsupervised vs. reinforcement learning, see @jordan:MachineLearning.2015\todo{write}
 
 ## How does ML compare to traditional approaches?
 
@@ -102,7 +102,7 @@ To show some of the differences in mindsets, we will use an exemplary model and 
 The chosen model is loosely based on the approach used by @davidov:ExplainingAttitudesImmigration.2012 and others; it has often been implemented in similar ways.
 It investigates the effect of human values on attitudes toward immigration.
 
-The explanandum, our dependent variable which we will call _reject_, is a measure which represents _attitudes towards immigration_.
+The explanandum, our dependent variable which we will call _reject_, is a measure that represents _attitudes towards immigration_.
 It is a mean index consisting of three variables[^av] which have been shown to load strongly on a single dimension in a confirmatory factor analysis.
 To measure human values, we use the theory of basic human values [@schwartz:UniversalsContentStructure.1992] which is captured in the ESS surveys.
 The theory describes 10 basic values that are structured in two dimensions[^schwartz]: _conservation_ and _self-transcendence_.
@@ -113,16 +113,33 @@ conservation values may be blocked by the arrival of immigrants (Sagiv and Schwa
 Immigrants bring along changing traditions and norms and this may hinder pursuing conservation values that include appreciation of stability of society, and respect, commitment and acceptance of the customs and ideas that traditional culture or religion provide. In other words, the arrival of immigrants is coupled with potential societal changes that are opposite to the preferences of conservative individuals. Therefore, we expect conservative individuals to reject immigration. On the other hand, the motivational goals or preferences embedded in self-transcendence values (especially universalism) are promoted by the arrival of immigrants (Sagiv and Schwartz 1995; Davidov et al. 2008a). Self-transcendence values include understanding, appreciation, tolerance and protection for the welfare of people and for nature. The arrival of immigrants provides opportunities for individuals to realise these self- transcendent values. In other words, the arrival of immigrants is coupled with potential societal changes that are in harmony with the preferences of self-transcendent individuals. Thus, we expect self-transcendent individuals to support immigration.
 <!-- copy ende -->
 
-We control for _income_, which which is measured with the variable `hincfel` and asks about the feeling about the household's present income.
+We control for _income_, which is measured with the variable `hincfel` and asks about the feeling about the household's present income.
 This one is chosen over the objective household income to reduce the number of missing values.
 Additionally, we control for _age_ (`agea`), _religiosity_ (`rlgdgr`), _education_ (`educyrs`), self-position on a _left-right scale_ (`lrscale`), and _gender_ (`gndr`).
 
-[^av]: The variables used here are ask on a 4-point scale how many immigrants of different groups respondents would like to allow into their country. 1. many/few immigrants of different race/ethnic groups e(as majority) `imdfetn`, 2.  many/few immigrants of same race/ethnic groups (as majority) `imsmetn`, 3. many/few immigrants from poorer countries outside Europe `impcntr`. All items are recoded so that higher levels indicate more accepted immigrants.
+[^av]: The variables used here are asked on a 4-point scale how many immigrants of different groups respondents would like to allow into their country. 1. many/few immigrants of different race/ethnic groups e(as majority) `imdfetn`, 2.  many/few immigrants of same race/ethnic groups (as majority) `imsmetn`, 3. many/few immigrants from poorer countries outside Europe `impcntr`. All items are recoded so that higher levels indicate more accepted immigrants.
 
-[^schwartz]: The measures are construction according to the ESS website. All items were recoded so that higher levels indicate more agreement.
+[^schwartz]: The measures are constructed according to the ESS website. All items were recoded so that higher levels indicate more agreement.
 
-## Assessing model fit
+## Assessing goodness-of-fit
 
-We have a plethora of pseudo $R^2$ measures to assess goodness-of-fit, or the Akaike and Bayesion information criterion to compare and select models.
-The basic idea behind these procedures in the social sciences is always to use all available data to fit the best possible model and to use one of the above mentioned measures to tell us  how good our model fits the underlying data.
+We have a plethora of pseudo $R^2$ measures to assess goodness-of-fit, or the Akaike / Bayesian information criterion (AIC/BIC) to compare and select models.
+The basic idea behind these procedures in the social sciences is always to use all available data to fit the best possible model and to use one of the above-mentioned measures to tell us how well our model fits the underlying data.
 Herein lies the probably biggest difference to what machine learners do.
+In constraining themselves to rather 'simple' linear models, only including variables (and interaction effects) that do have a strong foundation in theory, traditional statistics avoids a very big problem in the machine learning realm: _overfitting_.
+Overfitting describes a phenomenon where a complex model with a lot of parameters is able to fit the underlying data very well but fails to predict unseen (new) data points.
+To overcome this, it has become customary split the data set into multiple parts and only to use part of the data to train the model and the rest of the data to evaluate the predictive performance.
+We call this the _train-test-split_.
+It allows us to evaluate if our models only learns the noise (unexplained variance) in our data in a way that it is able to predict data that it has never seen before.
+Once the final model configuration is decided, all data are used to train the final model.
+A drawback of this procedure, of course, is that we are not able to evaluate the model on all data and are still at risk of _overfitting_ and there is a trade-off to be made when deciding in how large the test set should be.
+Larger test sets usually mean higher confidence in the validation results but they come at the price of reduced available data for the training step.
+Fortunately, methods exist to ensure predictive power on all data --- one of which is called _K-Fold Cross-Validation_.
+It describes an approach in which the data is split into $K$ equally sized parts where $K-1$ parts are used for training and the remaining part is used for validation.
+$K$ is often times $3$ or $5$ in these cases.
+This is repeated $K$ times until every part of the data has been the test set exactly once.
+Usually, the average over all $K$ model validation metrics is taken, resulting in numbers where all parts of the data are part of the training _and_ the validation step for the computational cost of having to train $K$ models instead of one in order to validate.
+
+## Lasso Regression
+
+## Random Forest
