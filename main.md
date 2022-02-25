@@ -180,3 +180,14 @@ $$
 ## Lasso Regression
 
 ## Random Forest
+
+# Discussion
+In sum, social scientists face a trade-off when it comes to using ML. 
+On the downside, features can only be ranked by importance. This stands in contrast to more-fine grained information provided by typical regression coefficients.
+On the upside, focusing on models' predictive capabilities shifts the attention to explanations that are closer to scientific reasoning and less prone to mirror common sense [@wattsCommonSenseSociological2014]. 
+It is "this potential predictive force which gives scientific explanations its importance" [@hempelStudiesLogicExplanation1948, 138], what is inherently neglected by goodness of fit measures solely relying on in-sample observations. 
+In contrast, using out-of-sample is a crucial part of any SML procedure (i.e., its test data). 
+
+… ML no cheat code though, all is statistics. Differences mostly due to epistemological differences, can learn from that different perspective. Combine both, all good; 
+
+… maybe finish by saying that UML helps explore, SML to predict; but that all st
