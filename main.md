@@ -7,13 +7,14 @@ csquotes: true
 title: 'Regression and Artificial Intelligence'
 
 authors:
+    - Lukas Erhard:
+        institute: stuttgart
+        email: lukas.erhard@sowi.uni-stuttgart.de
     - Raphael Heiberger:
         institute: stuttgart
         email: raphael.heiberger@sowi.uni-stuttgart.de
         correspondence: yes
-    - Lukas Erhard:
-        institute: stuttgart
-        email: lukas.erhard@sowi.uni-stuttgart.de
+    
 institutes:
     stuttgart: University of Stuttgart, Seidenstraße 36, 70714 Stuttgart, Germany
 
@@ -195,7 +196,7 @@ To be sure, how those methods are used (and promoted) in ML contexts, might diff
 Regardless which features drives a model and how an outcome could be explained, the main interest of ML researchers in industry, but also in science, is that "it works", i.e., that the model provides good predictions.
 This is an important *epistemological* difference. 
 It might be helpful to acknowledge that and think about fruitful ways to complement existing regression models. 
-Or rather, the way we as social scientists can make use of the ML perspective by … maybe finish by saying that UML helps explore, SML to predict; but that all st
+Or rather, the way we as social scientists can make use of the ML perspective by … maybe finish by saying that UML helps explore, SML to predict
 
 # References
      
