@@ -182,12 +182,22 @@ $$
 ## Random Forest
 
 # Discussion
-In sum, social scientists face a trade-off when it comes to using ML. 
+Social scientists face a trade-off when it comes to using ML. 
 On the downside, features can only be ranked by importance. This stands in contrast to more-fine grained information provided by typical regression coefficients.
 On the upside, focusing on models' predictive capabilities shifts the attention to explanations that are closer to scientific reasoning and less prone to mirror common sense [@wattsCommonSenseSociological2014]. 
 It is "this potential predictive force which gives scientific explanations its importance" [@hempelStudiesLogicExplanation1948, 138], what is inherently neglected by goodness of fit measures solely relying on in-sample observations. 
 In contrast, using out-of-sample is a crucial part of any SML procedure (i.e., its test data). 
+Integrating this inherent property of ML, would at least reduce an important weakness of TS. 
 
-… ML no cheat code though, all is statistics. Differences mostly due to epistemological differences, can learn from that different perspective. Combine both, all good; 
+ML is no cheat code, it is all statistics.
+Everybody with a professional background in quantitative social science has learned of some ML tools, be it UML like cluster analysis or SML like logistic regressions.
+To be sure, how those methods are used (and promoted) in ML contexts, might differ from common social science approaches. 
+Regardless which features drives a model and how an outcome could be explained, the main interest of ML researchers in industry, but also in science, is that "it works", i.e., that the model provides good predictions.
+This is an important *epistemological* difference. 
+It might be helpful to acknowledge that and think about fruitful ways to complement existing regression models. 
+Or rather, the way we as social scientists can make use of the ML perspective by … maybe finish by saying that UML helps explore, SML to predict; but that all st
 
-… maybe finish by saying that UML helps explore, SML to predict; but that all st
+# References
+     
+<div id="refs">
+</div>
