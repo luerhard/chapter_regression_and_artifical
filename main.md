@@ -32,15 +32,26 @@ toc: false # Table of contents
 
 Research in the social sciences has been shifting towards a new era.
 In the prior century, the focus laid mainly on variable-based, theory and hypothesis-driven approaches to give answers to societal questions.
-Data for such approaches was scarce, hard to come by, and very expensive [@grimmer:MachineLearningSocial.2021].
-The availability of more and more data opens possibilities and creates the need for new forms of analysis.
-While classical social science, as practiced since the second half of the last century, is based on a set of well-defined and elaborated rules, the emergence of ever new datasets create the need (and possibility) to approach questions in a new way [@mcfarland:SociologyEraBig.2016].
-Along with those new datasets, data sources, and the explosion in computing power, new analyzing techniques were also developed in a rapid fashion.
-Social scientists increasingly use those relatively newly developed techniques called machine learning. 
-This describes "a class of flexible algorithmic and statistical techniques for prediction and dimension reduction" [@grimmer:MachineLearningSocial.2021, 396].
+Data for such approaches was scarce, hard to come by, and expensive [@grimmer:MachineLearningSocial.2021].
+The internet changed that. 
+Digital data is comprehensive, ubiquitous, and, in general, cheap to retrieve.
+While the availability of such data opens up new roads and possibilities, it creates the need for new forms of analysis and the need to approach questions in a new way [@mcfarlandSociologyEraBig2016; @lazerComputationalSocialScience2020].
+Along with those new datasets, data sources, and an explosion in available computing power, new techniques for analyzing social phenomena were developed in a rapid fashion, often by integrating knowledge from other disciplines into an emerging field of "Computational Social Science" [@heibergerInstallingComputationalSocial2016].
 
-In this chapter, we will give an overview of some of the new methods, compare them to the approaches used in the 'classical' social sciences\todo{decide on consistent name}, and point out some key differences and commonalities.
-To do this, we will first go into detail on some theoretical basis and show the differences in approach on a practical example with an exemplary analysis on ESS Data [@essround9:EuropeanSocialSurvey.2019]\todo{use correct ess version(s)}.
+In particular, social scientists increasingly use tools from machine learning (ML), methods that can be described as "a class of flexible algorithmic and statistical techniques for prediction and dimension reduction" [@grimmer:MachineLearningSocial.2021, 396].
+Applications of ML comprise some of the most important technological innovations in recent years, for instance, gene prediction or search engines [@jordanMachineLearningTrends2015]. 
+No problem seems too complex as long as researchers have enough (i.e., very large) data, even previously unsolvable questions might be solved, e.g., how to maintain high-temperature plasma for nuclear fusion [@degraveMagneticControlTokamak2022]. 
+Given the already impressive resume and even greater potential of ML, is it only a matter of time until it replaces traditional statistics used in social science\todo{traditional statistics als consistent name nehmen und mit TS abkürzen?}?
+
+As we will see, differences of ML and TS are (mostly) grounded in different epistemological perspectives. 
+While recent overviews characterize ML-related methods and provide guidance for future research  [@molina:MachineLearningSociology.2019; @grimmer:MachineLearningSocial.2021], our contribution's goal is to point out key differences and commonalities between TS and ML. 
+We will illustrate how a typical social scientists' approach might look like and how using ML techniques would change the results.  
+For this purpose, we will first elaborate some theoretical differences and similarities between inferential statistics and ML. 
+We will then exemplify those differences by using a well-known database, the ESS [@essround9:EuropeanSocialSurvey.2019]\todo{use correct ess version(s)}.
+In particular, we will focus on two main parts of any regression analysis: estimators and goodness of fit. 
+Comparing logistic regressions and two popular ML algorithms \footnote{hier shcon wording klären, was also ML "regression" meint?} (Random Forest, Ridge Regression), we will explain how ML work and, more importantly, how they are typically used by researchers outside the social scientists.
+In so doing :) we will reveal how *epistemological* differences shape the potential usage of ML in the social sciences and discuss the methodological trade-off when it comes to the question whether to apply ML or TS. 
+As it is often the case, combining both seems like the most promising way.%in besser
 
 # Knowledge Acquisition in the Social Sciences
 
