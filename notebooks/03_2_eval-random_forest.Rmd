@@ -1,0 +1,128 @@
+---
+title: "02-create_schwartz_model"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE, echo=F}
+
+library(caret)
+library(forcats)
+library(ggplot2)
+library(ggpubr)
+library(dplyr)
+library(ranger)
+
+knitr::opts_chunk$set(echo = TRUE)
+options(box.path = here::here())
+box::use(r / load_data)
+theme_set(theme_minimal())
+```
+
+# Data
+
+```{r}
+ess <- load_data$ess1()
+df <- load_data$preprocess(ess)
+data <- load_data$train_test_split(df)
+```
+
+
+```{r}
+model <- readRDS(here::here("models", "ranger_mtry5_1.RDS"))
+```
+
+
+```{r}
+X_test <- select(data$test, -reject_bin)
+y_test <- predict(model, data$test)
+y_true <- data$test$reject_bin
+```
+
+
+```{r}
+confusionMatrix(y_test, y_true)
+```
+
+
+```{r}
+imp <- importance(model$finalModel)
+
+feat_importance <- tibble(names = names(imp), importance = imp) %>%
+  arrange(importance) %>%
+  mutate(names = fct_inorder(names)) %>%
+  filter(!grepl("^country", names))
+
+ggplot(feat_importance, aes(x = importance, y = names)) +
+  geom_bar(stat = "identity", show.legend = FALSE, width = .2)
+
+ggsave(here::here("rsc", "images", "rf_feature_imp.pdf"))
+```
+
+```{r}
+library(iml)
+
+d <- X_test %>%
+  mutate_if(is.factor, as.character) %>%
+  mutate_if(is.double, as.numeric)
+
+pred <- Predictor$new(
+  model,
+  data = d,
+  y = y_true,
+  class = "1"
+)
+```
+
+
+```{r}
+eff_tran <- FeatureEffect$new(pred, feature = "s_dim_trancendence", method = "ale") %>% 
+  plot() + 
+  theme(axis.title.y = element_blank())
+
+eff_cons <- FeatureEffect$new(pred, feature = "s_dim_conservation", method = "ale") %>% 
+  plot() + 
+  theme(axis.title.y = element_blank())
+
+eff_age <- FeatureEffect$new(pred, feature = "age", method = "ale") %>% 
+  plot() + 
+  theme(axis.title.y = element_blank())
+
+eff_lr <- FeatureEffect$new(pred, feature = "left_right", method = "ale") %>% 
+  plot() + 
+  theme(axis.title.y = element_blank())
+
+eff_income <- FeatureEffect$new(pred, feature = "income", method = "ale") %>% 
+  plot() + 
+  theme(axis.title.y = element_blank())
+
+eff_educ <- FeatureEffect$new(pred, feature = "educ", method = "ale") %>% 
+  plot() +
+  theme(axis.title.y = element_blank())
+
+eff_relig <- FeatureEffect$new(pred, feature = "relig", method = "ale") %>% 
+  plot() + 
+  theme(axis.title.y = element_blank())
+```
+
+```{r}
+ggarrange(
+  eff_tran,
+  eff_cons, 
+  eff_age, 
+  eff_lr, 
+  eff_income, 
+  eff_educ, 
+  eff_relig, 
+  ncol = 2, nrow = 4, align = "h"
+  ) 
+```
+
+```{r}
+ggsave(
+  here::here("rsc", "images", "rf_ale.pdf")
+)
+```
+

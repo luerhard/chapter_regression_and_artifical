@@ -36,23 +36,23 @@ In the prior century, the focus laid mainly on variable-based, theory and hypoth
 Data for such approaches was scarce, hard to come by, and expensive [@grimmer:MachineLearningSocial.2021].
 The internet changed that. 
 Digital data is comprehensive, ubiquitous, and, in general, cheap to retrieve.
-While the availability of such data opens up new roads and possibilities, it creates the need for new forms of analysis and the need to approach questions in a new way [@mcfarlandSociologyEraBig2016; @lazerComputationalSocialScience2020].
+While the availability of such data opens up new roads and possibilities, it creates the need for new forms of analysis and the need to approach questions in a new way [@mcfarland:SociologyEraBig.2016; @lazerComputationalSocialScience2020].
 Along with those new datasets, data sources, and an explosion in available computing power, new techniques for analyzing social phenomena were developed in a rapid fashion, often by integrating knowledge from other disciplines into an emerging field of "Computational Social Science" [@heibergerInstallingComputationalSocial2016].
 
-In particular, social scientists increasingly use tools from machine learning (ML), methods that can be described as "a class of flexible algorithmic and statistical techniques for prediction and dimension reduction" [@grimmer:MachineLearningSocial.2021, 396].
-Applications of ML comprise some of the most important technological innovations in recent years, for instance, gene prediction or search engines [@jordanMachineLearningTrends2015]. 
+In particular, social scientists increasingly use tools from [!ml], methods that can be described as "a class of flexible algorithmic and statistical techniques for prediction and dimension reduction" [@grimmer:MachineLearningSocial.2021, 396].
+Applications of [!ml] comprise some of the most important technological innovations in recent years, for instance, gene prediction or search engines [@jordan:MachineLearning.2015]. 
 No problem seems too complex as long as researchers have enough (i.e., very large) data, even previously unsolvable questions might be solved, e.g., how to maintain high-temperature plasma for nuclear fusion [@degraveMagneticControlTokamak2022]. 
-Given the already impressive resume and even greater potential of ML, is it only a matter of time until it replaces traditional statistics used in social science\todo{traditional statistics als consistent name nehmen und mit TS abkürzen?}?
+Given the already impressive resume and even greater potential of [!ml], is it only a matter of time until it replaces traditional statistics used in social science\todo{traditional statistics als consistent name nehmen und mit TS abkürzen?}?
 
-As we will see, differences of ML and TS are (mostly) grounded in different epistemological perspectives. 
-While recent overviews characterize ML-related methods and provide guidance for future research  [@molina:MachineLearningSociology.2019; @grimmer:MachineLearningSocial.2021], our contribution's goal is to point out key differences and commonalities between TS and ML. 
+As we will see, differences of [!ml] and [!ts] are (mostly) grounded in different epistemological perspectives. 
+While recent overviews characterize ML-related methods and provide guidance for future research  [@molina:MachineLearningSociology.2019; @grimmer:MachineLearningSocial.2021], our contribution's goal is to point out key differences and commonalities between [!ts] and [!ml]. 
 We will illustrate how a typical social scientists' approach might look like and how using ML techniques would change the results.  
-For this purpose, we will first elaborate some theoretical differences and similarities between inferential statistics and ML. 
-We will then exemplify those differences by using a well-known database, the ESS [@essround9:EuropeanSocialSurvey.2019]\todo{use correct ess version(s)}.
-In particular, we will focus on two main parts of any regression analysis: estimators and goodness of fit. 
-Comparing logistic regressions and two popular ML algorithms \footnote{hier shcon wording klären, was also ML "regression" meint?} (Random Forest, Ridge Regression), we will explain how ML work and, more importantly, how they are typically used by researchers outside the social scientists.
-In so doing :) we will reveal how *epistemological* differences shape the potential usage of ML in the social sciences and discuss the methodological trade-off when it comes to the question whether to apply ML or TS. 
-As it is often the case, combining both seems like the most promising way.%in besser
+For this purpose, we will first elaborate some theoretical differences and similarities between inferential statistics and [!ml]. 
+We will then exemplify those differences by using a well-known database, the [!ess] [@essround9:EuropeanSocialSurvey.2019]\todo{use correct ess version(s)}.
+In particular, we will focus on two main parts of any regression\todo[author=LE]{klären, ob wir regression oder classification machen} analysis: estimators and goodness of fit. 
+Comparing logistic regressions and two popular [!ml] algorithms \footnote{hier shcon wording klären, was also ML "regression" meint?} (Random Forest, Ridge Regression), we will explain how [!ml] works and, more importantly, how they are typically used by researchers outside the social scientists.
+In so doing we will reveal how *epistemological* differences shape the potential usage of [!ml] in the social sciences and discuss the methodological trade-off when it comes to the question whether to apply [!ml] or [!ts]. 
+As it is often the case, combining both seems like the most promising way. <!--in besser-->
 
 # Knowledge Acquisition in the Social Sciences
 
@@ -101,10 +101,10 @@ When the machine learning approach is combined with theory and scientific resear
 ## How does ML compare to traditional approaches?
 
 It might come as a surprise but often times the algorithms used in machine learning are quite similar, if not the same, as in the traditional quantitative social sciences.
-Logistic regression, OLS regressions, and principal component analysis, for example, are readily used in both camps. 
+Logistic regression, [!ols] regression, and principal component analysis, for example, are readily used in both camps. 
 Even though many of the algorithms are the same, the mindset, practical approach and evaluation strategies differ.
 
-In contrast to frequentist models, ML models usually do not have any usable, that is interpretable, coefficients.
+In contrast to frequentist models, [!ml] models usually do not have any usable, that is interpretable, coefficients.
 Model evaluation rather works by evaluating its predictive power.
 
 
@@ -117,7 +117,7 @@ It investigates the effect of human values on attitudes toward immigration.
 
 The explanandum, our dependent variable which we will call _reject_, is a measure that represents _attitudes towards immigration_.
 It is a mean index consisting of three variables[^av] which have been shown to load strongly on a single dimension in a confirmatory factor analysis.
-To measure human values, we use the theory of basic human values [@schwartz:UniversalsContentStructure.1992] which is captured in the ESS surveys.
+To measure human values, we use the theory of basic human values [@schwartz:UniversalsContentStructure.1992] which is captured in the [!ess] surveys.
 The theory describes 10 basic values that are structured in two dimensions[^schwartz]: _conservation_ and _self-transcendence_.
 
 <!-- copied from davidov & meuleman 2012 -->
@@ -139,7 +139,7 @@ Additionally, we control for _age_ (`agea`), _religiosity_ (`rlgdgr`), _educatio
 We have a plethora of pseudo $R^2$ measures to assess goodness-of-fit, or the Akaike / Bayesian information criterion (AIC/BIC) to compare and select models.
 The basic idea behind these procedures in the social sciences is always to use all available data to fit the best possible model and to use one of the above-mentioned measures to tell us how well our model fits the underlying data.
 Herein lies the probably biggest difference to what machine learners do.
-In constraining themselves to rather 'simple' linear models, only including variables (and interaction effects) that do have a strong foundation in theory, traditional statistics avoids a very big problem in the machine learning realm: _overfitting_.
+In constraining themselves to rather 'simple' linear models, only including variables (and interaction effects) that do have a strong foundation in theory, traditional statistics avoids a very big problem in the [!ml] realm: _overfitting_.
 
 ### Splitting data
 
@@ -176,11 +176,41 @@ $$
 
 
 - confusion matrix
-- specificity / sensitivity ? 
-
-## Lasso Regression
+- specificity / sensitivity ?
+- ROC Curve?
 
 ## Random Forest
+
+[!^rf!] ist an algorithm from the family of ensemble methods, meaning it is a compound of multiple simple algorithms called _Decision Trees_.
+Ensemble methods exploit the concept of majority voting, where multiple simple models are trained to capture different aspects of the data and the prediction is the outcome most models agree upon [@bonaccorso:MachineLearningAlgorithms.2017, 154].
+
+A Decision Tree is, as one would imagine, a tree of binary decisions on the data.
+The order of the decisions and the cutoff points according to which a decision is made are the things that are learned by maximizing an impurity measure like _Gini_[^impurity] or _cross-entropy_.
+The trees in a [!rf] a generally much simpler, in a way that they have less nodes (one could imagine them more as tree stumps), than a single decision tree.
+Interestingly, this has been shown to improve the predictive performance and, most importantly, makes the [!rf] less susceptible to overfitting compared to a single Decision Tree.
+
+We will use 'bagged' trees here.
+It is worth mentioning that there exists another group of ensemble trees called 'boosted trees'. 
+A very popular member of this relatively new group of algorithms is _AdaBoost_ [@freund:DecisionTheoreticGeneralizationOnLine.1997].
+They have shown to be very powerful because Decision Trees are trained sequentially (instead of simultaneously) and trees later in the sequence are able to learn from the misclassifications of earlier ones.
+
+[^impurity]: We will not go into detail about the differences of impurity measures here and use Gini throughout the rest of this chapter.
+
+### Hyperparameter tuning & Grid search
+
+The [!rf] implementation used here has two hyperparameters to tune: the number of features to be considered at each decision node (`mtry`) [see also, @lantz:MachineLearningDiscover.2015, 369ff.], and `min.node.size`, the minimum size of the terminal nodes in every tree. The latter implicitly defines the maximum depth of our trees.
+
+### Feature importance
+
+![](rsc/images/rf_feature_imp.pdf){#fig:rf_feature_importance .center width="100%"}
+
+### ALE plots
+
+![](rsc/images/rf_ale.pdf){#fig:rf_pdp .center width="100%"}
+
+
+
+## Lasso Regression
 
 # Discussion
 Social scientists face a trade-off when it comes to using ML. 

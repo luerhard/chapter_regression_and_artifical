@@ -1,10 +1,30 @@
 {
-    "aba": {
-        "shortform": "ABA",
-        "longform": "A Better Acronym"
+    "aic": {
+        "shortform": "AIC",
+        "longform": "Aikaike Information Criterion"
     },
-    "apa": {
-        "shortform": "APA",
-        "longform": "American Psychological Association"
+    "bic": {
+        "shortform": "BIC",
+        "longform": "Bayesian Information Criterion"
+    },
+    "ess": {
+        "shortform": "ESS",
+        "longform": "European Social Survey"
+    },
+    "ml": {
+        "shortform": "ML",
+        "longform": "machine learning"
+    },
+    "ols": {
+        "shortform": "OLS",
+        "longform": "ordinary least squares"
+    },
+    "rf": {
+        "shortform": "RF",
+        "longform": "random forest"
+    },
+    "ts": {
+        "shortform": "TS",
+        "longform": "traditional statistics"
     }
 }
