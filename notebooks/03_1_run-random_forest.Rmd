@@ -1,0 +1,76 @@
+---
+title: "02-create_schwartz_model"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE, echo=F}
+
+library(caret)
+library(doParallel)
+
+knitr::opts_chunk$set(echo = TRUE)
+options(box.path = here::here())
+box::use(r / load_data)
+box::reload(load_data)
+```
+
+# Data
+
+```{r}
+ess <- load_data$ess1()
+df <- load_data$preprocess(ess)
+data <- load_data$train_test_split(df)
+```
+
+```{r}
+
+set.seed(1337)
+
+form <- as.formula(
+  "reject_bin ~ gender +
+  age +
+  relig +
+  educ +
+  income +
+  s_dim_conservation +
+  s_dim_trancendence +
+  left_right +
+  country"
+)
+
+
+ctrl <- trainControl(
+  method = "cv",
+  number = 5,
+  savePredictions = "final"
+)
+
+tunegrid <- expand.grid(
+  mtry = c(1:7),
+  min.node.size = c(1,2,3,4, 10, 20, 50, 80, 100),
+  splitrule = "gini"
+)
+
+model <- train(
+  form,
+  method = "ranger",
+  data = data$train,
+  metric = "Accuracy",
+  tuneGrid = tunegrid,
+  trControl = ctrl,
+  importance = "impurity",
+  respect.unordered.factors = "partition"
+)
+
+```
+
+```{r}
+print(model)
+```
+
+```{r}
+saveRDS(model, here::here("models", "ranger_mtry5_1.RDS"))
+```
