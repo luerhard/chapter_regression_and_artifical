@@ -16,9 +16,7 @@ library(tidyverse)
 
 
 knitr::opts_chunk$set(echo = TRUE)
-
 options(box.path = here::here())
-
 box::use(r / load_data)
 ```
 
@@ -26,6 +24,7 @@ box::use(r / load_data)
 
 ```{r}
 ess <- load_data$ess1()
+df <- load_data$preprocess(ess)
 ```
 
 ## Notes
@@ -39,9 +38,6 @@ ess <- load_data$ess1()
     - max 8 dimensions per reg to avoid multicolinearity.
 
 - `s_` stands for schwartz-dimension
-```{r}
-df <- load_data$preprocess(ess)
-```
 
 ```{r}
 library(psych)
@@ -98,6 +94,18 @@ summary(model)
 ```{r}
 PseudoR2(model, which = c("McFadden", "McFaddenAdj", "McKelveyZavoina", "Nagelkerke"))
 ```
+
+```{r}
+coefs <- summary(model)$coef %>%
+  as.data.frame() %>%
+  filter(!grepl("^country", row.names(.))) %>%
+  arrange(row.names(.)) %>%
+  mutate_if(is.numeric, ~signif(., digits = 3)) %>%
+  select(Estimate, `Std. Error`, `Pr(>|z|)`)
+
+write.csv(coefs, here::here("rsc", "tables", "logreg.csv"))
+```
+
 
 ```{r}
 pred <- predict(model, df, type = "response")

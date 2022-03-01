@@ -133,6 +133,14 @@ Additionally, we control for _age_ (`agea`), _religiosity_ (`rlgdgr`), _educatio
 [^av]: The variables used here are asked on a 4-point scale how many immigrants of different groups respondents would like to allow into their country. 1. many/few immigrants of different race/ethnic groups e(as majority) `imdfetn`, 2.  many/few immigrants of same race/ethnic groups (as majority) `imsmetn`, 3. many/few immigrants from poorer countries outside Europe `impcntr`.
 All items are recoded so that higher levels indicate more accepted immigrants.
 
+```{.table #tab:logreg}
+---
+alignment: LRRRR
+caption: Logistic regression on all data.
+include: rsc/tables/logreg.csv
+markdown: true
+---
+```
 
 [^schwartz]: The measures are constructed according to the ESS website. All items were recoded so that higher levels indicate more agreement.
 
@@ -247,8 +255,3 @@ Regardless which features drives a model and how an outcome could be explained, 
 This is an important *epistemological* difference. 
 It might be helpful to acknowledge that and think about fruitful ways to complement existing regression models. 
 Or rather, the way we as social scientists can make use of the [!ml] perspective by … maybe finish by saying that [!uml] helps explore, [!sml] to predict
-
-# References
-     
-<div id="refs">
-</div>
