@@ -181,7 +181,8 @@ pre code {
 
 <div id="data" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Data</h1>
-<pre class="r"><code>ess &lt;- load_data$ess1()</code></pre>
+<pre class="r"><code>ess &lt;- load_data$ess1()
+df &lt;- load_data$preprocess(ess)</code></pre>
 <div id="notes" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Notes</h2>
 <div id="human-values-schwartz" class="section level3" number="1.1.1">
@@ -196,57 +197,6 @@ pre code {
 </ul></li>
 <li><code>s_</code> stands for schwartz-dimension</li>
 </ul>
-<pre class="r"><code>schwartz_cols &lt;- c(
-  &quot;imprich&quot;, &quot;iprspot&quot;, &quot;ipshabt&quot;, &quot;ipsuces&quot;, &quot;impfun&quot;, &quot;ipgdtim&quot;,
-  &quot;impdiff&quot;, &quot;ipadvnt&quot;, &quot;ipeqopt&quot;, &quot;ipudrst&quot;, &quot;impenv&quot;, &quot;iphlppl&quot;,
-  &quot;iplylfr&quot;, &quot;ipmodst&quot;, &quot;imptrad&quot;, &quot;ipbhprp&quot;, &quot;ipfrule&quot;, &quot;impsafe&quot;,
-  &quot;ipstrgv&quot;
-)
-
-df &lt;- ess %&gt;%
-  mutate_at(
-    # reverse coding and substract mrat from all schwartz cols
-    all_of(schwartz_cols), list(~ recode(.,
-      &quot;1&quot; = 6, &quot;2&quot; = 5, &quot;3&quot; = 4, &quot;4&quot; = 3, &quot;5&quot; = 2, &quot;6&quot; = 1,
-      .keep_value_labels = F
-    ))
-  ) %&gt;%
-  mutate(
-    # mrat = mean over all schwarz cols
-    mrat = rowMeans(across(all_of(schwartz_cols)))
-  ) %&gt;%
-  mutate_at(
-    all_of(schwartz_cols), list(~ . - mrat)
-  ) %&gt;%
-  transmute(
-    # controls
-    gender = recode(as_factor(gndr), &quot;Male&quot; = 0, &quot;Female&quot; = 1),
-    age = ifelse(agea &gt; 18, agea, NA),
-    relig = rlgdgr,
-    educ = ifelse(eduyrs &lt; 30, eduyrs, NA),
-    country = as_factor(cntry),
-    left_right = lrscale,
-    income = recode(hincfel, &quot;1&quot; = 4, &quot;2&quot; = 3, &quot;3&quot; = 2, &quot;4&quot; = 1, .keep_value_labels = F),
-    # AV
-    reject = rowMeans(across(c(imdfetn, imsmetn, impcntr))),
-    reject_bin = ifelse(reject &gt; 2.5, 1, 0),
-    # Schwartz
-    # create values
-    # s_power = rowMeans(across(c(imprich, iprspot))),
-    # s_achievement = rowMeans(across(c(ipshabt, ipsuces))),
-    # s_hedonism = rowMeans(across(c(impfun, ipgdtim))),
-    # s_stimulation = rowMeans(across(c(impdiff, ipadvnt))),
-    # s_selfdirecton = rowMeans(across(c(ipcrtiv, impfree))),
-    # s_unversalism = rowMeans(across(c(ipeqopt, ipudrst, impenv))),
-    # s_benevolence = rowMeans(across(c(iphlppl, iplylfr))),
-    # s_tradition = rowMeans(across(c(ipmodst, imptrad))),
-    # s_conformity = rowMeans(across(c(ipbhprp, ipfrule))),
-    # s_security = rowMeans(across(c(impsafe, ipstrgv))),
-    # create dimensions
-    s_dim_conservation = rowMeans(across(c(impsafe, ipstrgv, ipfrule, ipbhprp, ipmodst, imptrad))),
-    s_dim_trancendence = rowMeans(across(c(ipeqopt, ipudrst, impenv, iphlppl, iplylfr)))
-  ) %&gt;%
-  drop_na()</code></pre>
 <pre class="r"><code>library(psych)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;psych&#39;</code></pre>
@@ -282,17 +232,16 @@ desc_short &lt;- descriptives %&gt;%
   filter(names %in% select_vars) %&gt;%
   mutate_if(is.numeric, round, 2)
 
-write_csv(desc_short, file.path(&quot;rsc&quot;, &quot;tables&quot;, &quot;descriptives.csv&quot;))
+#write_csv(desc_short, file.path(&quot;rsc&quot;, &quot;tables&quot;, &quot;descriptives.csv&quot;))
 
 as.data.frame(desc_short)</code></pre>
 <pre><code>##                                 names     n  mean    sd   min    max
-## gender                         gender 27164  0.51  0.50  0.00   1.00
+## gender                         gender 27164  1.51  0.50  1.00   2.00
 ## age                               age 27164 47.46 16.79 19.00 102.00
 ## relig                           relig 27164  4.94  2.91  0.00  10.00
 ## educ                             educ 27164 12.24  3.97  0.00  29.00
 ## left_right                 left_right 27164  5.10  2.15  0.00  10.00
 ## income                         income 27164  3.08  0.82  1.00   4.00
-## reject_bin                 reject_bin 27164  0.45  0.50  0.00   1.00
 ## s_dim_conservation s_dim_conservation 27164  0.13  0.63 -2.82   2.36
 ## s_dim_trancendence s_dim_trancendence 27164  0.66  0.53 -2.13   3.05</code></pre>
 <pre class="r"><code>form &lt;- as.formula(
@@ -321,7 +270,7 @@ summary(model)</code></pre>
 ## Coefficients:
 ##                         Estimate Std. Error z value Pr(&gt;|z|)    
 ## (Intercept)            2.3043408  0.1120174  20.571  &lt; 2e-16 ***
-## gender                 0.0092098  0.0282416   0.326   0.7443    
+## genderFemale           0.0092098  0.0282416   0.326   0.7443    
 ## age                    0.0064212  0.0009509   6.753 1.45e-11 ***
 ## relig                 -0.0237449  0.0053208  -4.463 8.10e-06 ***
 ## educ                  -0.0988852  0.0042473 -23.282  &lt; 2e-16 ***
@@ -360,9 +309,17 @@ summary(model)</code></pre>
 <pre class="r"><code>PseudoR2(model, which = c(&quot;McFadden&quot;, &quot;McFaddenAdj&quot;, &quot;McKelveyZavoina&quot;, &quot;Nagelkerke&quot;))</code></pre>
 <pre><code>##        McFadden     McFaddenAdj McKelveyZavoina      Nagelkerke 
 ##       0.1579631       0.1565201       0.2773538       0.2615074</code></pre>
+<pre class="r"><code>coefs &lt;- summary(model)$coef %&gt;%
+  as.data.frame() %&gt;%
+  filter(!grepl(&quot;^country&quot;, row.names(.))) %&gt;%
+  arrange(row.names(.)) %&gt;%
+  mutate_if(is.numeric, ~signif(., digits = 3)) %&gt;%
+  select(Estimate, `Std. Error`, `Pr(&gt;|z|)`)
+
+write.csv(coefs, here::here(&quot;rsc&quot;, &quot;tables&quot;, &quot;logreg.csv&quot;))</code></pre>
 <pre class="r"><code>pred &lt;- predict(model, df, type = &quot;response&quot;)
 pred &lt;- as_factor(ifelse(pred &gt; .5, 1, 0))
-confusionMatrix(as_factor(df$reject_bin), pred)</code></pre>
+confusionMatrix(df$reject_bin, pred)</code></pre>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
