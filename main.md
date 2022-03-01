@@ -157,7 +157,7 @@ We use this model only for didactic purposes.
 We have a plethora of pseudo $R^2$ measures to assess goodness-of-fit, or the Akaike / Bayesian information criterion (AIC/BIC) to compare and select models.
 The basic idea behind these procedures in the social sciences is always to use all available data to fit the best possible model and to use one of the above-mentioned measures to tell us how well our model fits the underlying data.
 Herein lies the probably biggest difference to what machine learners do.
-In constraining themselves to rather 'simple' linear models, only including variables (and interaction effects) that do have a strong foundation in theory, [!ts] avoidy a very big problem in the [!ml] realm: _overfitting_.
+In constraining themselves to rather 'simple' linear models, only including variables (and interaction effects) that do have a strong foundation in theory, [!ts] avoid a very big problem in the [!ml] realm: _overfitting_.
 
 Overfitting describes a phenomenon where a complex model with a lot of parameters is able to fit the underlying data very well but fails to predict unseen (new) data points.
 To overcome this, it has become customary to split the data set into multiple parts and only to use part of the data to train the model and the rest of the data to evaluate the predictive performance.
