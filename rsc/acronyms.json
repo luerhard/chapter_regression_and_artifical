@@ -26,5 +26,25 @@
     "ts": {
         "shortform": "TS",
         "longform": "traditional statistics"
+    },
+    "ale": {
+        "shortform": "ALE",
+        "longform": "accumulated local effect"
+    },
+    "pdp": {
+        "shortform": "PDP",
+        "longform": "partial dependence plot"
+    },
+    "pca": {
+        "shortform": "PCA",
+        "longform": "principal component analysis"
+    },
+    "sml": {
+        "shortform": "SML",
+        "longform": "supervised machine learning"
+    },
+    "uml": {
+        "shortform": "UML",
+        "longform": "unsupervised machine learning"
     }
 }

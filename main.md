@@ -86,7 +86,7 @@ This approach, however, bears some shortcomings:
 
 
 <!--% transcript of McFarland, p. 20 -- rewrite, but basically this:-->
-See @mcfarland:SociologyEraBig.2016:
+See @mcfarland:SociologyEraBig.2016:\todo{rewrite copy / paste}
 
 In internet companies there are large assortments of engineers focused solely on improving prediction. For example, a company may have many records on their website’s usage, such as information on clicks, site referrals, posted texts, network positions, as well as time spent on each page, purchasing behavior, and product quality ratings. Most companies ask their engineers to take these data and develop models informing the company when a customer service effort, advertisement, or search result will lead users to purchase more goods, stay on the site longer, or otherwise become an ideal consumer. The engineer typically approaches this problem without any concern for theory and instead applies machine learning (Alpaydin 2004; Bishop 2007).Footnote 6 This proceeds when the engineer takes, say, half the collected data (the “training set”) and identifies a variety of user actions (and their timing) most associated with a desired outcome. In effect, the engineer trains a logit model on an outcome of interest and throws as many features (variables) as possible at it in order to develop highly predictive weights. Then the engineer utilizes these weights to create an algorithm and assesses whether it can accurately predict the desired outcome in the remaining data that were not used for training (the “test set”). When the algorithm reaches certain levels of accuracy, the engineer can use it to determine which users need a “push” so as to proceed in desired directions.
 
@@ -101,7 +101,7 @@ When the machine learning approach is combined with theory and scientific resear
 ## How does ML compare to traditional approaches?
 
 It might come as a surprise but often times the algorithms used in machine learning are quite similar, if not the same, as in the traditional quantitative social sciences.
-Logistic regression, [!ols] regression, and principal component analysis, for example, are readily used in both camps. 
+Logistic regression, [!ols] regression, and [!pca], for example, are readily used in both camps. 
 Even though many of the algorithms are the same, the mindset, practical approach and evaluation strategies differ.
 
 In contrast to frequentist models, [!ml] models usually do not have any usable, that is interpretable, coefficients.
@@ -111,7 +111,7 @@ Model evaluation rather works by evaluating its predictive power.
 
 # A comparison by example: Immigration in Europe
 
-To show some of the differences in mindsets, we will use an exemplary model and approach the problem from both angles.
+To show some of the differences in mindsets, we will use an exemplary model and approach the problem from both angles. \todo{add regression table, but which one?}
 The chosen model is loosely based on the approach used by @davidov:ExplainingAttitudesImmigration.2012 and others; it has often been implemented in similar ways.
 It investigates the effect of human values on attitudes toward immigration.
 
@@ -123,14 +123,16 @@ The theory describes 10 basic values that are structured in two dimensions[^schw
 <!-- copied from davidov & meuleman 2012 -->
 Concrete expectations can be formulated regarding the relation between values and attitudes towards immigration. The motivational goals or preferences embedded in
 conservation values may be blocked by the arrival of immigrants (Sagiv and Schwartz 1995).
-Immigrants bring along changing traditions and norms and this may hinder pursuing conservation values that include appreciation of stability of society, and respect, commitment and acceptance of the customs and ideas that traditional culture or religion provide. In other words, the arrival of immigrants is coupled with potential societal changes that are opposite to the preferences of conservative individuals. Therefore, we expect conservative individuals to reject immigration. On the other hand, the motivational goals or preferences embedded in self-transcendence values (especially universalism) are promoted by the arrival of immigrants (Sagiv and Schwartz 1995; Davidov et al. 2008a). Self-transcendence values include understanding, appreciation, tolerance and protection for the welfare of people and for nature. The arrival of immigrants provides opportunities for individuals to realise these self- transcendent values. In other words, the arrival of immigrants is coupled with potential societal changes that are in harmony with the preferences of self-transcendent individuals. Thus, we expect self-transcendent individuals to support immigration.
+Immigrants bring along changing traditions and norms and this may hinder pursuing conservation values that include appreciation of stability of society, and respect, commitment and acceptance of the customs and ideas that traditional culture or religion provide. In other words, the arrival of immigrants is coupled with potential societal changes that are opposite to the preferences of conservative individuals. Therefore, we expect conservative individuals to reject immigration. On the other hand, the motivational goals or preferences embedded in self-transcendence values (especially universalism) are promoted by the arrival of immigrants (Sagiv and Schwartz 1995; Davidov et al. 2008a). Self-transcendence values include understanding, appreciation, tolerance and protection for the welfare of people and for nature. The arrival of immigrants provides opportunities for individuals to realise these self- transcendent values. In other words, the arrival of immigrants is coupled with potential societal changes that are in harmony with the preferences of self-transcendent individuals. Thus, we expect self-transcendent individuals to support immigration.\todo{rewrite copy / paste}
 <!-- copy ende -->
 
 We control for _income_, which is measured with the variable `hincfel` and asks about the feeling about the household's present income.
 This one is chosen over the objective household income to reduce the number of missing values.
 Additionally, we control for _age_ (`agea`), _religiosity_ (`rlgdgr`), _education_ (`educyrs`), self-position on a _left-right scale_ (`lrscale`), and _gender_ (`gndr`).
 
-[^av]: The variables used here are asked on a 4-point scale how many immigrants of different groups respondents would like to allow into their country. 1. many/few immigrants of different race/ethnic groups e(as majority) `imdfetn`, 2.  many/few immigrants of same race/ethnic groups (as majority) `imsmetn`, 3. many/few immigrants from poorer countries outside Europe `impcntr`. All items are recoded so that higher levels indicate more accepted immigrants.
+[^av]: The variables used here are asked on a 4-point scale how many immigrants of different groups respondents would like to allow into their country. 1. many/few immigrants of different race/ethnic groups e(as majority) `imdfetn`, 2.  many/few immigrants of same race/ethnic groups (as majority) `imsmetn`, 3. many/few immigrants from poorer countries outside Europe `impcntr`.
+All items are recoded so that higher levels indicate more accepted immigrants.
+
 
 [^schwartz]: The measures are constructed according to the ESS website. All items were recoded so that higher levels indicate more agreement.
 
@@ -141,8 +143,6 @@ The basic idea behind these procedures in the social sciences is always to use a
 Herein lies the probably biggest difference to what machine learners do.
 In constraining themselves to rather 'simple' linear models, only including variables (and interaction effects) that do have a strong foundation in theory, traditional statistics avoids a very big problem in the [!ml] realm: _overfitting_.
 
-### Splitting data
-
 Overfitting describes a phenomenon where a complex model with a lot of parameters is able to fit the underlying data very well but fails to predict unseen (new) data points.
 To overcome this, it has become customary split the data set into multiple parts and only to use part of the data to train the model and the rest of the data to evaluate the predictive performance.
 We call this the _train-test-split_.
@@ -150,13 +150,15 @@ It allows us to evaluate if our models only learns the noise (unexplained varian
 Once the final model configuration is decided, all data are used to train the final model.
 A drawback of this procedure, of course, is that we are not able to evaluate the model on all data and are still at risk of _overfitting_ and there is a trade-off to be made when deciding in how large the test set should be.
 Larger test sets usually mean higher confidence in the validation results but they come at the price of reduced available data for the training step.
-Fortunately, methods exist to ensure predictive power on all data --- one of which is called _K-Fold Cross-Validation_.
+Fortunately, methods exist to ensure predictive power on all data --- one of which is called _K-Fold cross-validation_.
 It describes an approach in which the data is split into $K$ equally sized parts where $K-1$ parts are used for training and the remaining part is used for validation.
 $K$ is often times $3$ or $5$ in these cases.
 This is repeated $K$ times until every part of the data has been the test set exactly once.
 Usually, the average over all $K$ model validation metrics is taken, resulting in numbers where all parts of the data are part of the training _and_ the validation step for the computational cost of having to train $K$ models instead of one in order to validate.
 
-### Evaluation metrics
+Often times, and we do that in the following examples as well, these two procedures are combined.
+We therefore split our data and keep a random sample of $20\%$ of all rows as a test set separate from all other data.
+This data will only be used for model inspection and evaluation.
 
 $$
 Accuracy = \frac{TP + TN}{TP + FP + FN + TN}
@@ -175,13 +177,17 @@ $$
 
 
 
-- confusion matrix
-- specificity / sensitivity ?
-- ROC Curve?
+### Hyperparameter tuning & Grid Search
+Most [!ml] models have so called _hyperparameters_.
+These are parameters that influence the way the models is trained and choosing these can have a great impact on model performance.
+Trying combinations of hyperparameters and choosing the ones that result in the highest model performance is called _hyperparameter tuning_.
+The [!rf] implementation used here has two hyperparameters to tune: the number of features to be considered at each decision node (`mtry`) [see also, @lantz:MachineLearningDiscover.2015, 369ff.], and `min.node.size`, the minimum size of the terminal nodes in every tree. The latter implicitly defines the maximum depth of our trees.
+
+A common approach to tune hyperparameters is a procedure called _Grid Search cross-validation_.\todo{write GridSearch CV; describe final model, selection based on Acc etc., compare to LogReg (create LogReg model with traning data)}
 
 ## Random Forest
 
-[!^rf!] ist an algorithm from the family of ensemble methods, meaning it is a compound of multiple simple algorithms called _Decision Trees_.
+[!^rf!] is an algorithm from the family of ensemble methods, meaning it is a compound of multiple simple algorithms called _Decision Trees_.
 Ensemble methods exploit the concept of majority voting, where multiple simple models are trained to capture different aspects of the data and the prediction is the outcome most models agree upon [@bonaccorso:MachineLearningAlgorithms.2017, 154].
 
 A Decision Tree is, as one would imagine, a tree of binary decisions on the data.
@@ -196,37 +202,51 @@ They have shown to be very powerful because Decision Trees are trained sequentia
 
 [^impurity]: We will not go into detail about the differences of impurity measures here and use Gini throughout the rest of this chapter.
 
-### Hyperparameter tuning & Grid search
 
-The [!rf] implementation used here has two hyperparameters to tune: the number of features to be considered at each decision node (`mtry`) [see also, @lantz:MachineLearningDiscover.2015, 369ff.], and `min.node.size`, the minimum size of the terminal nodes in every tree. The latter implicitly defines the maximum depth of our trees.
+###  Interpreting ML models
 
-### Feature importance
-
-![](rsc/images/rf_feature_imp.pdf){#fig:rf_feature_importance .center width="100%"}
-
-### ALE plots
-
-![](rsc/images/rf_ale.pdf){#fig:rf_pdp .center width="100%"}
+One basic inspection of a [!rf] model is to look at feature importances.
+These reflect the relative influence each feature has on the resulting predictions.
+Figure @fig:rf_feature_importance shows the relative feature importances for all predictors in our [!rf] model (excluding the country dummy variables).
+These paint a similar picture as our logistic regression with the two human values dimension being the most important predictors, followed by age and education.
+Religiosity and the self-placement on the left-right scale contribute roughly half as much to the prediction compared to the human values dimensions.
 
 
+![Feature importances of all non-country features in [!rf].](rsc/images/rf_feature_imp.pdf){#fig:rf_feature_importance .center width="100%"}
+
+
+The feature importances are easy to compute but have to major drawbacks. First, due to the relativity of the measure, one cannot draw any conclusion about the absolute contribution of each feature to the prediction.
+Secondly, it is not possible to determine a direction of the effects on the predicted outcome.
+Especially the latter point is a main reason for social scientists to run statistical analyses in the first place and is, in linear models, usually determined by the sign of the coefficients.
+Random forests, however, are, due to their inherent nature, highly non-linear, meaning that each feature can have different impacts on the predicted outcome, depending on the actual feature value of an observation.
+In [!ts] non-linear effects (often introduced by interaction effects in regression models) are often times visualized using marginal effects.
+The same can be done for [!ml] models.
+Traditionally, this was done using [!+pdp], which serve exactly this purpose but have a drawback: [!+pdp] tend to non-sensical effects if the features are correlated.
+Therefore, a more advanced technique is the inspection of [!ale] plots [@molnar:InterpretableMachineLearning.2019], which serve the same purpose but are, in contrast to [!+pdp], still correct if the respective features are correlated.
+
+
+![[!^ale!] for metrically scaled features in RF.](rsc/images/rf_ale.pdf){#fig:rf_pdp .center width="100%"}
+
+This allows to assess whether the relationship between a selected feature and the outcome is linear, monotonic, or more complex.
+Figure @fig:rf_pdp shows the [!+ale!] for all numerical features in the [!rf] model.\todo{describe figure}
 
 ## Lasso Regression
 
 # Discussion
-Social scientists face a trade-off when it comes to using ML. 
+Social scientists face a trade-off when it comes to using [!ml]. 
 On the downside, features can only be ranked by importance. This stands in contrast to more-fine grained information provided by typical regression coefficients.
 On the upside, focusing on models' predictive capabilities shifts the attention to explanations that are closer to scientific reasoning and less prone to mirror common sense [@wattsCommonSenseSociological2014]. 
 It is "this potential predictive force which gives scientific explanations its importance" [@hempelStudiesLogicExplanation1948, 138], what is inherently neglected by goodness of fit measures solely relying on in-sample observations. 
-In contrast, using out-of-sample is a crucial part of any SML procedure (i.e., its test data). 
-Integrating this inherent property of ML, would at least reduce an important weakness of TS. 
+In contrast, using out-of-sample is a crucial part of any [!sml] procedure (i.e., its test data). 
+Integrating this inherent property of [!ml], would at least reduce an important weakness of TS. 
 
-ML is no cheat code, it is all statistics.
-Everybody with a professional background in quantitative social science has learned of some ML tools, be it UML like cluster analysis or SML like logistic regressions.
-To be sure, how those methods are used (and promoted) in ML contexts, might differ from common social science approaches. 
-Regardless which features drives a model and how an outcome could be explained, the main interest of ML researchers in industry, but also in science, is that "it works", i.e., that the model provides good predictions.
+[!ml] is no cheat code, it is all statistics.
+Everybody with a professional background in quantitative social science has learned of some [!ml] tools, be it [!uml] like cluster analysis or [!sml] like logistic regressions.
+To be sure, how those methods are used (and promoted) in [!ml] contexts, might differ from common social science approaches. 
+Regardless which features drives a model and how an outcome could be explained, the main interest of [!ml] researchers in industry, but also in science, is that "it works", i.e., that the model provides good predictions.
 This is an important *epistemological* difference. 
 It might be helpful to acknowledge that and think about fruitful ways to complement existing regression models. 
-Or rather, the way we as social scientists can make use of the ML perspective by … maybe finish by saying that UML helps explore, SML to predict
+Or rather, the way we as social scientists can make use of the [!ml] perspective by … maybe finish by saying that [!uml] helps explore, [!sml] to predict
 
 # References
      
