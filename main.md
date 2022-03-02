@@ -43,12 +43,12 @@ Along with those new datasets, data sources, and an explosion in available compu
 In particular, social scientists increasingly use tools from [!ml], methods that can be described as "a class of flexible algorithmic and statistical techniques for prediction and dimension reduction" [@grimmer:MachineLearningSocial.2021, 396].
 Applications of [!ml] comprise some of the most important technological innovations in recent years, for instance, gene prediction or search engines [@jordan:MachineLearning.2015]. 
 No problem seems too complex as long as researchers have enough (i.e., very large) data, even previously unsolvable questions might be solved, e.g., how to maintain high-temperature plasma for nuclear fusion [@degraveMagneticControlTokamak2022]. 
-Given the already impressive resume and even greater potential of [!ml], is it only a matter of time until it replaces traditional statistics used in social science\todo{traditional statistics als consistent name nehmen und mit TS abkürzen?}?
+Given the already impressive resume and even greater potential of [!ml], is it only a matter of time until it replaces [!ts] used in social science?
 
 As we will see, differences of [!ml] and [!ts] are (mostly) grounded in different epistemological perspectives. 
 While recent overviews characterize ML-related methods and provide guidance for future research  [@molina:MachineLearningSociology.2019; @grimmer:MachineLearningSocial.2021], our contribution's goal is to point out key differences and commonalities between [!ts] and [!ml]. 
 We will illustrate what a typical social scientists' approach might look like and how using ML techniques would change the results.  
-For this purpose, we will first elaborate on some theoretical differences and similarities between inferential statistics and [!ml]. 
+For this purpose, we will first elaborate on some theoretical differences and similarities between [!ts] and [!ml]. 
 We will then exemplify those differences by using a well-known database, the [!ess] [@essround9:EuropeanSocialSurvey.2019]\todo{use correct ess version(s)}.
 In particular, we will focus on two main parts of any regression\todo[author=LE]{klären, ob wir regression oder classification machen} analysis: estimators and goodness of fit. 
 Comparing logistic regressions and two popular [!ml] algorithms \footnote{hier shcon wording klären, was also ML "regression" meint?} (Random Forest, Ridge Regression), we will explain how [!ml] works and, more importantly, how they are typically used by researchers outside the social scientists.
@@ -63,7 +63,7 @@ The widely agreed-upon approach to social science is mainly based on Karl Popper
 Falsifiable hypotheses, founded on strong theories, build the foundation for the idea of testing theory-based assumptions.
 It describes a way of generating knowledge about a small part of a population and generalizing this to its entirety [@krzywinski:Importancebeinguncertain.2013].
 
-## Inferential statistics
+## Traditional statistics
 
 We can calculate the probability of being wrong and define thresholds upon which we accept or reject our assumptions.
 
@@ -82,6 +82,8 @@ This approach, however, bears some shortcomings:
 3. What if you have data about the entire population? <!--%all tweets, news articles, users of a platform, etc. --> Then, running tests for significance becomes completely irrelevant.
 
 4. What if you have no theory, you can derive hypotheses from? This is especially important for social media networks, where the rules of engagement might differ quite substantially from 'normal' social behavior or where you cannot specify your population.
+
+5. What if your relationships are highly non-linear? It is very difficult to model non-linear relationships with models from [!ts].
 
 ## Machine Learning
 
@@ -172,9 +174,9 @@ $K$ is oftentimes $3$ or $5$ in these cases.
 This is repeated $K$ times until every part of the data has been the test set exactly once.
 Usually, the average overall $K$ model validation metrics is taken, resulting in numbers where all parts of the data are part of the training _and_ the validation step for the computational cost of having to train $K$ models instead of one to validate.
 
-Oftentimes, and we do that in the following examples as well, these two procedures are combined.
+Oftentimes, and we do that in the following examples as well, these two procedures are combined.\todo{confusion matrix zeigen / erklären}
 We therefore split our data and keep a random sample of $20\%$ of all rows as a test set separate from all other data.
-This data will only be used for model inspection and evaluation.
+This data will only be used for model inspection and evaluation.\todo{Welche Metriken erklären? 1. Prec / Recall? (Nötig für F1-score) 2. Sensitivity/Specificity? Näher an ts, werden von caret angegeben. 3. alle 4?}
 
 $$
 Accuracy = \frac{TP + TN}{TP + FP + FN + TN}
@@ -193,31 +195,40 @@ $$
 
 
 
-### Hyperparameter tuning & Grid Search
-Most [!ml] models have so-called _hyperparameters_.
-These are parameters that influence the way the models are trained and choosing these can have a great impact on model performance.
-Trying combinations of hyperparameters and choosing the ones that result in the highest model performance is called _hyperparameter tuning_.
-The [!rf] implementation used here has two hyperparameters to tune: the number of features to be considered at each decision node (`mtry`) [see also, @lantz:MachineLearningDiscover.2015, 369ff.], and `min.node.size`, the minimum size of the terminal nodes in every tree. The latter implicitly defines the maximum depth of our trees.
-
-A common approach to tune hyperparameters is a procedure called _Grid Search cross-validation_.\todo{write GridSearch CV; describe final model, selection based on Acc etc., compare to LogReg (create LogReg model with traning data)}
-
 ## Random Forest
 
 [!^rf!] is an algorithm from the family of ensemble methods, meaning it is a compound of multiple simple algorithms called _Decision Trees_.
 Ensemble methods exploit the concept of majority voting, where multiple simple models are trained to capture different aspects of the data and the prediction is the outcome most models agree upon [@bonaccorso:MachineLearningAlgorithms.2017, 154].
 
 A Decision Tree is, as one would imagine, a tree of binary decisions on the data.
-The order of the decisions and the cutoff points according to which a decision is made are the things that are learned by maximizing an impurity measure like _Gini_[^impurity] or _cross-entropy_.
+The order of the decisions and the cutoff points according to which a decision is made are the things that are learned by maximizing an impurity measure like _gini_[^impurity] or _cross-entropy_.
 The trees in a [!rf] a generally much simpler, in a way that they have fewer nodes (one could imagine them more like tree stumps) than a single decision tree.
 Interestingly, this has been shown to improve the predictive performance and, most importantly, makes the [!rf] less susceptible to overfitting compared to a single Decision Tree.
 
-We will use 'bagged' trees here.
+We will use 'bagged' trees here.\todo{describe 'bagged'}
 It is worth mentioning that there exists another group of ensemble trees called 'boosted trees'. 
 A very popular member of this relatively new group of algorithms is _AdaBoost_ [@freund:DecisionTheoreticGeneralizationOnLine.1997].
 They have shown to be very powerful because Decision Trees are trained sequentially (instead of simultaneously) and trees later in the sequence can learn from the misclassifications of earlier ones.
 
-[^impurity]: We will not go into detail about the differences of impurity measures here and use Gini throughout the rest of this chapter.
+[^impurity]: We will not go into detail about the differences of impurity measures here and use gini throughout the rest of this chapter.
 
+### Hyperparameter tuning & Grid Search
+Most [!ml] models have so-called _hyperparameters_.
+These are parameters that influence the way the models are trained and choosing these can have a great impact on model performance.
+Trying combinations of hyperparameters and choosing the ones that result in the highest model performance is called _hyperparameter tuning_.
+The [!rf] implementation used here has two hyperparameters to tune[^ntree]: the number of features to be considered at each decision node (`mtry`) [see also, @lantz:MachineLearningDiscover.2015, 369ff.], and `min.node.size`, the minimum size of the terminal nodes in every tree.\todo{lantz uses randomForest, not ranger, which only has mtry as hyperparam. Still ok citation?}
+The latter implicitly defines the maximum depth of our trees.
+
+A common approach to tune hyperparameters is a procedure called _Grid Search cross-validation_.
+We talked about cross-validation earlier, so the new term to be clarified hier is Grid Search: to do a grid search we define a grid of all possible parameter combinations of our hyperparameters and create cross-validated models for each combinations.
+Since this is an extremely computationally costly procedure, the parameter grid should be chosen with care[^cv].\todo{check if caret actually runs cv on gridsearch}
+Applying this procedure, we select the model that considers 5 features at each node with a minimum terminal node size of 4.
+This model shows an accuracy of 68.96\% sensitivity of 76.12\%, and a specificity of 60.33\% on our test data.\todo{desc what numbers mean?}
+
+
+[^ntree]: We keep the number of trees in our forest at the default of 500 as we do not expect to gain much predictive performance of this parameter in our case.
+[^cv]: In our case, we chose the values $1$ through $7$ for the number of features per decision node and $(1, 2, 3, 4, 10, 20, 50, 80, 100)$ for the minimum size of the terminal nodes in every tree.
+Combined with $5$-Fold cross-validation, this results in estimating $7\times9\times5 = 315$ models to estimate.
 
 ###  Interpreting ML models
 
@@ -244,7 +255,7 @@ Therefore, a more advanced technique is the inspection of [!ale] plots [@molnar:
 ![[!+^ale!] for metrically scaled features in RF.](rsc/images/rf_ale.pdf){#fig:rf_pdp .center width="100%"}
 
 This allows assessing whether the relationship between a selected feature and the outcome is linear, monotonic, or more complex.
-Figure @fig:rf_pdp shows the [!+ale] for all numerical features in the [!rf] model.
+Figure @fig:rf_pdp shows the [!+ale] for all numerical features in the [!rf] model.\todo{gender effect mit aufnehmen? default plot hat unangenehm große Balken, man sieht keinen Effekt}
 Compared to the results of the logistic regression earlier (see Table @tbl:logreg), the linear trends of the [!rf] model point in the same directions.
 But additionally, we can see some non-linear relationships in our data.
 According to our model, self-transcendence and conservation are only changing the predicted outcome once their values become positive.
