@@ -178,125 +178,101 @@ pre code {
 <pre class="r"><code>ess &lt;- load_data$ess1()
 df &lt;- load_data$preprocess(ess)
 data &lt;- load_data$train_test_split(df)</code></pre>
-<pre class="r"><code>set.seed(1337)
-
-form &lt;- as.formula(
+<pre class="r"><code>form &lt;- as.formula(
   &quot;reject_bin ~ gender +
   age +
   relig +
   educ +
   income +
   s_dim_conservation +
-  s_dim_trancendence +
+  s_dim_transcendence +
   left_right +
   country&quot;
 )
 
+model &lt;- glm(form, family = binomial(link = &quot;logit&quot;), data = data$train)
 
-ctrl &lt;- trainControl(
-  method = &quot;cv&quot;,
-  number = 5,
-  savePredictions = &quot;final&quot;
-)
-
-tunegrid &lt;- expand.grid(
-  mtry = c(1:7),
-  min.node.size = c(1,2,3,4, 10, 20, 50, 80, 100),
-  splitrule = &quot;gini&quot;
-)
-
-model &lt;- train(
-  form,
-  method = &quot;ranger&quot;,
-  data = data$train,
-  metric = &quot;Accuracy&quot;,
-  tuneGrid = tunegrid,
-  trControl = ctrl,
-  importance = &quot;impurity&quot;,
-  respect.unordered.factors = &quot;partition&quot;
-)</code></pre>
-<pre class="r"><code>print(model)</code></pre>
-<pre><code>## Random Forest 
+summary(model)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = form, family = binomial(link = &quot;logit&quot;), data = data$train)
 ## 
-## 21732 samples
-##     9 predictor
-##     2 classes: &#39;0&#39;, &#39;1&#39; 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.5920  -0.9484  -0.5033   1.0325   2.7346  
 ## 
-## No pre-processing
-## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 17386, 17385, 17386, 17386, 17385 
-## Resampling results across tuning parameters:
+## Coefficients:
+##                        Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)            2.399488   0.125917  19.056  &lt; 2e-16 ***
+## genderFemale           0.013948   0.031612   0.441   0.6591    
+## age                    0.005930   0.001064   5.572 2.52e-08 ***
+## relig                 -0.026101   0.005960  -4.379 1.19e-05 ***
+## educ                  -0.102191   0.004765 -21.446  &lt; 2e-16 ***
+## income                -0.129470   0.021146  -6.123 9.20e-10 ***
+## s_dim_conservation     0.426261   0.029757  14.325  &lt; 2e-16 ***
+## s_dim_transcendence   -0.682983   0.031914 -21.401  &lt; 2e-16 ***
+## left_right             0.062536   0.007471   8.370  &lt; 2e-16 ***
+## countryBelgium        -1.095702   0.090516 -12.105  &lt; 2e-16 ***
+## countrySwitzerland    -1.745440   0.090533 -19.280  &lt; 2e-16 ***
+## countryCzechia        -1.082820   0.102603 -10.553  &lt; 2e-16 ***
+## countryGermany        -1.205303   0.081224 -14.839  &lt; 2e-16 ***
+## countryDenmark        -0.640404   0.093791  -6.828 8.61e-12 ***
+## countrySpain          -1.135290   0.097410 -11.655  &lt; 2e-16 ***
+## countryFinland        -0.430201   0.088259  -4.874 1.09e-06 ***
+## countryUnited Kingdom -1.015913   0.088868 -11.432  &lt; 2e-16 ***
+## countryGreece          0.444317   0.098510   4.510 6.47e-06 ***
+## countryHungary         0.200527   0.103074   1.945   0.0517 .  
+## countryIreland        -1.854236   0.097083 -19.099  &lt; 2e-16 ***
+## countryIsrael         -1.495165   0.090581 -16.506  &lt; 2e-16 ***
+## countryNetherlands    -1.167597   0.082395 -14.171  &lt; 2e-16 ***
+## countryNorway         -1.249934   0.087045 -14.360  &lt; 2e-16 ***
+## countryPoland         -1.517135   0.091089 -16.656  &lt; 2e-16 ***
+## countryPortugal       -0.873962   0.100879  -8.663  &lt; 2e-16 ***
+## countrySweden         -2.753116   0.111756 -24.635  &lt; 2e-16 ***
+## countrySlovenia       -1.469373   0.098911 -14.856  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-##   mtry  min.node.size  Accuracy   Kappa     
-##   1       1            0.5823677  0.08787394
-##   1       2            0.5796527  0.08118790
-##   1       3            0.5805729  0.08372278
-##   1       4            0.5786397  0.07860238
-##   1      10            0.5815392  0.08594738
-##   1      20            0.5808025  0.08411841
-##   1      50            0.5781335  0.07761549
-##   1      80            0.5741300  0.06767288
-##   1     100            0.5804347  0.08308162
-##   2       1            0.6772049  0.33055858
-##   2       2            0.6762843  0.32826214
-##   2       3            0.6751341  0.32606581
-##   2       4            0.6765142  0.32891048
-##   2      10            0.6762382  0.32867963
-##   2      20            0.6763305  0.32883852
-##   2      50            0.6770203  0.33007500
-##   2      80            0.6765603  0.32984004
-##   2     100            0.6761002  0.32894077
-##   3       1            0.6853030  0.35481134
-##   3       2            0.6858551  0.35608964
-##   3       3            0.6841984  0.35259484
-##   3       4            0.6846127  0.35321318
-##   3      10            0.6862230  0.35667729
-##   3      20            0.6853489  0.35453553
-##   3      50            0.6850726  0.35416568
-##   3      80            0.6849348  0.35440860
-##   3     100            0.6863611  0.35720314
-##   4       1            0.6900424  0.36658170
-##   4       2            0.6897201  0.36602643
-##   4       3            0.6886158  0.36379861
-##   4       4            0.6902724  0.36745753
-##   4      10            0.6897203  0.36645235
-##   4      20            0.6895360  0.36596708
-##   4      50            0.6909626  0.36899017
-##   4      80            0.6892600  0.36537713
-##   4     100            0.6878797  0.36263918
-##   5       1            0.6882477  0.36423649
-##   5       2            0.6882017  0.36419170
-##   5       3            0.6891218  0.36586642
-##   5       4            0.6910087  0.36985835
-##   5      10            0.6896281  0.36690254
-##   5      20            0.6887538  0.36526436
-##   5      50            0.6894901  0.36691867
-##   5      80            0.6899503  0.36782021
-##   5     100            0.6896284  0.36705135
-##   6       1            0.6855788  0.35959861
-##   6       2            0.6883858  0.36553406
-##   6       3            0.6896741  0.36794371
-##   6       4            0.6870051  0.36238718
-##   6      10            0.6882477  0.36453286
-##   6      20            0.6871895  0.36246203
-##   6      50            0.6902727  0.36875190
-##   6      80            0.6896282  0.36764252
-##   6     100            0.6871433  0.36224703
-##   7       1            0.6862230  0.36159370
-##   7       2            0.6857168  0.36036054
-##   7       3            0.6873275  0.36351740
-##   7       4            0.6869134  0.36256852
-##   7      10            0.6845665  0.35811296
-##   7      20            0.6877415  0.36412304
-##   7      50            0.6888920  0.36630201
-##   7      80            0.6876956  0.36407849
-##   7     100            0.6890299  0.36664220
+## (Dispersion parameter for binomial family taken to be 1)
 ## 
-## Tuning parameter &#39;splitrule&#39; was held constant at a value of gini
-## Accuracy was used to select the optimal model using the largest value.
-## The final values used for the model were mtry = 5, splitrule = gini
-##  and min.node.size = 4.</code></pre>
-<pre class="r"><code>saveRDS(model, here::here(&quot;models&quot;, &quot;ranger_mtry5_1.RDS&quot;))</code></pre>
+##     Null deviance: 29937  on 21731  degrees of freedom
+## Residual deviance: 25181  on 21705  degrees of freedom
+## AIC: 25235
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<pre class="r"><code>PseudoR2(model, which = c(&quot;McFadden&quot;, &quot;McFaddenAdj&quot;, &quot;McKelveyZavoina&quot;, &quot;Nagelkerke&quot;))</code></pre>
+<pre><code>##        McFadden     McFaddenAdj McKelveyZavoina      Nagelkerke 
+##       0.1588864       0.1570827       0.2791774       0.2628743</code></pre>
+<pre class="r"><code>pred &lt;- predict(model, data$test, type = &quot;response&quot;)
+pred &lt;- as_factor(ifelse(pred &gt; .5, 1, 0))
+confusionMatrix(data$test$reject_bin, pred)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    0    1
+##          0 2299  670
+##          1 1022 1441
+##                                          
+##                Accuracy : 0.6885         
+##                  95% CI : (0.676, 0.7008)
+##     No Information Rate : 0.6114         
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
+##                                          
+##                   Kappa : 0.3638         
+##                                          
+##  Mcnemar&#39;s Test P-Value : &lt; 2.2e-16      
+##                                          
+##             Sensitivity : 0.6923         
+##             Specificity : 0.6826         
+##          Pos Pred Value : 0.7743         
+##          Neg Pred Value : 0.5851         
+##              Prevalence : 0.6114         
+##          Detection Rate : 0.4232         
+##    Detection Prevalence : 0.5466         
+##       Balanced Accuracy : 0.6874         
+##                                          
+##        &#39;Positive&#39; Class : 0              
+## </code></pre>
 </div>
 
 

@@ -58,7 +58,7 @@ select_vars <- c(
   "income",
   "reject_bin",
   "s_dim_conservation",
-  "s_dim_trancendence"
+  "s_dim_transcendence"
 )
 
 desc_short <- descriptives %>%
@@ -67,7 +67,7 @@ desc_short <- descriptives %>%
   filter(names %in% select_vars) %>%
   mutate_if(is.numeric, round, 2)
 
-#write_csv(desc_short, file.path("rsc", "tables", "descriptives.csv"))
+write_csv(desc_short, file.path("rsc", "tables", "descriptives.csv"))
 
 as.data.frame(desc_short)
 ```
@@ -81,7 +81,7 @@ form <- as.formula(
   educ +
   income +
   s_dim_conservation +
-  s_dim_trancendence +
+  s_dim_transcendence +
   left_right +
   country"
 )
@@ -100,7 +100,7 @@ coefs <- summary(model)$coef %>%
   as.data.frame() %>%
   filter(!grepl("^country", row.names(.))) %>%
   arrange(row.names(.)) %>%
-  mutate_if(is.numeric, ~signif(., digits = 3)) %>%
+  mutate_if(is.numeric, ~ signif(., digits = 3)) %>%
   select(Estimate, `Std. Error`, `Pr(>|z|)`)
 
 write.csv(coefs, here::here("rsc", "tables", "logreg.csv"))

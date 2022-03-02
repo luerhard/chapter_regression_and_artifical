@@ -89,7 +89,7 @@ preprocess <- function(ess) {
       # s_security = rowMeans(across(c(impsafe, ipstrgv))),
       # create dimensions
       s_dim_conservation = rowMeans(across(c(impsafe, ipstrgv, ipfrule, ipbhprp, ipmodst, imptrad))),
-      s_dim_trancendence = rowMeans(across(c(ipeqopt, ipudrst, impenv, iphlppl, iplylfr)))
+      s_dim_transcendence = rowMeans(across(c(ipeqopt, ipudrst, impenv, iphlppl, iplylfr)))
     ) %>%
     drop_na()
 

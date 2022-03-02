@@ -1,5 +1,5 @@
 ---
-title: "02-create_schwartz_model"
+title: "03-run_eval_logreg"
 output:
   html_document:
     toc: true
@@ -37,7 +37,7 @@ form <- as.formula(
   educ +
   income +
   s_dim_conservation +
-  s_dim_trancendence +
+  s_dim_transcendence +
   left_right +
   country"
 )
