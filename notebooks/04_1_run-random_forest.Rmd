@@ -1,5 +1,5 @@
 ---
-title: "02-create_schwartz_model"
+title: "04_1_run-random-forest"
 output:
   html_document:
     toc: true
@@ -36,7 +36,7 @@ form <- as.formula(
   educ +
   income +
   s_dim_conservation +
-  s_dim_trancendence +
+  s_dim_transcendence +
   left_right +
   country"
 )
@@ -50,7 +50,7 @@ ctrl <- trainControl(
 
 tunegrid <- expand.grid(
   mtry = c(1:7),
-  min.node.size = c(1,2,3,4, 10, 20, 50, 80, 100),
+  min.node.size = c(1, 2, 3, 4, 10, 20, 50, 80, 100),
   splitrule = "gini"
 )
 
@@ -64,7 +64,6 @@ model <- train(
   importance = "impurity",
   respect.unordered.factors = "partition"
 )
-
 ```
 
 ```{r}

@@ -1,5 +1,5 @@
 ---
-title: "02-create_schwartz_model"
+title: "03_2-eval-random-forest"
 output:
   html_document:
     toc: true
@@ -65,7 +65,7 @@ ggsave(here::here("rsc", "images", "rf_feature_imp.pdf"))
 library(iml)
 
 d <- X_test %>%
-  mutate_if(is.factor, as.character) %>%
+  mutate_if(is.factor, ~ as.factor(as.character(.))) %>%
   mutate_if(is.double, as.numeric)
 
 pred <- Predictor$new(
@@ -78,7 +78,7 @@ pred <- Predictor$new(
 
 
 ```{r}
-eff_tran <- FeatureEffect$new(pred, feature = "s_dim_trancendence", method = "ale") %>% 
+eff_tran <- FeatureEffect$new(pred, feature = "s_dim_transcendence", method = "ale") %>% 
   plot() + 
   theme(axis.title.y = element_blank())
 
@@ -105,6 +105,10 @@ eff_educ <- FeatureEffect$new(pred, feature = "educ", method = "ale") %>%
 eff_relig <- FeatureEffect$new(pred, feature = "relig", method = "ale") %>% 
   plot() + 
   theme(axis.title.y = element_blank())
+
+eff_gender <- FeatureEffect$new(pred, feature = "gender", method = "ale") %>% 
+  plot() + 
+  theme(axis.title.y = element_blank())
 ```
 
 ```{r}
@@ -115,7 +119,8 @@ ggarrange(
   eff_lr, 
   eff_income, 
   eff_educ, 
-  eff_relig, 
+  eff_relig,
+  eff_gender,
   ncol = 2, nrow = 4, align = "h"
   ) 
 ```
