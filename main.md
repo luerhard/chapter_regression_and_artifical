@@ -47,11 +47,11 @@ Given the already impressive resume and even greater potential of [!ml], is it o
 
 As we will see, differences of [!ml] and [!ts] are (mostly) grounded in different epistemological perspectives. 
 While recent overviews characterize ML-related methods and provide guidance for future research  [@molina:MachineLearningSociology.2019; @grimmer:MachineLearningSocial.2021], our contribution's goal is to point out key differences and commonalities between [!ts] and [!ml]. 
-We will illustrate what a typical social scientists' approach might look like and how using ML techniques would change the results.  
+We will illustrate what a typical social scientists' approach might look like and how using [!ml] techniques would change the results.\todo{can add additional insights?}  
 For this purpose, we will first elaborate on some theoretical differences and similarities between [!ts] and [!ml]. 
-We will then exemplify those differences by using a well-known database, the [!ess] [@essround9:EuropeanSocialSurvey.2019]\todo{use correct ess version(s)}.
-In particular, we will focus on two main parts of any regression\todo[author=LE]{klären, ob wir regression oder classification machen} analysis: estimators and goodness of fit. 
-Comparing logistic regressions and two popular [!ml] algorithms \footnote{hier shcon wording klären, was also ML "regression" meint?} (Random Forest, Ridge Regression), we will explain how [!ml] works and, more importantly, how they are typically used by researchers outside the social scientists.
+We will then exemplify those differences by using a well-known dataset, the [!ess] [@ESS.2002].
+In particular, we will focus on two main parts of any regression\todo[author=LE]{klären, ob wir regression oder classification machen} analysis: estimators and goodness of fit\todo{decide on spelling}. 
+Comparing logistic regressions and two popular [!ml] algorithms \footnote{hier shcon wording klären, was also ML "regression" meint?} (Random Forest, Ridge Regression), we will explain how [!ml] works and, more importantly, how they are typically used by researchers outside the social sciences.
 In so doing we will reveal how *epistemological* differences shape the potential usage of [!ml] in the social sciences and discuss the methodological trade-off when it comes to the question of whether to apply [!ml] or [!ts]. 
 As is often the case, combining both seems like the most promising way. <!--in besser-->
 
@@ -87,18 +87,17 @@ This approach, however, bears some shortcomings:
 
 ## Machine Learning
 
-
-<!--% transcript of McFarland, p. 20 -- rewrite, but basically this:-->
-See @mcfarland:SociologyEraBig.2016:\todo{rewrite copy / paste}
+- See @mcfarland:SociologyEraBig.2016\todo{write section}
+<!--% transcript of McFarland, p. 20 -- rewrite, but basically this: 
 
 In internet companies there are large assortments of engineers focused solely on improving prediction. For example, a company may have many records on their website’s usage, such as information on clicks, site referrals, posted texts, network positions, as well as time spent on each page, purchasing behavior, and product quality ratings. Most companies ask their engineers to take these data and develop models informing the company when a customer service effort, advertisement, or search result will lead users to purchase more goods, stay on the site longer, or otherwise become an ideal consumer. The engineer typically approaches this problem without any concern for theory and instead applies machine learning (Alpaydin 2004; Bishop 2007).Footnote 6 This proceeds when the engineer takes, say, half the collected data (the “training set”) and identifies a variety of user actions (and their timing) most associated with a desired outcome. In effect, the engineer trains a logit model on an outcome of interest and throws as many features (variables) as possible at it in order to develop highly predictive weights. Then the engineer utilizes these weights to create an algorithm and assesses whether it can accurately predict the desired outcome in the remaining data that were not used for training (the “test set”). When the algorithm reaches certain levels of accuracy, the engineer can use it to determine which users need a “push” so as to proceed in desired directions.
 
 Machine learning is a powerful tool that has assisted companies in many domains with various engineering questions (Talley et al. 2011). In fact, machine learning is the foundation of machine translation: for instance, how Chinese is accurately translated into English. The algorithm proceeds by merely identifying common word sequences across verified translations, and as the “training set” of known translations grows, so does the probability of accurately “predicting” word associations in “test sets” of future text. The “theory” is nothing more than probabilities of word associations as identified by many known translations. There is no linguistic theory of how a language or translation works (in fact, theories are notoriously inaccurate at translation). All that is desired is an accurate translation—utility is paramount, while understanding and explanation are superfluous.
 
 When the machine learning approach is combined with theory and scientific research it can lead to surprising results. The atheoretical perspective of machine learning can reveal patterns a theory did not predict or a new way to formulate the theory that perhaps the analyst had overlooked. However, machine learning on its own (and by design) results in little to no understanding if there is no effort to derive a theory or explanation. In sum, the use of machine learning is atheoretical, but it is potentially powerful when used as an agnostic search for potential explanations. In contrast, theory is a somewhat narrow-minded but powerful tool in that it is a focusing device that identifies which constructs are to be selected and formed from the millions of possible variables (or features) and it afford potential explanations for how features interrelate. As such, the iterative combination of atheoretical induction and theory-led deduction can be quite powerful.
-<!--% copy paste McFarland Ende.-->
+copy paste McFarland Ende.-->
 
-- Supervised vs. unsupervised vs. reinforcement learning, see @jordan:MachineLearning.2015\todo{write}
+- Supervised vs. unsupervised vs. reinforcement learning, see @jordan:MachineLearning.2015
 - Regression vs. classification problems
 
 ## How does ML compare to traditional approaches?
@@ -107,7 +106,7 @@ It might come as a surprise but often the algorithms used in machine learning ar
 Logistic regression, [!ols] regression, and [!pca], for example, are readily used in both camps. 
 Even though many of the algorithms are the same, the mindset, practical approach, and evaluation strategies differ.
 
-In contrast to frequentist models, [!ml] models usually do not have any usable, that is interpretable, coefficients.
+In contrast to [!ts] models, [!ml] models usually do not have any usable, that is interpretable, coefficients.
 Model evaluation rather works by evaluating its predictive power.
 
 
@@ -119,7 +118,7 @@ The chosen model is loosely based on the approach used by @davidov:ExplainingAtt
 It investigates the effect of human values on attitudes toward immigration.
 
 The explanandum, our dependent variable which we will call _reject_, is a measure that represents _attitudes towards immigration_.
-It is a mean index consisting of three variables[^av] which have been shown to load strongly on a single dimension in a confirmatory factor analysis.
+It is a mean index consisting of three variables[^av] which have been shown to load strongly on a single dimension in a confirmatory factor analysis.\todo{desc reject Binarisierung aus didaktischen Gründen. single class Classification einfacher usecase}
 To measure human values, we use the theory of basic human values [@schwartz:UniversalsContentStructure.1992] which is captured in the [!ess] surveys.
 The theory describes 10 basic values that are structured in two dimensions[^schwartz]: _conservation_ and _self-transcendence_.
 
@@ -130,8 +129,8 @@ Immigrants bring along changing traditions and norms and this may hinder pursuin
 <!-- copy ende -->
 
 We control for _income_, which is measured with the variable `hincfel` and asks about the feeling about the household's present income.
-This one is chosen over the objective household income to reduce the number of missing values.
-Additionally, we control for _age_ (`agea`), _religiosity_ (`rlgdgr`), _education_ (`educyrs`), self-position on a _left-right scale_ (`lrscale`), and _gender_ (`gndr`).
+It is chosen over the objective household income to reduce the number of missing values.
+Additionally, we control for _age_ (`agea`), _religiosity_ (`rlgdgr`), _education_ (`educyrs`), self-position on a _left-right scale_ (`lrscale`), _gender_ (`gndr`), and country (`ctry`).
 
 [^av]: The variables used here are asked on a 4-point scale how many immigrants of different groups respondents would like to allow into their country. 1. many/few immigrants of different race/ethnic groups e(as majority) `imdfetn`, 2.  many/few immigrants of same race/ethnic groups (as majority) `imsmetn`, 3. many/few immigrants from poorer countries outside Europe `impcntr`.
 All items are recoded so that higher levels indicate more accepted immigrants.
@@ -145,9 +144,9 @@ markdown: true
 ---
 ```
 
-Table @tbl:logreg shows the results of the logistic regression.
+Table @tbl:logreg shows the results of the logistic regression.\todo{Sinnvolle Tabellenbeschreibung}
 Country dummy variables are ommitted for reasons of clarity.
-We see highly significant effects for all variables except gender with age, self-placement on the left-right scale, and conservation being positively correlated whereas education, satisfaction with income, religiosity and self-transcendence are negatively correlated with reject_bin, our dichotomous measure for attitudes towards immigration.
+We see highly significant effects for all variables except gender with age, self-placement on the left-right scale, and conservation being positively correlated whereas education, satisfaction with income, religiosity and self-transcendence are negatively correlated with rejection of immigration.
 Except for the non-significance of gender our results are generally comparable to @davidov:ExplainingAttitudesImmigration.2012.
 That said, we use a drastically simplified model and would not advise to draw any substantial conlusions from it.
 We use this model only for didactic purposes.
@@ -156,9 +155,9 @@ We use this model only for didactic purposes.
 
 ## Assessing goodness-of-fit
 
-We have a plethora of pseudo $R^2$ measures to assess goodness-of-fit, or the Akaike / Bayesian information criterion (AIC/BIC) to compare and select models.
-The basic idea behind these procedures in the social sciences is always to use all available data to fit the best possible model and to use one of the above-mentioned measures to tell us how well our model fits the underlying data.
-Herein lies the probably biggest difference to what machine learners do.
+Social scientists have a plethora of pseudo $R^2$ measures to assess goodness-of-fit, or the Akaike / Bayesian information criterion (AIC/BIC) to compare and select models at their disposal.
+The basic idea behind these procedures in the social sciences is always to use all available data to fit the best possible model and to use one or more of the above-mentioned measures to tell us how well our model fits the underlying data.
+Herein lies the probably biggest difference to what machine learners do.\todo{Sinnvoller Übergang}
 In constraining themselves to rather 'simple' linear models, only including variables (and interaction effects) that do have a strong foundation in theory, [!ts] avoid a very big problem in the [!ml] realm: _overfitting_.
 
 Overfitting describes a phenomenon where a complex model with a lot of parameters is able to fit the underlying data very well but fails to predict unseen (new) data points.
@@ -172,9 +171,9 @@ Fortunately, methods exist to ensure predictive power on all data --- one of whi
 It describes an approach in which the data is split into $K$ equally sized parts where $K-1$ parts are used for training and the remaining part is used for validation.
 $K$ is oftentimes $3$ or $5$ in these cases.
 This is repeated $K$ times until every part of the data has been the test set exactly once.
-Usually, the average overall $K$ model validation metrics is taken, resulting in numbers where all parts of the data are part of the training _and_ the validation step for the computational cost of having to train $K$ models instead of one to validate.
+Usually, the average overall $K$ model validation metrics is taken, resulting in numbers where all parts of the data are part of the training _and_ the validation step for the computational cost of having to train $K$ models instead of one to validate their predictive power.
 
-Oftentimes, and we do that in the following examples as well, these two procedures are combined.\todo{confusion matrix zeigen / erklären}
+Oftentimes, and we do that in the following examples as well, these two procedures are combined.\todo{confusion matrix zeigen / erklären, Sinnvoller Übergang?}
 We therefore split our data and keep a random sample of $20\%$ of all rows as a test set separate from all other data.
 This data will only be used for model inspection and evaluation.\todo{Welche Metriken erklären? 1. Prec / Recall? (Nötig für F1-score) 2. Sensitivity/Specificity? Näher an ts, werden von caret angegeben. 3. alle 4?}
 
@@ -208,7 +207,7 @@ Interestingly, this has been shown to improve the predictive performance and, mo
 We will use 'bagged' trees here.\todo{describe 'bagged'}
 It is worth mentioning that there exists another group of ensemble trees called 'boosted trees'. 
 A very popular member of this relatively new group of algorithms is _AdaBoost_ [@freund:DecisionTheoreticGeneralizationOnLine.1997].
-They have shown to be very powerful because Decision Trees are trained sequentially (instead of simultaneously) and trees later in the sequence can learn from the misclassifications of earlier ones.
+They have shown to be very powerful because their trees are trained sequentially (instead of simultaneously) and trees later in the sequence can learn from the misclassifications of earlier ones.
 
 [^impurity]: We will not go into detail about the differences of impurity measures here and use gini throughout the rest of this chapter.
 
@@ -232,7 +231,7 @@ Combined with $5$-Fold cross-validation, this results in estimating $7\times9\ti
 
 ###  Interpreting ML models
 
-One basic inspection of a [!rf] model is to look at feature importances.
+One basic inspection of a [!rf] model is to look at feature importances.\todo{Sinnvolle Einleitung zum Kapitel finden. Interpretation on heldout test data}
 These reflect the relative influence each feature has on the resulting predictions.
 Figure @fig:rf_feature_importance shows the relative feature importances for all predictors in our [!rf] model (excluding the country dummy variables).
 These paint a similar picture as our logistic regression with the two human values dimension being the most important predictors, followed by age and education.
