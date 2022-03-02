@@ -1,0 +1,58 @@
+---
+title: "02-create_schwartz_model"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE, echo=F}
+
+library(caret)
+library(DescTools)
+library(ggplot2)
+library(labelled)
+library(tidyverse)
+
+
+knitr::opts_chunk$set(echo = TRUE)
+options(box.path = here::here())
+box::use(r / load_data)
+```
+
+# Data
+
+```{r}
+ess <- load_data$ess1()
+df <- load_data$preprocess(ess)
+data <- load_data$train_test_split(df)
+```
+
+
+```{r}
+form <- as.formula(
+  "reject_bin ~ gender +
+  age +
+  relig +
+  educ +
+  income +
+  s_dim_conservation +
+  s_dim_trancendence +
+  left_right +
+  country"
+)
+
+model <- glm(form, family = binomial(link = "logit"), data = data$train)
+
+summary(model)
+```
+
+```{r}
+PseudoR2(model, which = c("McFadden", "McFaddenAdj", "McKelveyZavoina", "Nagelkerke"))
+```
+
+```{r}
+pred <- predict(model, data$test, type = "response")
+pred <- as_factor(ifelse(pred > .5, 1, 0))
+confusionMatrix(data$test$reject_bin, pred)
+```
