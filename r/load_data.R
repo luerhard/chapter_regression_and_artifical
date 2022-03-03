@@ -4,9 +4,24 @@ box::use(
   dplyr[...],
   tibble[as_tibble],
   here[here],
-  tibble[as_tibble]
+  tibble[as_tibble],
+  forcats[fct_relevel, fct_drop],
+  caret[createDataPartition]
 )
 
+
+#' @export
+train_test_split <- function(df) {
+  set.seed(1337)
+  train_ix <- createDataPartition(df$reject_bin, p = .8, list = F, times = 1)
+
+  result <- list(
+    train = df[train_ix,],
+    test = df[-train_ix,]
+  )
+
+  return(result)
+}
 
 #' @export
 ess1 <- function() {
@@ -32,12 +47,13 @@ preprocess <- function(ess) {
     "iplylfr", "ipmodst", "imptrad", "ipbhprp", "ipfrule", "impsafe",
     "ipstrgv"
   )
-  
+
   df <- ess %>%
     mutate_at(
       # reverse coding and substract mrat from all schwartz cols
-      all_of(schwartz_cols), list(~ car::recode(.,
-                                          "1 = 6; 2 = 5; 3 = 4; 4 = 3; 5 = 2; 6 = 1"
+      all_of(schwartz_cols), list(~ car::recode(
+        .,
+        "1 = 6; 2 = 5; 3 = 4; 4 = 3; 5 = 2; 6 = 1"
       ))
     ) %>%
     mutate(
@@ -49,7 +65,7 @@ preprocess <- function(ess) {
     ) %>%
     transmute(
       # controls
-      gender = dplyr::recode(as_factor(gndr), "Male" = 0, "Female" = 1),
+      gender = fct_drop(fct_relevel(as_factor(gndr), "Male")),
       age = ifelse(agea > 18, agea, NA),
       relig = rlgdgr,
       educ = ifelse(eduyrs < 30, eduyrs, NA),
@@ -73,9 +89,9 @@ preprocess <- function(ess) {
       # s_security = rowMeans(across(c(impsafe, ipstrgv))),
       # create dimensions
       s_dim_conservation = rowMeans(across(c(impsafe, ipstrgv, ipfrule, ipbhprp, ipmodst, imptrad))),
-      s_dim_trancendence = rowMeans(across(c(ipeqopt, ipudrst, impenv, iphlppl, iplylfr)))
+      s_dim_transcendence = rowMeans(across(c(ipeqopt, ipudrst, impenv, iphlppl, iplylfr)))
     ) %>%
     drop_na()
-  
+
   return(df)
 }

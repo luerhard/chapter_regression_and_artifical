@@ -24,15 +24,15 @@ $endif$
 \usepackage{longtable}
 \usepackage{authblk}
 \usepackage{setspace}
+\usepackage[hang]{footmisc}
 
-\setlength{\marginparwidth }{2cm}
-\usepackage[textwidth=4.5cm, tickmarkheight=0.2cm, textsize=footnotesize]{todonotes}
+\usepackage[textwidth=3.5cm, tickmarkheight=0.2cm, textsize=footnotesize]{todonotes}
 \floatplacement{figure}{$if(float-placement-figure)$$float-placement-figure$$else$H$endif$}
 
 \usepackage[
 left=2cm,
-right=5cm,
-top=3cm,
+right=4cm,
+top=2cm,
 bottom=3cm
 %marginparwidth=125pt,
 %marginparsep=5mm,
@@ -59,9 +59,15 @@ $endif$
 \renewcommand{\floatpagefraction}{.3}
 \renewcommand{\textfraction}{.4} 
 
+% space between footnote number and text
+\setlength{\footnotemargin}{2mm}
+%space between footnotes and text body
+\addtolength{\footnotesep}{2mm}
+
 \clubpenalty10000
 \widowpenalty10000
 \displaywidowpenalty=10000
+\interfootnotelinepenalty=1000
 
 % Scale images if necessary, so that they will not overflow the page
 % margins by default, and it is still possible to overwrite the defaults
