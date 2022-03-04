@@ -10,10 +10,11 @@ authors:
     - Lukas Erhard:
         institute: stuttgart
         email: lukas.erhard@sowi.uni-stuttgart.de
+        correspondence: yes
     - Raphael Heiberger:
         institute: stuttgart
         email: raphael.heiberger@sowi.uni-stuttgart.de
-        correspondence: yes
+        
     
 institutes:
     stuttgart: University of Stuttgart, Seidenstraße 36, 70714 Stuttgart, Germany
@@ -22,7 +23,7 @@ date: \today
 
 abstract: 'Hier Vorgang ihm als reiße. Ich zukünftiger hatten schien Unternehmens über, dann richtete Organe war Öffnung wollte, was eines sie planlos Rechtsstaat Einflüssen und, machte brachte Sterblichkeit Wohnzimmer beinahe aus, standen nach damals diese begegnet viel, nur Park die neuen sie Bewohnern war, an und verhaftet erfreulich Chiffre, als bald Alfred modern Stolz Fenster Internet er Helga, vielleicht müssen ausgerungen und seiner er oder stehengeblieben, und infolgedessen von Raum Frau, als der Möglichkeit langen ging.'
 
-keywords: 'regression, artifical intelligence, machine learning'
+keywords: 'regression, artificial intelligence, machine learning'
 
 titlepage: true
 toc: false # Table of contents
@@ -38,7 +39,7 @@ Data for such approaches was scarce, hard to come by, and expensive [@grimmer:Ma
 The internet changed that. 
 Digital data is comprehensive, ubiquitous, and, in general, cheap to retrieve.
 While the availability of such data opens up new roads and possibilities, it creates the need for new forms of analysis and the need to approach questions in a new way [@mcfarland:SociologyEraBig.2016; @lazerComputationalSocialScience2020].
-Along with those new datasets, data sources, and an explosion in available computing power, new techniques for analyzing social phenomena were developed rapidly, often by integrating knowledge from other disciplines into an emerging field of "Computational Social Science" [@heibergerInstallingComputationalSocial2016].
+Along with those new datasets, data sources, and an explosion in available computing power, new techniques for analyzing social phenomena were developed rapidly, often by integrating knowledge from other disciplines into an emerging field of "Computational Social Science" (CSS) [@heibergerInstallingComputationalSocial2016].
 
 In particular, social scientists increasingly use tools from [!ml], methods that can be described as "a class of flexible algorithmic and statistical techniques for prediction and dimension reduction" [@grimmer:MachineLearningSocial.2021, 396].
 Applications of [!ml] comprise some of the most important technological innovations in recent years, for instance, gene prediction or search engines [@jordan:MachineLearning.2015]. 
@@ -57,35 +58,113 @@ As is often the case, combining both seems like the most promising way. <!--in b
 
 # Knowledge Acquisition in the Social Sciences
 
-The rising popularity of survey methods in the 1930s and 40s established a new era in the social sciences.
-This era was accompanied by new opportunities and the idea of inferential statistics made its way into the social sciences.
-The widely agreed-upon approach to social science is mainly based on Karl Popper's formalizations in the 1950s [@popper:LogicScientificDiscovery.2010]\todo{sinnvolle engl. Edition finden}.
-Falsifiable hypotheses, founded on strong theories, build the foundation for the idea of testing theory-based assumptions.
-It describes a way of generating knowledge about a small part of a population and generalizing this to its entirety [@krzywinski:Importancebeinguncertain.2013].
+## Traditional statistics and digital data
+Statistics became widely employed and prevailed in the landscape of all social sciences from the 1950s onward [@plattHistorySociologicalResearch1998]. 
+Platt’s (1998) historical account of sociological methods argues that studies from 1920 to 1940 lacked external funding and were mainly qualitative by design (interviews, ethnography). 
+In the following decades, this changed as surveys and statistics became the main instruments for social scientists [@converseSurveyResearchUnited2009]. 
+The quantification and numeric measurement of social phenomena, coupled with increasing  computing power, can be seen as “watershed moment” of empirical research in sociology [@mcfarland:SociologyEraBig.2016, 14]. 
+The paramount of research activities shifted during this process from ethnographic community studies to an individualistic perspective which was inherent to survey questions [@porterModernSocialSciences2003]. 
 
-## Traditional statistics
+Reflecting changes in methods, new theoretical programs came into fashion. 
+For instance, rational choice theory with its methodological individualism was well-suited to explain variable-centered research questions and became a prevalent taste of many sociologists [@colemanFoundationsSocialTheory1990]. 
+The usage of surveys, the resulting availability of a new kind of data and easier access and higher acceptance of causal models occurred in other social sciences as well. In psychology and economics, for instance, general methodological subfields emerged (psychometrics and econometrics respectively [@rafteryStatisticsSociology19502001].
+In the wake of variable driven data retrieval came the advent of regression models, factor analysis and other statistics in sociology, although those methods were considered “esoteric expertise” [@abbottSystemProfessions1988, 147] until the 1960’s.
 
-We can calculate the probability of being wrong and define thresholds upon which we accept or reject our assumptions.
+Thus, the shift to quantitative research was fueled by fundamental changes of research content, techniques (surveys, regressions), and technology (computers).
+Social scientists face a similar situation today. 
+The flux of research fashions and increasing diversity of the field has picked up steam as a new era of big data and super-computing has arrived [@mcfarland:SociologyEraBig.2016]. 
+For more than a decade, the internet has changed the life of most people in industrialized countries providing the means to use all sorts of digital traces (e.g., connections, profiles, or communications) as data on social behaviors and systems. 
 
-Since then, the linear model has become ubiquitous [@abbott:TranscendingGeneralLinear.1988].
+Social scientists have been slower to utilize the possibilities of new data and computational methods [@heibergerInstallingComputationalSocial2016] in comparison to computer scientists and engineers who have embraced the analysis of large social data and actively developed research programs to "conquer" this domain [@conteManifestoComputationalSocial2012].
+Part of the answer may be found in the underlying research program of [!ts].
+It builds off inferential statistics and Karl Popper's formalizations [@popper:LogicScientificDiscovery.2010]\todo{sinnvolle engl. Edition finden}, i.e., creating falsifiable hypotheses, derived from (general) theories.
+This foundation of testing theory-based assumptions describes a way of generating knowledge about a small part of a population and generalizing to its entirety [@krzywinski:Importancebeinguncertain.2013].
+One main pillar is then to calculate the probability of being wrong. 
+Hence, social scientists rely heavily on thresholds upon which we accept or reject our assumptions, most often considered to be at the 5%-level.
+
+While this frequentist approach is well-suited for carefully conducted surveys, it bears some significant shortcomings for digital data. 
+One severe methodological challenge is tied to *sample characteristics.* 
+Most of the frequentist approaches are prone to sample sizes (e.g., all chi-squared-based test-statistics). 
+Testing for significance with very large sample sizes will almost always generate significant results, rendering those tests meaningless. 
+This problem is amplified by the source of many popular digital data, e.g., social media platforms like Twitter.
+Inferences and significance levels are then, at best, possible for the underlying population, hence, the platform's users [@lewisThreeFallaciesDigital2015].
+Most often, however, we do not know much about their characteristics, or how userbases relate to (parts of) the general population [@hargittaiPotentialBiasesBig2020]. 
+In addition, the efficient estimation and interpretation of regression coefficients depends on non-independent and identically distributed observations. 
+This is often not the case for samples from digital data, e.g., when it comes to all data gathered on social networks (of which dependency is an inherent property).
+
+Another important challenge for [!ts] relates to ubiquitous of *linear* models [@abbott:TranscendingGeneralLinear.1988]. 
+Thus, what if relationships are non-linear? 
+It is very difficult to model non-linear relationships with models from [!ts].
+Some argue that is because of the omission of counterfactual language [@pearlBookWhyNew2018, 329-35], while others may point to the problem of overfitting when introducing polynomial terms in linear regressions [@molina:MachineLearningSociology.2019]. 
+In any case, the consequence is that theories and results in social sciences cannot, methodologically, consider non-linear relations. 
+A circumstance that is astonishing, given the complexity of social phenomena.
+On of the great promises of [!ml] is to offer ways to measure non-linear effects, as we will discuss below.
+
+<!-- leftovers:
 Questions around model _validity_ became central for the upcoming new methods.
-
-This approach, however, bears some shortcomings:
-
-1. What if your sample size is large?
-    Many of the frequentist approaches are very prone to large sample sizes (e.g., all the chi-squared-based test-statistics).
-    Testing for significance with very large sample sizes will almost always generate significant results, rendering those tests useless.
-
-2. What if your sample is not independent and identically distributed? <!--% prozessgeneriert -->
-    Many new datasets do not oblige to the rules for classical hypothesis testing
-
-3. What if you have data about the entire population? <!--%all tweets, news articles, users of a platform, etc. --> Then, running tests for significance becomes completely irrelevant.
-
 4. What if you have no theory, you can derive hypotheses from? This is especially important for social media networks, where the rules of engagement might differ quite substantially from 'normal' social behavior or where you cannot specify your population.
+-->
 
-5. What if your relationships are highly non-linear? It is very difficult to model non-linear relationships with models from [!ts].
+## Machine Learning in the social sciences
+[!ml] summarizes statistical methods in which computers learn from data and extract information. 
+Whilel [!ml] represents a breakthrough in computer sciences, its adoption in the social sciences is less enthusiastic [@molina:MachineLearningSociology.2019].
+In contrast to the usage of inferential statistics, the application of [!ml] does not (yet) rest on an established research in the social sciences. 
 
-## Machine Learning
+In general, we can distinguish two paradigms when it comes to [!ml]: _supervised machine learning_ (SML) and _unsupervised machine learning_ (UML) (e.g., @jordan:MachineLearning.2015).
+While SML uses *labeled* data as input to predict outcomes of *unlabeled* data, UML derives  patterns in (unlabeled) observations by exploiting statistical properties of the data. 
+
+UML, in essence, are aiming to create categorization schemes or typologies. 
+Researchers so inductively define types along derived dimensions and represent each case relative to the types given its underlying values.
+Resulting (ideal-)types are arguably among the most important methodological tools of social scientists and have been used for a long-time. 
+Prominent UML techniques comprise cluster analysis, principal components, or latent class analysis. 
+UML’s main purpose is therefore to explore data and reduce its complexity.
+Researchers might use the output as input for further analysis [@heibergerFacetsSpecializationIts2021] or to develop theoretical models [@hallIntroductionVarietiesCapitalism2001].
+
+Thus, those exploratory techniques are by no means new to social sciences.
+However, UML does provide novel ways to analyze large amounts of text and social networks, both kinds of data often associated with the digital age and computational social science. 
+In particular, the “automatic” categorization of large corpora has found many applications on social phenomena (Evans and Aceves 2016). 
+Topic models represent one of the most used NLP tools in the social sciences (McFarland et al. 2013). 
+Also, the detection of communities resembles prominent ideas of social groups (Fortunato 2010). 
+
+The importance of UML notwithstanding, we will focus on SML in this contribution. 
+Many people might first think on SML when it comes to [!ml].
+Methods under the umbrella of SML also witnessed the largest performance boost due to increases availability of digital data.
+Almost all instances of AI are SML, methodologically speaking, with the aim of predicting an outcome with a given set of features.
+That is the same principle as when social scientists speak of estimating a dependent variable by the means of independent variables.
+
+Thus,how does SML actually differ from [!ts]?
+There are two main answer to that important question, one epistemological, the other practical.
+While [!ts] infer models that *explain* how an outcome is generated with unbiased and consistent estimators, SML does not care about interpretability.
+While the coefficients are the most interesting part of regressions for social scientists, the features are of little to no interest for typical [!ml] use cases.
+Instead, the main goal of SML is how to best forecast the outcome.
+Thus, SML models do not need to care about meaningful interpretations or unbiased estimators.
+This is a crucial epistemological difference and yields many practical consequences.
+
+The prioritization of predictions affords "out-of-sample" testing, i.e., the ability of models to predict unknown and, hence, unlabeled, observations. 
+This stems from its practical success in many commercial applications. 
+Engineers of almost all large companies focus on improving prediction of customer behavior.
+Of course, firms with digital business models profit most from SML's predictive power. 
+Consider, for instance, a company that sells wine online. 
+Given a certain record of orders and a large enough customer base, the company can use the characteristics of their data (e.g., price, grape, origin, quality, vineyard, etc.) to make recommendations.
+Those might also be based on information of what other customers might have bought. 
+In any case, the wine shop will mostly be interested to develop models "that work", i.e., engineers might typically approach this task without any concern for theory or explaning why somebody bought something. 
+It suffices to make suitable recommendations (predictions) to improve sales. 
+
+Thus, unlike most social scientists using *one* dataset for modeling efforts, SML consists of at least two datasets: training and test data.
+The training data is used to develop the model, the second to test its predictive capacity on out-of-sample data. 
+Often, the train and test sets are randomly sampled from the same dataset which is split, e.g., 50/50. 
+That means, properties like autocorrelation or multicollinearity are merely treated as features, not as problems like in inferential statistics. 
+Given the priority of prediction, many restrictions of [!ts] are no longer concerns of [!ml] researcher.
+If interpretation (or explanation) is not the aim, the use of poweful “black-boxes” like multi-layer neural networks or high-orders of interaction effects becomes an attractive option.
+Almost all deep-learning efforts rest on such black-boxes, which are only of limited use for social scientists.
+The same is true for using thousands of (potentially co-linear) variables in a model.
+This practical approach also allows regularization of variance and empirical tuning of parameters [@mullainathanMachineLearningApplied2017]. 
+Instead of being prone to overfitting (like [!ts] models), SML uses the training data and tunes regularizers to fit the data at hand (number and effect differing by algorithm).
+
+We will illustrate such a typical SML work-flow on two examples in the remainder of this contribution.
+We will focus on illustrating the use of ML for "classifications" instead of "regressions", because .... 
+In the language of [!ml] this translates into using a categorical dependent variable (i.e., solving a "classification" problem), while employing "regressions" refers to techniques that use continuous outcomes.
+
 
 - See @mcfarland:SociologyEraBig.2016\todo{write section}
 <!--% transcript of McFarland, p. 20 -- rewrite, but basically this: 
@@ -100,7 +179,7 @@ copy paste McFarland Ende.-->
 - Supervised vs. unsupervised vs. reinforcement learning, see @jordan:MachineLearning.2015
 - Regression vs. classification problems
 
-## How does ML compare to traditional approaches?
+## How does ML compare to traditional approaches?\todo{das könnte man auch gut in die discussion stecken?} 
 
 It might come as a surprise but often the algorithms used in machine learning are quite similar, if not the same, as in the traditional quantitative social sciences.
 Logistic regression, [!ols] regression, and [!pca], for example, are readily used in both camps. 
