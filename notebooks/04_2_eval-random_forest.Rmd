@@ -131,3 +131,9 @@ ggsave(
 )
 ```
 
+```{r}
+MLmetrics::Recall(y_true = y_true, y_pred = y_test)
+MLmetrics::Precision(y_true = y_true, y_pred = y_test)
+MLmetrics::F1_Score(y_true = y_true, y_pred = y_test)
+```
+
