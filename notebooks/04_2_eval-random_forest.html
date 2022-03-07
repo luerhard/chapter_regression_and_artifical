@@ -281,6 +281,12 @@ eff_gender &lt;- FeatureEffect$new(pred, feature = &quot;gender&quot;, method = 
   here::here(&quot;rsc&quot;, &quot;images&quot;, &quot;rf_ale.pdf&quot;)
 )</code></pre>
 <pre><code>## Saving 7 x 5 in image</code></pre>
+<pre class="r"><code>MLmetrics::Recall(y_true = y_true, y_pred = y_test)</code></pre>
+<pre><code>## [1] 0.7611991</code></pre>
+<pre class="r"><code>MLmetrics::Precision(y_true = y_true, y_pred = y_test)</code></pre>
+<pre><code>## [1] 0.6981773</code></pre>
+<pre class="r"><code>MLmetrics::F1_Score(y_true = y_true, y_pred = y_test)</code></pre>
+<pre><code>## [1] 0.7283274</code></pre>
 </div>
 
 

@@ -1,0 +1,74 @@
+---
+title: "Run penalized Regression"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE, echo=F}
+
+library(caret)
+library(doParallel)
+library(dplyr)
+
+knitr::opts_chunk$set(echo = TRUE)
+options(box.path = here::here())
+box::use(r / load_data)
+box::reload(load_data)
+```
+
+# Data
+
+```{r}
+ess <- load_data$ess1()
+df <- load_data$preprocess(ess)
+data <- load_data$train_test_split(df)
+```
+
+```{r}
+
+set.seed(1337)
+
+data$train <- select(data$train, -reject)
+
+form <- as.formula("reject_bin ~ .^3")
+
+ctrl <- trainControl(
+  method = "cv",
+  number = 5,
+  savePredictions = "final"
+)
+
+# alpha = 1 for lasso reg
+# alpha = 0 for ridge reg
+# alpha = ]0, 1[ for elasticnet reg
+# lambda: numeric value defining the amount of shrinkage
+tunegrid <- expand.grid(
+  lambda = seq(0, 0.2 , length.out = 50),
+  alpha = 0
+)
+
+cl <- makePSOCKcluster(4)
+registerDoParallel(cl)
+
+model <- train(
+  form,
+  method = "glmnet",
+  data = data$train,
+  preProc = c("zv", "center", "scale"), 
+  metric = "Accuracy",
+  tuneGrid = tunegrid,
+  trControl = ctrl
+)
+
+stopCluster(cl)
+```
+
+```{r}
+print(model)
+```
+
+```{r}
+saveRDS(model, here::here("models", "glmnet_penalized_reg.RDS"))
+```

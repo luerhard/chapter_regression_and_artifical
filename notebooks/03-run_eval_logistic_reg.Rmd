@@ -53,6 +53,13 @@ PseudoR2(model, which = c("McFadden", "McFaddenAdj", "McKelveyZavoina", "Nagelke
 
 ```{r}
 pred <- predict(model, data$test, type = "response")
-pred <- as_factor(ifelse(pred > .5, 1, 0))
-confusionMatrix(data$test$reject_bin, pred)
+y_test <- as_factor(ifelse(pred > .5, 1, 0))
+y_true <- data$test$reject_bin
+confusionMatrix(y_true, y_test)
+```
+
+```{r}
+MLmetrics::Recall(y_true = y_true, y_pred = y_test)
+MLmetrics::Precision(y_true = y_true, y_pred = y_test)
+MLmetrics::F1_Score(y_true = y_true, y_pred = y_test)
 ```

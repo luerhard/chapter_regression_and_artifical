@@ -1,0 +1,65 @@
+---
+title: "04_1_run-lasso-reg"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE, echo=F}
+
+library(caret)
+library(doParallel)
+library(dplyr)
+
+knitr::opts_chunk$set(echo = TRUE)
+options(box.path = here::here())
+box::use(r / load_data)
+box::reload(load_data)
+```
+
+# Data
+
+```{r}
+ess <- load_data$ess1()
+df <- load_data$preprocess(ess)
+data <- load_data$train_test_split(df)
+```
+
+```{r}
+model <- readRDS(here::here("models", "glmnet_penalized_reg.RDS"))
+```
+
+```{r}
+X_test <- select(data$test, -reject, -reject_bin)
+X_test <- preProcess(X_test, method = c("zv", "center", "scale"))
+y_test <- predict(model, data$test)
+y_true <- data$test$reject_bin
+```
+
+
+```{r}
+vars <- varImp(model)
+nrow(vars$importance)
+
+nrow(filter(vars$importance, Overall > 0))
+```
+
+```{r}
+coefs <- as.matrix(coef(model$finalModel, model$bestTune$lambda))
+
+nrow(coefs)
+sum(coefs != 0)
+```
+
+
+```{r}
+confusionMatrix(y_test, y_true)
+```
+
+
+```{r}
+MLmetrics::Recall(y_true = y_true, y_pred = y_test)
+MLmetrics::Precision(y_true = y_true, y_pred = y_test)
+MLmetrics::F1_Score(y_true = y_true, y_pred = y_test)
+```

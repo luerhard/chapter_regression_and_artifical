@@ -3,6 +3,14 @@
         "shortform": "AIC",
         "longform": "Aikaike Information Criterion"
     },
+    "ale": {
+        "shortform": "ALE",
+        "longform": "accumulated local effect"
+    },
+    "ai": {
+        "shortform": "AI",
+        "longform": "artificial intelligence"
+    },
     "bic": {
         "shortform": "BIC",
         "longform": "Bayesian Information Criterion"
@@ -11,9 +19,25 @@
         "shortform": "ESS",
         "longform": "European Social Survey"
     },
+    "fn": {
+        "shortform": "FN",
+        "longform": "false negative"
+    },
+    "fp": {
+        "shortform": "FP",
+        "longform": "false positive"
+    },
+    "lasso": {
+        "shortform": "LASSO",
+        "longform": "least absoulute shrinkage operator"
+    },
     "ml": {
         "shortform": "ML",
         "longform": "machine learning"
+    },
+    "nlp": {
+        "shortform": "NLP",
+        "longform": "natural language processing"
     },
     "ols": {
         "shortform": "OLS",
@@ -23,13 +47,17 @@
         "shortform": "RF",
         "longform": "random forest"
     },
+    "tn": {
+        "shortform": "TN",
+        "longform": "true negative"
+    },
+    "tp": {
+        "shortform": "TP",
+        "longform": "true positive"
+    },
     "ts": {
         "shortform": "TS",
         "longform": "traditional statistics"
-    },
-    "ale": {
-        "shortform": "ALE",
-        "longform": "accumulated local effect"
     },
     "pdp": {
         "shortform": "PDP",
