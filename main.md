@@ -29,10 +29,9 @@ toc: false # Table of contents
 
 ---
 
-\listoftodos
 # Introduction
 
-Research in the social sciences has been shifting towards a new era.\todo{RHH: check title -> sollte nur leicht geändert werden (weil schonmal mit skopek iteriert) und knackig sein; neuer versuch, s.o.}
+Research in the social sciences has been shifting towards a new era.
 In the prior century, the focus laid mainly on variable-based, theory and hypothesis-driven approaches to give answers to societal questions.
 Data for such approaches was scarce, hard to come by, and expensive [@grimmer:MachineLearningSocial.2021].
 The internet changed that. 
@@ -40,7 +39,7 @@ Digital data is comprehensive, ubiquitous, and, in general, cheap to retrieve.
 While the availability of such data opens up new roads and possibilities, it creates the necessity for adequate forms of analysis [@mcfarland:SociologyEraBig.2016; @lazerComputationalSocialScience2020].
 Along with those new datasets, data sources, and an explosion in available computing power, new techniques for analyzing social phenomena were developed rapidly, often by integrating knowledge from other disciplines into an emerging field of "Computational Social Science" (CSS) [@heibergerInstallingComputationalSocial2016].
 
-In particular, social scientists increasingly use tools from computer science and, in particular, [!ml]. 
+Social scientists increasingly use tools from computer science and, in particular, [!ml]. 
 Methods subsumed under [!ml] can be described as "a class of flexible algorithmic and statistical techniques for prediction and dimension reduction" [@grimmer:MachineLearningSocial.2021, 396].
 Applications of [!ml] comprise some of the most important technological innovations in recent years, for instance, gene prediction or search engines [@jordan:MachineLearning.2015]. 
 No problem seems too complex as long as researchers have enough (i.e., very large) data, even previously unsolvable questions might be solved, e.g., how to maintain high-temperature plasma for nuclear fusion [@degraveMagneticControlTokamak2022]. 
@@ -51,18 +50,18 @@ While recent overviews characterize ML-related methods and provide guidance for 
 We will illustrate what a typical social scientists' approach might look like and how using [!ml] techniques could potentially contribute additional insights or change the results. 
 For this purpose, we will first elaborate on some theoretical differences and similarities between [!ts] and [!ml]. 
 We will then exemplify those differences by using a well-known dataset, the [!ess] [@ESS.2002].
-In particular, we will focus on two main parts of any regression\todo[author=LE]{klären, ob wir regression oder classification machen} analysis: estimators and goodness of fit. 
-By comparing logistic regressions and two popular [!ml] algorithms (Random Forest, Ridge Regression), we will explain how [!ml] works and, more importantly, how they are typically used by researchers outside the social sciences.[^git]
+In particular, we will focus on two main parts of any regression analysis: estimators and goodness of fit. 
+By comparing logistic regressions and two popular [!ml] algorithms (Random Forest, Ridge Regression), we will explain how [!ml] works and, more importantly, how they are typically used by researchers outside the social sciences[^git].
 In so doing we will reveal how *epistemological* differences shape the potential usage of [!ml] in the social sciences and discuss the methodological trade-off when it comes to the question of whether to apply [!ml] or [!ts]. 
 <!--As is often the case, combining both seems like the most promising way. -->
 
-[^git]: All code and descriptions to use the ESS are available on https://github.com/luerhard/chapter_regression_and_artifical.git.
+[^git]: All code and descriptions to use the ESS are available on [https://github.com/luerhard/chapter_regression_and_artifical](https://github.com/luerhard/chapter_regression_and_artifical.git).
 
 # Traditional statistics and digital data
 Statistics became widely employed in the landscape of all social sciences from the 1950s onward [@plattHistorySociologicalResearch1998]. 
 Platt’s [-@plattHistorySociologicalResearch1998] historical account of sociological methods argues that studies from 1920 to 1940 lacked external funding and were mainly qualitative by design (interviews, ethnography). 
 In the following decades, this changed as surveys and statistics became the main instruments for social scientists [@converseSurveyResearchUnited2009]. 
-The quantification and numeric measurement of social phenomena through surveys, the subsequent approximation of complex concepts in variables, together with increasing computing power, can be seen as last “watershed moment” of empirical social research. 
+The quantification and numeric measurement of social phenomena through surveys, the subsequent approximation of complex concepts in variables, together with increasing computing power, can be seen as a "watershed moment" of empirical social research. 
 The paramount of research activities shifted during this process from ethnographic community studies to an individualistic perspective which was inherent to survey questions [@porterModernSocialSciences2003]. 
 
 Reflecting changes in methods, new theoretical programs came into fashion. 
@@ -79,11 +78,11 @@ Social scientists have been slower to utilize the possibilities of new data and 
 Part of the answer may be found in the underlying research program of [!ts] that dominates quantitative research in the social sciences.
 It builds off inferential statistics and Karl Popper's formalizations [@popper:LogicScientificDiscovery.1968], i.e., testing falsifiable hypotheses, derived from (general) theories.
 This foundation of testing theory-based assumptions describes a way of generating knowledge about a small part of a population and generalizing it to its entirety [@krzywinski:Importancebeinguncertain.2013].
-One main pillar of this approach is to calculate the probability of this generalization being wrong. 
-Hence, social scientists rely heavily on thresholds upon which we accept or reject  assumptions, most often considered to be at the 5%-level.
+One main pillar of this approach is to calculate the probability of this generalization being wrong.
+Hence, social scientists rely heavily on thresholds upon which we accept or reject assumptions, most often considered to be at the 5%-level.
 
 While this frequentist approach is well-suited for carefully conducted surveys, it bears some significant shortcomings for digital data. 
-One severe methodological challenge is tied to *sample characteristics.* 
+One severe methodological challenge is tied to *sample characteristics*. 
 Most of the frequentist approaches are prone to sample sizes (e.g., all chi-squared-based test-statistics). 
 Testing for significance with very large sample sizes will almost always generate significant results, rendering those tests meaningless. 
 This problem is amplified by the source of many popular digital data, e.g., social media platforms like Twitter.
@@ -93,7 +92,7 @@ In addition, the efficient estimation and interpretation of regression coefficie
 This is often not the case for samples from digital data, e.g., when it comes to all data gathered on social networks (of which dependency is an inherent property).
 
 Another important challenge for [!ts] analyzing digital data relates to the ubiquity of *linear* models [@abbott:TranscendingGeneralLinear.1988]. 
-But what if relationships are non-linear? 
+But what if relationships are non-linear?
 It is very difficult to model non-linear relationships with models from [!ts].
 Some argue that is because of the omission of counterfactual language [@pearlBookWhyNew2018, 329-35], while others may point to the problem of overfitting when introducing polynomial terms in linear regressions [@molina:MachineLearningSociology.2019]. 
 In any case, the consequence is that theories and results in social sciences can almost never, methodologically, consider non-linear relations. 
@@ -108,7 +107,7 @@ Questions around model _validity_ became central for the upcoming new methods.
 # Machine Learning in the social sciences
 [!ml] summarizes statistical methods in which computers learn from data and extract information. 
 While [!ml] represents a breakthrough in computer sciences, its adoption in the social sciences is less enthusiastic [@molina:MachineLearningSociology.2019].
-In contrast to the usage of inferential statistics, the application of [!ml] does not (yet) rest on established methodological principles and assumption as in [!ts]. 
+In contrast to the usage of inferential statistics, the application of [!ml] does not (yet) rest on as established methodological principles and assumptions as in [!ts]. 
 
 In general, we can distinguish two paradigms when it comes to [!ml]: _[!sml!]_ and _[!uml!]_ [e.g., @jordan:MachineLearning.2015].
 While [!sml] uses *labeled* data as input to predict outcomes of *unlabeled* data, [!uml] derives patterns in (unlabeled) observations by exploiting statistical properties of the data. 
@@ -117,7 +116,7 @@ While [!sml] uses *labeled* data as input to predict outcomes of *unlabeled* dat
 Researchers so inductively define types along derived dimensions and represent each case relative to the types given its underlying values.
 Resulting (ideal-)types are arguably among the most important methodological tools of social scientists and have been used for a long-time. 
 Prominent [!uml] techniques comprise cluster analysis, principal components, or latent class analysis. 
-[!uml<]’s main purpose is therefore to explore data and reduce its complexity.
+[!uml]’s main purpose is therefore to explore data and reduce its complexity.
 Researchers might use the output as input for further analysis [@heibergerFacetsSpecializationIts2021] or to develop theoretical models [@hallIntroductionVarietiesCapitalism2001].
 
 Thus, those exploratory techniques are by no means new to social sciences.
@@ -134,13 +133,13 @@ That is the same principle as when social scientists speak of estimating a depen
 
 Thus, how does [!sml] actually compare to [!ts]?
 There are two main answers to that, in our view, crucial question, one is epistemological, the other practical.
-While [!ts] infers\todo{achtung: plural/singular richtig nach abbreviations (s-endung bei verben oder nicht)} models that *explain* how an outcome is generated with unbiased and consistent estimators, [!sml] does not care about interpretability.
+While [!ts] infers models that *explain* how an outcome is generated with unbiased and consistent estimators, [!sml] does not care about interpretability.
 While the coefficients are the most interesting part of regressions for social scientists, the features are of little to no interest for typical [!ml] use cases.
 Instead, the main goal of [!sml] is how to best forecast the outcome.
 Thus, [!sml] models do not need to care about meaningful interpretations or unbiased estimators.
 This is a crucial epistemological difference and yields many practical consequences.
 
-Foremost, the prioritization of predictions affords an "out-of-sample" testing, i.e., the ability of models to predict unknown and, hence, unlabeled, observations.
+Foremost, the prioritization of predictions affords "out-of-sample" testing, i.e., the ability of models to predict unknown and, hence, unlabeled, observations.
 Thus, unlike most social scientists using *one* dataset for modeling efforts, SML consists of at least two datasets: training and test data.
 The training data is used to develop the model, the second to test its predictive capacity on out-of-sample data. 
 Often, the train and test sets are randomly sampled from the same dataset which is split, e.g., 50/50. 
@@ -163,9 +162,9 @@ This practical approach also allows regularization of variance and empirical tun
 Instead of being prone to overfitting (like [!ts] models), [!sml] uses the training data and tunes regularizers to fit the data at hand (number and effect differing by algorithm).
 
 We will illustrate such a typical [!sml] workflow on two examples in the remainder of this contribution.
-We will focus on illustrating the use of [!ml] for "classifications" instead of "regressions" in order to keep the analysis as comprehensible as possible.[^language] \footnote{In the language of [!ml], this translates into using a categorical, often binary, dependent variable (i.e., solving a "classification" problem), while employing "regressions" refers to techniques that use continuous outcomes.}
-In particular, binary outcomes have the advantage to yield relatively simple indicators for model performance, confusion matrices. 
-Nevertheless, those are among the most common concepts of [!ml] and so provide a useful case for the purposes of this contribution.
+We will focus on illustrating the use of [!ml] for "classifications" instead of "regressions" in order to keep the analysis as comprehensible as possible[^language].
+In particular, confusion matrices (see below) for binary outcomes have the advantage to yield relatively simple indicators for model performance. 
+Nevertheless, those are among the most common concepts of [!ml] and provide a useful case for the purposes of this contribution.
 All derived conclusions, however, do apply for "regressions" (in the [!ml] sense) too. 
 
 [^language]: In the language of [!ml], this translates into using a categorical, often binary, dependent variable (i.e., solving a "classification" problem), while employing "regressions" refers to techniques that use continuous outcomes. This might be a bit confusing for social scientists first.
@@ -179,11 +178,11 @@ First, and in stark contrast to [!ts] models, [!ml] models usually do not have a
 Secondly, model evaluation works by evaluating its predictive power.
 
 To illustrate the epistemological differences, we will use an exemplary model and approach the problem from both angles.
-The chosen model is loosely based on the approach used by @davidov:ExplainingAttitudesImmigration.2012 and others; it has often been implemented in similar ways\todo{ein paar (wenige) cites dafür?}.
+The chosen model is loosely based on the approach used by @davidov:ExplainingAttitudesImmigration.2012 and has been implemented by others in similar ways [e.g., @sagiv:Valueprioritiesreadiness.1995].
 It investigates the effect of human values on attitudes toward immigration.
 
 The explanandum, our dependent variable which we will call _reject_, is a measure that represents _attitudes towards immigration_.
-It is a mean index consisting of three variables[^av] which have been shown to load strongly on a single dimension in a confirmatory factor analysis.\todo{where has it been shown?}
+It is a mean index consisting of three variables[^av] which have been shown to load strongly on a single dimension in a confirmatory factor analysis [@davidov:ExplainingAttitudesImmigration.2012, 764].
 To show the [!ml] workflow in its simplest form, binary classification, the resulting variable is dichotomized at the scale's mean value.
 To measure human values, we use the theory of basic human values [@schwartz:UniversalsContentStructure.1992] which is captured in the [!ess] surveys.
 The theory describes 10 basic values that are structured in two dimensions[^schwartz]: _conservation_ and _self-transcendence_.
@@ -199,7 +198,7 @@ It is chosen over the objective household income to reduce the number of missing
 Additionally, we control for _age_ (`agea`), _religiosity_ (`rlgdgr`), _education_ (`educyrs`), self-position on a _left-right scale_ (`lrscale`), _gender_ (`gndr`), and country (`ctry`).
 
 [^av]: The variables used here are asked on a 4-point scale how many immigrants of different groups respondents would like to allow into their country. 1. many/few immigrants of different race/ethnic groups e(as majority) `imdfetn`, 2.  many/few immigrants of same race/ethnic groups (as majority) `imsmetn`, 3. many/few immigrants from poorer countries outside Europe `impcntr`.
-All items are recorded so that higher levels indicate more accepted immigrants.
+All items are recoded so that higher levels indicate more accepted immigrants.
 
 ```{.table #tbl:logreg}
 ---
@@ -210,9 +209,9 @@ markdown: true
 ---
 ```
 
-Table @tbl:logreg\todo{bei kleinen p-values einfach < 0.001 eintragen?} reveals the results of the logistic regression.
+Table @tbl:logreg reveals the results of the logistic regression.
 We see highly significant effects for all variables except gender with age, self-placement on the left-right scale, and conservation being positively correlated whereas education, satisfaction with income, religiosity, and self-transcendence are negatively correlated with the rejection of immigration.
-Except for the non-significance of gender, our results are very similar to @davidov:ExplainingAttitudesImmigration.2012.\todo{sind sehr ähnlich, oder? ansonsten gerne andere formulierung, aber "generally comparable" hört sich ziemlich unähnlich an...}
+Except for the non-significance of gender, our results are similar to @davidov:ExplainingAttitudesImmigration.2012.
 That said, we use a drastically simplified model and would not advise drawing any substantial conclusions from it.
 We use this model only for didactic purposes to compare methods of [!ts] to [!ml].
 
@@ -225,7 +224,7 @@ The basic idea behind these procedures is always the same: utilize all data avai
 Herein lies the probably biggest difference to machine learners' aims.
 While [!ml] needs to *predict*, social scientists tend to *overfit* their models.
 Yet, overfitted models can only rarely be replicated in other samples (i.e., are bad in predicting unseen data), because they fit the data at hand "too good" and are prone to "p-hacking". 
-That creates considerable uncertainty about such models merits and casts considerable doubts if those explanations should be even considered as scientific [@wattsCommonSenseSociological2014].
+That creates considerable uncertainty about such models' merits and casts considerable doubts if those explanations should be even considered as scientific [@wattsCommonSenseSociological2014].
 
 To overcome the obstacle of overfitting, it has become customary to split the data set into multiple parts and only to use part of the data to train the model and the rest of the data to evaluate the predictive performance.
 We call this the _train-test-split_.
@@ -253,11 +252,10 @@ true 1, FN (false negative), TP (true positive)
 [!+^tn] represent the number of correct predictions for the "negative class" (e.g., the absence of a class, most often 0), [!+tp] the number of correct predictions for the positive class, respectively.
 [!+^fn] show the number of incorrect predictions for the negative class, whereas [!+fp] depict the number of incorrect positive predictions.
 Many important goodness-of-fit metrics can be derived from this matrix. 
-We will illustrate two of the most common measures, _accuracy_ and *F1-score"*.
+We will illustrate two of the most common measures, _accuracy_ and *F1-score*.
 Both metrics range from 0 to 1, with higher values indicating better models.
 
-_Accuracy_ denotes the number of correctly classified data instances of the total number of data instances:
-
+_Accuracy_ denotes the ratio of correctly classified data instances to the total number of data instances:
 $$
 Accuracy = \frac{TP + TN}{TP + FP + FN + TN}
 $$
@@ -284,7 +282,7 @@ $$
 F1 = 2 * \frac{Precision * Recall}{Precision + Recall}
 $$
 To be comparable to the models presented below, the logistic regression from above is rerun on the training data set and evaluated on the test set.
-The results are shown in the following confusion matrix:
+The results are shown in the confusion matrix in Table @tbl:logregconfmat.
 
 ```{.table #tbl:logregconfmat}
 ---
@@ -299,7 +297,9 @@ true 1, 670, 1441, **2111**
 **sum**, **2969**, **2463**, **5432**
 ```
 
-From this data, an accuracy of 68.85\%, recall of .7743, precision of .6923, and a resulting F1-score of .731 can be computed.\todo{interpret / Überleitung}
+From this data, an accuracy of 68.85\%, recall of .7743, precision of .6923, and a resulting F1-score of .731 can be computed.
+These numbers will be compared to the alternative [!ml] models below.
+
 
 ## Penalized Regression
 
@@ -324,6 +324,7 @@ In practice, however, it is often useful to try both variants and use the one th
 This was also done in the present case and ridge regression was chosen because it performed slightly better.
 There also exists a mixture of both variants where the _shrinkage penalty_ itself is an additional parameter of the model to optimize which is called _elastic net_ regression.
 If the hyperparameter, usually called $\alpha$, is 0, elastic net reduces to a ridge regression and if $\alpha$ is 1, elastic net regressions are equivalent to lasso regressions.
+In all these methods, it becomes apparent that we modify the coefficients to enhance the model performance, thus rendering them uninterpretable in the traditional sense.
 
 ### Hyperparameter tuning & Grid Search Cross-Validation {#sec:hyperparameter}
 
@@ -341,11 +342,14 @@ Once we defined on *what* data we optimize parameters, we need to set *how* to d
 A common approach to this end is called _Grid Search cross-validation_.
 The term to be clarified here is _Grid Search_: to do a grid search we define a grid of all possible parameter combinations of our hyperparameters and create cross-validated models for each combination.
 Already with a limited number of hyperparameters, this becomes a very computationally costly procedure. 
-Therefore, the parameter grid should be chosen with care.\todo{RHH: check if caret actually runs cv on gridsearch -> "By default, any `train()` object in `caret` has its hyperparameters tuned via grid search." from: https://campus.datacamp.com/courses/practicing-machine-learning-interview-questions-in-r/model-selection-and-evaluation?ex=10}
+Therefore, the parameter grid should be chosen with care.
 Ridge regression, as mentioned earlier, only has a single hyperparameter $\lambda$.
 A grid search cross-validation on 50 different possible values revealed 0.045 as the value of choice for the final model. 
 
-Evaluated on our held-out test data, this model achieves 69.90\% accuracy, recall of .766, precision of .708, and an F1-score of .735.\todo{compare to earlier models; 3797 correct in ridge, 3740 in normal logreg}
+Evaluated on our held-out test data, this model achieves 69.90\% accuracy, recall of .766, precision of .708, and an F1-score of .735.
+Compared to the simple logistic regression, this is an increase in accuracy of around 1\%.
+In other words, we classify 54 more cases correct when using the ridge regression model.
+The differences in recall and precision tell us, that the ridge regression model misses slightly more true positive cases but does better in deciding whether or not a case is positive or not.
 
 ## Random Forest
 
@@ -355,7 +359,7 @@ Ensemble methods exploit the concept of majority voting, where multiple simple m
 A Decision Tree is, as one would imagine, a tree of binary decisions on the data.
 The order of the decisions and the cutoff points according to which a decision is made are the things that are learned by maximizing an impurity measure like _gini_[^impurity] or _cross-entropy_.
 The trees in a (random) forest are generally simpler, in a way that they have fewer nodes (one could imagine them more like tree stumps) than a single decision tree would have.
-Interestingly, this has been shown to improve the predictive performance and, most importantly, makes the [!rf] less susceptible to overfitting compared to a single Decision Tree.\todo{where has this been shown?}
+Interestingly, this has been shown to improve the predictive performance and, most importantly, makes the [!rf] less susceptible to overfitting compared to a single Decision Tree [@lantz:MachineLearningDiscover.2015, 361].
 
 We will use 'bagged' trees here, which means that 'bags of features' (in the sense of multiple) are considered at every decision node.
 It is worth mentioning that there exists another group of ensemble trees called 'boosted trees'. 
@@ -367,24 +371,26 @@ The latter implicitly defines the maximum depth of our trees.
 
 The grid of our search was carefully chosen to reflect the expected space of parameters.[^cv]
 Applying this procedure, a model that considers 5 features at each node with a minimum terminal node size of 4 is selected.
-This model shows an accuracy of 68.96\%, a precision of.761, recall of .698 and a resulting F1-score of .728 on our test data.\todo{compare to earlier models}
+This model shows an accuracy of 68.96\%, a precision of.761, recall of .698 and a resulting F1-score of .728 on our test data.
+It therefore performs almost equally compared to the logistic regression regarding the predictive power in this case.
+Better tuning and more careful preprocessing could lead to slightly better performance here, but for the purposes of this article, this model is sufficient.
+Because decision trees and [!+rf] are non-parametric models, they can, compared to logistic regression, reveal non-linear relationships in the underlying data [@dangeti:StatisticsMachineLearning.2017, 134].
+
 
 [^impurity]: We will not go into detail about the differences of impurity measures here and use gini throughout the rest of this chapter.
 [^ntree]: We keep the number of trees in our forest at the default of 500 as we do not expect to gain much predictive performance of this parameter in our case.
-![Bild nicht gefunden: rsc/images/rf_feature_imp.pdf](rsc/images/rf_feature_imp.pdf "Bild nicht gefunden: rsc/images/rf_feature_imp.pdf"){#fig:rf_feature_importance .center width="100%"}ig:rf_feature_importance .center width="100%"} for the minimum size of the terminal nodes in every tree.
+[^cv]: In our case, we chose the values $1$ through $7$ for the number of features per decision node and $(1, 2, 3, 4, 10, 20, 50, 80, 100)$ for the minimum size of the terminal nodes in every tree.
 Combined with $5$-Fold cross-validation, this results in estimating $7\times9\times5 = 315$ models.
 
 ###  Interpreting ML models
 
-Usually, to investigate a [!rf] model, research look first at the feature importances.\todo{Sinnvolle Einleitung zum Kapitel finden. Interpretation on heldout test data}
+Usually, to investigate a [!rf] model, research look first at the feature importances.
 These reflect the relative influence each feature has on the resulting predictions.
 Figure @fig:rf_feature_importance shows the relative feature importance of all predictors in our [!rf] model (excluding the country dummy variables).
 These paint a similar picture as our logistic regression with the two human values dimension being the most important predictors, followed by age and education.
 Religiosity and self-placement on the left-right scale contribute roughly half as much to the prediction compared to the human values dimensions.
 
-
-![Bild nicht gefunden: rsc/images/rf_feature_imp.pdf](rsc/images/rf_feature_imp.pdf "Bild nicht gefunden: rsc/images/rf_feature_imp.pdf"){#fig:rf_feature_importance .center width="100%"}
-
+![Feature importances of all non-country features in [!rf].](rsc/images/rf_feature_imp.pdf){#fig:rf_feature_importance .center width="100%"}
 
 The feature importances are easy to compute but have two major drawbacks. First, due to the relativity of the measure, one cannot draw any conclusion about the *absolute contribution* of each feature to the prediction.
 In other words, the strength of the regression coefficients social scientists most often use, is not available.
@@ -402,7 +408,7 @@ Therefore, a more advanced technique is the inspection of [!ale] plots [@molnar:
 ![[!^ale!] plots for features of interest in RF.](rsc/images/rf_ale.pdf){#fig:rf_pdp .center width="100%"}
 
 This allows assessing whether the relationship between a selected feature and the outcome is linear, monotonic, or more complex.
-Figure @fig:rf_pdp shows the [!+ale] for all numerical features in the [!rf] model.\todo{gender effect mit aufnehmen? default plot hat unangenehm große Balken, man sieht keinen Effekt -> gerne raus}
+Figure @fig:rf_pdp shows the [!+ale] for all numerical features in the [!rf] model.
 Compared to the results of the logistic regression earlier (see Table @tbl:logreg), the linear trends of the [!rf] model point in the same directions.
 Additionally, however, the [!rf] reveals some non-linear relationships in our data.
 According to our model, self-transcendence and conservation are only changing the predicted outcome once their values become positive.
@@ -410,13 +416,13 @@ In a way, it looks like it does not matter too much **how** negative the values 
 A similar effect can be seen when looking at the self-placement on the left-right scale which is starting to increase at roughly the value of $4$.
 The effect of education seems to be of a more dichotomous fashion, with low values indicating more tendencies towards a rejection of immigrations whereas high values indicate the opposite.
 Here again, the exact amount does not seem to drive the predictions, but rather whether someone has received much or little education is decisive.
-The effect of religiosity looks like a slightly skewed inverse u-shape rather than being linearly negative, as the logistic regression would suggest, with the highest predicted probabilities for rejection of immigrants at around 5 on the religiosity scale.\todo{nicht-lineare Zusammenhänge finden; hier oder in Discussion mit Bezug auf atheortical, explorative analysis, theory building etc. eingehen.}
+The effect of religiosity looks like a slightly skewed inverse u-shape rather than being linearly negative, as the logistic regression would suggest, with the highest predicted probabilities for rejection of immigrants at around 5 on the religiosity scale.
 
 # Discussion
 This contribution tried to illustrate similarities and differences between approaches using [!ts] or [!ml].
 Social scientists face a trade-off when it comes to using [!ml]. 
 On the downside, features (i.e., independent variables) can only be ranked by importance. This stands in contrast to more fine-grained information provided by a typical regression coefficient, in particular, its direction, but also the strength of effects.
-On the upside, focusing on models' predictive capabilities, like in any [!ml] application, shifts the attention to explanations that are closer to scientific reasoning and less prone to mirror common sense [@wattsCommonSenseSociological2014]. 
+On the upside, focusing on models' predictive capabilities, like in any [!ml] application, shifts the attention to explanations that are closer to scientific reasoning and less prone to mirror common sense [@wattsCommonSenseSociological2014].
 It is "this potential predictive force which gives scientific explanations its importance" [@hempelStudiesLogicExplanation1948, 138], which is inherently neglected by goodness of fit measures solely relying on in-sample observations. 
 Using out-of-sample is a crucial part of any [!sml] procedure, i.e., applying the trained model to unseen test data. 
 Integrating this inherent property of [!ml] would at least reduce an important weakness of [!ts] and could even boost, following Watts' line of argumentation, social scientists reasoning more generally. 
