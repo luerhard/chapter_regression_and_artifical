@@ -245,7 +245,7 @@ true 0, TN, FP
 true 1, FN, TP
 ```
 
-[!+^tn] represent the number of correct predictions for the negative class, [!+tp] the number of correction predictions for the positive class, respectively.
+[!+^tn] represent the number of correct predictions for the negative class, [!+tp] the number of correct predictions for the positive class, respectively.
 [!+^fn] show the number of incorrect predictions for the negative class, whereas [!+fp] depict the number of incorrect positive predictions.
 Some measurements can be derived from this matrix, the first being _accuracy_.
 For all metrics, values range from 0 to 1, with higher values indicating better models.
