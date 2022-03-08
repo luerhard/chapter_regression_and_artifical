@@ -120,7 +120,6 @@ ggarrange(
   eff_income, 
   eff_educ, 
   eff_relig,
-  eff_gender,
   ncol = 2, nrow = 4, align = "h"
   ) 
 ```
