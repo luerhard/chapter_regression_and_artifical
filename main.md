@@ -391,7 +391,7 @@ Figure @fig:rf_feature_importance shows the relative feature importance of all p
 These paint a similar picture as our logistic regression with the two human values dimension being the most important predictors, followed by age and education.
 Religiosity and self-placement on the left-right scale contribute roughly half as much to the prediction compared to the human values dimensions.
 
-![Feature importances of all non-country features in [!rf].](rsc/images/rf_feature_imp.pdf){#fig:rf_feature_importance .center width="100%"}
+![Feature importances of all non-country features in [!rf].](rsc/images/rf_feature_imp.png){#fig:rf_feature_importance .center width="100%"}
 
 The feature importances are easy to compute but have two major drawbacks. First, due to the relativity of the measure, one cannot draw any conclusion about the *absolute contribution* of each feature to the prediction.
 In other words, the strength of the regression coefficients social scientists most often use, is not available.
@@ -406,7 +406,7 @@ Traditionally, this was done using [!+pdp], which serve exactly this purpose but
 Therefore, a more advanced technique is the inspection of [!ale] plots [@molnar:InterpretableMachineLearning.2019], which serve the same purpose but are, in contrast to [!+pdp], still correct if the respective features are correlated.
 
 
-![[!^ale!] plots for features of interest in RF.](rsc/images/rf_ale.pdf){#fig:rf_pdp .center width="100%"}
+![[!^ale!] plots for features of interest in RF.](rsc/images/rf_ale.png){#fig:rf_pdp .center width="100%"}
 
 This allows assessing whether the relationship between a selected feature and the outcome is linear, monotonic, or more complex.
 Figure @fig:rf_pdp shows the [!+ale] for all numerical features in the [!rf] model.
