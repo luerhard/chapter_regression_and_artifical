@@ -20,7 +20,7 @@ institutes:
 
 date: \today
 
-abstract: "Machine learning (ML) techniques have become one of the most successful scientific tools and changed the everyday-life of people around the globe (e.g., search engines). Due to the internet, a vast amount of new data sources on human behavior have emerged and opened the door for computer scientists to apply ML on social phenomena. In the social sciences, however, the adoption of ML has been less enthusiastic. To investigate the relation of traditional statistics to ML, this paper shows how ML might be used to substitute regression analysis. For that purpose, we illustrate what a typical social science approach might look like and how using ML techniques could contribute additional insights when it comes to estimators (non-linearity) or the assessment of model fit (predictive power). In particular, we reveal how *epistemological* differences shape the potential usage of ML in the social sciences and discuss the methodological trade-off of applying ML compared to traditional statistics."
+abstract: "Machine learning (ML) techniques have become one of the most successful scientific tools and changed the everyday-life of people around the globe (e.g., search engines). A vast amount of digital data sources on human behavior has emerged due to the rise of the internet and opened the door for computer scientists to apply ML on social phenomena. In the social sciences, however, the adoption of ML has been less enthusiastic. To investigate the relation of traditional statistics and ML, this paper shows how ML might be used as regression analysis. For that purpose, we illustrate what a typical social science approach might look like and how using ML techniques could contribute additional insights when it comes to estimators (non-linearity) or the assessment of model fit (predictive power). In particular, we reveal how *epistemological* differences shape the potential usage of ML in the social sciences and discuss the methodological trade-off of applying ML compared to traditional statistics."
 
 keywords: 'regression, artificial intelligence, machine learning, ess'
 
@@ -32,27 +32,28 @@ toc: false # Table of contents
 # Introduction
 
 Research in the social sciences has been shifting towards a new era.
-In the prior century, the focus laid mainly on variable-based, theory and hypothesis-driven approaches to give answers to societal questions.
+In the prior century, the focus laid mainly on variable-based, hypothesis-driven approaches to give answers to societal questions.
 Data for such approaches was scarce, hard to come by, and expensive [@grimmer:MachineLearningSocial.2021].
 The internet changed that. 
 Digital data is comprehensive, ubiquitous, and, in general, cheap to retrieve.
-While the availability of such data opens up new roads and possibilities, it creates the necessity for adequate forms of analysis [@mcfarland:SociologyEraBig.2016; @lazerComputationalSocialScience2020].
-Along with those new datasets, data sources, and an explosion in available computing power, new techniques for analyzing social phenomena were developed rapidly, often by integrating knowledge from other disciplines into an emerging field of "Computational Social Science" (CSS) [@heibergerInstallingComputationalSocial2016].
+While the availability of such data opens up new roads and possibilities, it also creates the necessity for adequate forms of analysis [@mcfarland:SociologyEraBig.2016; @lazerComputationalSocialScience2020].
+Along with those new datasets, data sources, and an explosion in available computing power, new techniques for analyzing social phenomena developed rapidly, often by integrating knowledge from other disciplines into an emerging field of "Computational Social Science" (CSS) [@heibergerInstallingComputationalSocial2016].
 
-Social scientists increasingly use tools from computer science and, in particular, [!ml]. 
+Social scientists increasingly use tools from CSS [@lazerComputationalSocialScience2020] and, in particular, [!ml]. 
 Methods subsumed under [!ml] can be described as "a class of flexible algorithmic and statistical techniques for prediction and dimension reduction" [@grimmer:MachineLearningSocial.2021, 396].
 Applications of [!ml] comprise some of the most important technological innovations in recent years, for instance, gene prediction or search engines [@jordan:MachineLearning.2015]. 
-No problem seems too complex as long as researchers have enough (i.e., very large) data, even previously unsolvable questions might be solved, e.g., how to maintain high-temperature plasma for nuclear fusion [@degraveMagneticControlTokamak2022]. 
-Thus we ask: given the already impressive resume and even greater potential of [!ml], is it only a matter of time until it replaces [!ts] used in social science?
+No problem seems too complex as long as researchers have enough (i.e., very large) data.
+Even previously unsolvable questions might be solved, e.g., how to maintain high-temperature plasma for nuclear fusion [@degraveMagneticControlTokamak2022]. 
+Thus we ask: given the already impressive resume and even greater potential of [!ml], is it only a matter of time until it replaces [!ts] as used in social science?
 
 As we will see, differences of [!ml] and [!ts] are (mostly) grounded in different epistemological perspectives. 
-While recent overviews characterize ML-related methods and provide guidance for future research  [@molina:MachineLearningSociology.2019; @grimmer:MachineLearningSocial.2021], our contribution's goal is to point out key differences and commonalities between [!ts] and [!ml]. 
-We will illustrate what a typical social scientists' approach might look like and how using [!ml] techniques could potentially contribute additional insights or change the results. 
-For this purpose, we will first elaborate on some theoretical differences and similarities between [!ts] and [!ml]. 
+While recent overviews characterize ML-related methods and provide outlines for future research  [@molina:MachineLearningSociology.2019; @grimmer:MachineLearningSocial.2021], our contribution's goal is to point out key differences and commonalities between [!ts] and [!ml]. 
+We will illustrate what a typical social scientists' approach might look like and how using [!ml] techniques could potentially contribute additional insights. 
+For that purpose, we will first elaborate some general differences and similarities between [!ts] and [!ml]. 
 We will then exemplify those differences by using a well-known dataset, the [!ess] [@ESS.2002].
 In particular, we will focus on two main parts of any regression analysis: estimators and goodness of fit. 
 By comparing logistic regressions and two popular [!ml] algorithms (Random Forest, Ridge Regression), we will explain how [!ml] works and, more importantly, how they are typically used by researchers outside the social sciences[^git].
-In so doing we will reveal how *epistemological* differences shape the potential usage of [!ml] in the social sciences and discuss the methodological trade-off when it comes to the question of whether to apply [!ml] or [!ts]. 
+In so doing we will reveal how *epistemological* differences shape the potential usage of [!ml] in the social sciences and discuss the methodological trade-off when it comes to the question of whether (and how) to apply [!ml] or [!ts]. 
 <!--As is often the case, combining both seems like the most promising way. -->
 
 [^git]: All code and descriptions to use the ESS are available on [https://github.com/luerhard/chapter_regression_and_artifical](https://github.com/luerhard/chapter_regression_and_artifical.git).
@@ -173,13 +174,13 @@ All derived conclusions, however, do apply for "regressions" (in the [!ml] sense
 
 It might come as a surprise for some readers, but often the algorithms used in machine learning are quite similar, if not even exactly the same, as in traditional quantitative social sciences.
 Logistic regression, [!ols] regression, and [!pca], for example, are readily used in both camps. 
-Even though many of the algorithms are the same, the mindset, practical approach, and evaluation strategies differ.
+Even though many of the algorithms are the same, the epistemological and practical approach, as well as evaluation strategies, differ.
 First, and in stark contrast to [!ts] models, [!ml] models usually do not have any usable, that is interpretable, coefficients.
-Secondly, model evaluation works by evaluating its predictive power.
+Secondly, model evaluation works by assessing its predictive power.
 
 To illustrate the epistemological differences, we will use an exemplary model and approach the problem from both angles.
-The chosen model is loosely based on the approach used by @davidov:ExplainingAttitudesImmigration.2012 and has been implemented by others in similar ways [e.g., @sagiv:Valueprioritiesreadiness.1995].
-It investigates the effect of human values on attitudes toward immigration.
+The chosen model is loosely based on the approach by @davidov:ExplainingAttitudesImmigration.2012 and has been used by others in a similar way [e.g., @sagiv:Valueprioritiesreadiness.1995].
+The model investigates the well-known effect of human values on attitudes toward immigration.
 
 The explanandum, our dependent variable which we will call _reject_, is a measure that represents _attitudes towards immigration_.
 It is a mean index consisting of three variables[^av] which have been shown to load strongly on a single dimension in a confirmatory factor analysis [@davidov:ExplainingAttitudesImmigration.2012, 764].
@@ -415,7 +416,7 @@ According to our model, self-transcendence and conservation are only changing th
 In a way, it looks like it does not matter too much **how** negative the values are but only **if** they are negative.
 A similar effect can be seen when looking at the self-placement on the left-right scale which is starting to increase at roughly the value of $4$.
 The effect of education seems to be of a more dichotomous fashion, with low values indicating more tendencies towards a rejection of immigrations whereas high values indicate the opposite.
-Here again, the exact amount does not seem to drive the predictions, but rather whether someone has received much or little education is decisive.
+Again, the exact amount does not seem to drive the predictions, but rather whether someone has received much or little education is decisive.
 The effect of religiosity looks like a slightly skewed inverse u-shape rather than being linearly negative, as the logistic regression would suggest, with the highest predicted probabilities for rejection of immigrants at around 5 on the religiosity scale.
 
 # Discussion
@@ -424,16 +425,16 @@ Social scientists face a trade-off when it comes to using [!ml].
 On the downside, features (i.e., independent variables) can only be ranked by importance. This stands in contrast to more fine-grained information provided by a typical regression coefficient, in particular, its direction, but also the strength of effects.
 On the upside, focusing on models' predictive capabilities, like in any [!ml] application, shifts the attention to explanations that are closer to scientific reasoning and less prone to mirror common sense [@wattsCommonSenseSociological2014].
 It is "this potential predictive force which gives scientific explanations its importance" [@hempelStudiesLogicExplanation1948, 138], which is inherently neglected by goodness of fit measures solely relying on in-sample observations. 
-Using out-of-sample is a crucial part of any [!sml] procedure, i.e., applying the trained model to unseen test data. 
+Instead, using out-of-sample is a crucial part of any [!sml] procedure, i.e., applying the trained model to unseen test data. 
 Integrating this inherent property of [!ml] would at least reduce an important weakness of [!ts] and could even boost, following Watts' line of argumentation, social scientists reasoning more generally. 
 
 Those important benefits notwithstanding, we would like to emphasize that [!ml] is no cheat code, it is all statistics.
 Everybody with a professional background in quantitative social science has learned many [!ml] tools, be it [!uml] like cluster analysis or [!sml] like logistic regressions.
-Yet, how those methods are used (and promoted) in [!ml] contexts, might starkly differ from common social science approaches. 
-Regardless of which features drive a model and how an outcome could be explained, the main interest of [!ml] researchers in industry, but also in science, is that "the model works", i.e., that the model provides good predictions.
+Yet, how those methods are used (and promoted) in [!ml] contexts, might starkly differ from common social science approaches and researchers' training. 
+Regardless of which features drive a model and how an outcome could be explained, the main interest of [!ml] researchers in industry and science is that "the model works", i.e., that the model provides good predictions.
 This is an important, though merely *epistemological*, difference to statistical models used in social science. 
 
-Going further, it might be helpful for social scientists to acknowledge the differences laid out here and pay closer attention to the predictive power of our models.
+Going further, it might be helpful for social scientists to acknowledge the differences laid out in this paper and pay closer attention to the predictive power of [!ts] models.
 In addition, non-linear effects could be explored by tools like [!rf] and, hence, also inform theory-building [@grimmer:MachineLearningSocial.2021].
 Both advantages might provide fruitful ways to *complement* existing regression models. 
-Hopefully, this contribution showed interested readers what can and what cannot be done with [!ml] methods and how to apply those parts of the rich [!ml] universe that are useful to us when it comes to predicting an outcome.
+Hopefully, this contribution showed interested readers what can and what cannot be done with [!ml] methods and how to apply those parts of the [!ml] universe that are actually useful to us when it comes to predicting an outcome.
