@@ -1,10 +1,10 @@
 ---
 # Bibliography
-csl: rsc/library/style.csl # See https://www.zotero.org/styles for more styles.
+csl: rsc/library/apa-6th-edition.csl # See https://www.zotero.org/styles for more styles.
 bibliography: rsc/library/references.json
 csquotes: true
 
-title: "Regression and Machine learning"
+title: Regression and Machine learning
 
 authors:
   - Lukas Erhard:
@@ -20,9 +20,9 @@ institutes:
 
 date: \today
 
-abstract: "Machine learning (ML) techniques have become one of the most successful scientific tools and changed the everyday life of people around the globe (e.g., search engines). A vast amount of digital data sources on human behaviour has emerged due to the rise of the internet and opened the door for computer scientists to apply ML on social phenomena. In the social sciences, however, the adoption of ML has been less enthusiastic. To investigate the relation of traditional statistics and ML, this paper shows how ML might be used as regression analysis. For that purpose, we illustrate what a typical social science approach might look like and how using ML techniques could contribute additional insights when it comes to estimators (non-linearity) or the assessment of model fit (predictive power). In particular, we reveal how epistemological differences shape the potential usage of ML in the social sciences and discuss the methodological trade-off of applying ML compared to traditional statistics."
+abstract: Machine learning (ML) techniques have become one of the most successful scientific tools and changed the everyday life of people around the globe (e.g., search engines). A vast amount of digital data sources on human behaviour has emerged due to the rise of the internet and opened the door for computer scientists to apply ML on social phenomena. In the social sciences, however, the adoption of ML has been less enthusiastic. To investigate the relation of traditional statistics and ML, this paper shows how ML might be used as regression analysis. For that purpose, we illustrate what a typical social science approach might look like and how using ML techniques could contribute additional insights when it comes to estimators (non-linearity) or the assessment of model fit (predictive power). In particular, we reveal how epistemological differences shape the potential usage of ML in the social sciences and discuss the methodological trade-off of applying ML compared to traditional statistics.
 
-keywords: "regression analysis, machine learning, ess, ridge regression, random forest"
+keywords: regression analysis, machine learning, ess, ridge regression, random forest
 
 titlepage: true
 toc: true # Table of contents
@@ -42,7 +42,7 @@ While the availability of such data opens up new roads and possibilities, it als
 Along with those new data sets, data sources, and an explosion in available computing power, new techniques for analysing social phenomena developed rapidly, often by integrating knowledge from other disciplines into an emerging field of computational social science (CSS) [@heibergerInstallingComputationalSocial2016, see also Kashyap et al. in this volume].
 
 Social scientists increasingly use tools from CSS [@lazerComputationalSocialScience2020] and, in particular, [!ml].
-Methods subsumed under [!ml] can be described as "a class of flexible algorithmic and statistical techniques for prediction and dimension reduction" [@grimmer:MachineLearningSocial.2021, 396].
+Methods subsumed under [!ml] can be described as 'a class of flexible algorithmic and statistical techniques for prediction and dimension reduction' [@grimmer:MachineLearningSocial.2021, 396].
 Applications of [!ml] comprise some of the most important technological innovations in recent years, for instance, gene prediction or search engines [@jordan:MachineLearning.2015].
 No problem seems too complex as long as researchers have enough (i.e., very large) data.
 Even previously unsolvable questions might be solved, e.g., how to maintain high-temperature plasma for nuclear fusion [@degraveMagneticControlTokamak2022].
@@ -52,7 +52,7 @@ As we will see, differences of [!ml] and [!ts] are (mostly) grounded in differen
 While recent overviews characterize ML-related methods and provide outlines for future research [@molina:MachineLearningSociology.2019; @grimmer:MachineLearningSocial.2021], our chapter's goal is to point out key differences and commonalities between [!ts] and [!ml].
 We will illustrate what a typical social scientists' approach might look like and how using [!ml] techniques could potentially contribute additional insights.
 For that purpose, we will first elaborate some general differences and similarities between [!ts] and [!ml].
-We will then exemplify those differences by using a well-known data set, the [!ess] [@ESS.2002].\todo[author=LE]{JS will Zitation streichen. Afaik wird die aber von ESS gefordert. Oder nur im Literaturverzeichnis anbringen?}
+We will then exemplify those differences by using a well-known data set, the [!ess] <!--[@ESS.2002]-->.\todo[author=LE]{JS will Zitation streichen. Afaik wird die aber von ESS gefordert. Oder nur im Literaturverzeichnis anbringen?}
 In particular, we will focus on two main parts of any regression analysis: estimators and goodness of fit.
 By comparing logistic regressions and two popular [!ml] algorithms ('Random Forest' and 'Ridge Regression'), we will explain how [!ml] works and, more importantly, how they are typically used by researchers outside the social sciences[^git].
 In so doing we will reveal how _epistemological_ differences shape the potential usage of [!ml] in the social sciences and discuss the methodological trade-off when it comes to the question of whether (and how) to apply [!ml] or [!ts].
@@ -64,29 +64,29 @@ In so doing we will reveal how _epistemological_ differences shape the potential
 Statistics became widely employed in the landscape of all social sciences from the 1950s onward [@plattHistorySociologicalResearch1998].
 Platt’s [-@plattHistorySociologicalResearch1998] historical account of sociological methods argues that studies from 1920 to 1940 lacked external funding and were mainly qualitative by design (interviews, ethnography).
 In the following decades, this changed as surveys and statistics became the main instruments for social scientists [@converseSurveyResearchUnited2009].
-The quantification and numeric measurement of social phenomena through surveys, the subsequent approximation of complex concepts in variables, together with increasing computing power, can be seen as a "watershed moment" of empirical social research.
+The quantification and numeric measurement of social phenomena through surveys, the subsequent approximation of complex concepts in variables, together with increasing computing power, can be seen as a 'watershed moment' of empirical social research.
 The paramount of research activities shifted during this process from ethnographic community studies to an individualistic perspective which was inherent to survey questions [@porterModernSocialSciences2003].
 
 Reflecting changes in methods, new theoretical programs came into fashion.
 For instance, rational choice theory with its methodological individualism was well-suited to explain variable-centred research questions and became a prevalent taste of many sociologists [@colemanFoundationsSocialTheory1990].
 The usage of surveys, the resulting availability of a new kind of data, and easier access and higher acceptance of causal models occurred in other social sciences as well. In psychology and economics, for instance, the general methodological subfields of psychometrics and econometrics respectively emerged [@rafteryStatisticsSociology19502001].
-In the wake of variable-driven data retrieval came the advent of regression models, factor analysis, and other statistical techniques in sociology, although those methods were considered “esoteric expertise” [@abbottSystemProfessions1988, 147] until the late 1960s.
+In the wake of variable-driven data retrieval came the advent of regression models, factor analysis, and other statistical techniques in sociology, although those methods were considered 'esoteric expertise' [@abbottSystemProfessions1988, 147] until the late 1960s.
 
 Thus, the shift to quantitative research was fueled by fundamental changes in research content (survey), techniques (regressions), and technology (computers).
 Social scientists face a similar situation today.
 The flux of research fashions and increasing diversity of the field has picked up steam as a new era of big data and super-computing has arrived [@mcfarland:SociologyEraBig.2016].
 For more than a decade, the internet has changed the lives of most people in industrialized countries providing the means to use all sorts of digital traces (e.g., connections, profiles, or communications) as data on social behaviours and systems.
 
-Compared to computer scientists and engineers who have embraced the analysis of large social data and actively developed research programs to "conquer" this domain [@conteManifestoComputationalSocial2012], social scientists have been rather slow to utilize the possibilities of new data and computational methods [@heibergerInstallingComputationalSocial2016].
+Compared to computer scientists and engineers who have embraced the analysis of large social data and actively developed research programs to 'conquer' this domain [@conteManifestoComputationalSocial2012], social scientists have been rather slow to utilize the possibilities of new data and computational methods [@heibergerInstallingComputationalSocial2016].
 Part of the explanation may be sought in the underlying research program of [!ts] that dominates quantitative research in the social sciences.
 It builds on inferential statistics and Karl Popper's formalizations [@popper:LogicScientificDiscovery.1968], i.e., testing falsifiable hypotheses, derived from (general) theories.
 This foundation of testing theory-based assumptions describes a way of generating knowledge about a small part of a population and generalizing it to its entirety [@krzywinski:Importancebeinguncertain.2013].
-One main pillar of this approach is to calculate the probability of this generalization being wrong (like the probability of a false-positive or alpha error as represented by the p-value)\todo[author=JS]{Agree?}.
-Hence, social scientists rely heavily on thresholds upon which we accept or reject hypotheses\todo[author=JS]{I feel "hypothesis" would be more precise than assumptions.}, most often considered to be at the conventional but arbitrary significance level of 5 percent.
+One main pillar of this approach is to calculate the probability of this generalization being wrong (like the probability of a false-positive or alpha error as represented by the p-value).
+Hence, social scientists rely heavily on thresholds upon which we accept or reject hypotheses, most often considered to be at the conventional but arbitrary significance level of 5 percent.
 
 While this frequentist approach is well-suited for carefully conducted surveys, it bears some significant shortcomings for digital data.
 One severe methodological challenge is tied to _sample characteristics_.
-Most of the frequentist approaches are driven by or depend on to sample size (e.g., all chi-squared-based test-statistics).
+Most of the frequentist approaches are driven by or depend on sample size (e.g., all chi-squared-based test-statistics).
 Testing for significance with very large sample sizes will almost always generate statistically significant results, rendering those tests meaningless.
 This problem is amplified by the source of many popular digital data, e.g., social media platforms like Twitter.
 Inferences and significance levels are then, at best, possible for the underlying population, hence, the platform's users [@lewisThreeFallaciesDigital2015].
@@ -95,7 +95,7 @@ In addition, the efficient estimation and interpretation of regression coefficie
 This is often not the case for samples from digital data, e.g., when it comes to all data gathered on social networks (of which dependency is an inherent property).
 
 Another important challenge for [!ts] analysing digital data relates to the ubiquity of _linear_ models [@abbott:TranscendingGeneralLinear.1988].
-But what if relationships are non-linear?\todo[author=JS]{as it’s currently presented, many would disagree. See comment in markdown}
+But what if relationships are non-linear?<!--\todo[author=JS]{as it’s currently presented, many would disagree. See comment in markdown. LE: Wenn Änderung ok, gerne löschen}-->
 <!-- 
 I really love this point! However, as it’s currently presented, many would disagree. 
 Indeed, TS provides ample tools for the analysis of non-linear relationships. For instance, you have “non-linear models” such as log-linear regression models (e.g. taking the log of income), logistic regression (modelling the non-linear relationship between predictors and a probability), or Poisson models (modelling non-linear relationships between predictors and count outcomes). Furthermore, you can model non-linear functional forms such as Age and Age2 (on the predictor side). 
@@ -107,16 +107,13 @@ Hence, what TS usually never does is formulating models that are complex and non
 $f(y) = b0/sqrt(b1*x1)*b2^x2$
 Perhaps you might sharpen the argument a bit to make it more precise/convincing.
 -->
-It is very difficult to model non-linear relationships with standard models from [!ts].
+It is very difficult to explore non-linear relationships with standard models from [!ts].
+While it is possible to model these relationships in [!ts] using, for example generalized linear models (GLMs), researchers are bound to have strong assumptions on where the non-linearity is hidden.
+On the other hand, the modelling of non-linearity is inherent to many [!ml] techniques (e.g., Random Forests, see below), making it possible to find these relationships without prior knowledge.  
 Some argue that is because of the omission of counterfactual language [@pearlBookWhyNew2018, 329-35], while others may point to the problem of overfitting when introducing polynomial terms in linear regressions [@molina:MachineLearningSociology.2019].
-In any case, the consequence is that theories and results in social sciences can almost never, methodologically, consider non-linear relations\todo[author=JS]{See my previous point.}.
+In any case, the consequence is that theories and results in social sciences can almost never, methodologically, consider non-linear relations\todo[author=JS]{RHH: See my previous point.}.
 A circumstance that is astonishing, given the complexity of social phenomena.
 One of the great promises of [!ml], in contrast, is to offer ways to measure non-linear effects, as we will discuss below.
-
-<!-- leftovers:
-Questions around model _validity_ became central for the upcoming new methods.
-4. What if you have no theory, you can derive hypotheses from? This is especially important for social media networks, where the rules of engagement might differ quite substantially from 'normal' social behavior or where you cannot specify your population.
--->
 
 # Machine Learning in the social sciences
 
@@ -125,7 +122,12 @@ While [!ml] represents a breakthrough in computer sciences, its adoption in the 
 In contrast to the usage of inferential statistics, the application of [!ml] does not (yet) rest on as established methodological principles and assumptions as in [!ts].
 
 In general, we can distinguish two paradigms when it comes to [!ml]: _[!sml!]_ and _[!uml!]_ [e.g., @jordan:MachineLearning.2015].
-While [!sml] uses _labelled_ data as input to predict outcomes of _unlabelled_ data, [!uml] derives patterns in (unlabelled) observations by exploiting statistical properties of the data.\todo[author=JS]{The concepts of labelled and unlabelled deserve some explanation. What do you mean by that?}
+[!^sml] uses _labelled_ data. We speak of labelled data if the values of the dependent variable (DV) are known.
+Models are then fit to predict previously unseen data of which we know all variable values _except_ the one of the DV.
+These techniques are grouped into regression (if the DV is scaled numerically) and classification (if the DV is categorical).
+[!uml] uses _unlabelled_ data, that is data where the 'correct' answer cannot be learned from known observations.
+It instead derives patterns in (unlabelled) observations by exploiting statistical properties of the data.
+Common groups of [!uml] techniques are dimension reduction (e.g., Principal Component Analysis) and clustering (e.g., K-Means clustering).<!--\todo[author=JS]{The concepts of labelled and unlabelled deserve some explanation. What do you mean by that? LE: Besser? Dann comment löschen.}-->
 
 [!uml], in essence, aims to create categorization schemes or typologies.
 Researchers so inductively define types along derived dimensions and represent each case relative to the types given its underlying values.
@@ -136,11 +138,11 @@ Researchers might use the output as input for further analysis [@heibergerFacets
 
 Those exploratory techniques are by no means new to social sciences.
 However, [!uml] does provide novel ways to analyse large amounts of text and social networks, both kinds of data often associated with the digital age and computational social science [@heibergerInstallingComputationalSocial2016].
-In particular, the "automatic" categorization of large corpora has found many applications to social phenomena [@evans:MachineTranslationMining.2016].
+In particular, the 'automatic' categorization of large corpora has found many applications to social phenomena [@evans:MachineTranslationMining.2016].
 Topic models, for instance, represent one of the most used [!nlp] tools in the social sciences [@mcfarland:DifferentiatingLanguageUsage.2013; @heibergerFacetsSpecializationIts2021].
 In addition, the detection of communities in networks resembles prominent ideas of social groups [@fortunato:CommunityDetectionGraphs.2010].
 
-The importance of [!uml] notwithstanding, our chapter's focus is on [!sml].\todo[author=JS]{missing here is some brief reasoning on how SML is different from UML; see comment in markdown}
+The importance of [!uml] notwithstanding, our chapter's focus is on [!sml].\todo[author=JS]{RHH: missing here is some brief reasoning on how SML is different from UML; see comment in markdown}
 <!--
 What is somewhat missing here is some brief reasoning on how SML is different from UML (inductive relation to theory, exploratory / data mining in terms data analysis). In contrast, what is the purpose of SML? What does it do? Can you perhaps make an example just to briefly illustrate the use of a SML? Perhaps the brief example could be used as well to delineate the difference between TS and SML further down.
 -->
@@ -152,12 +154,12 @@ That is the same principle as when social scientists speak of estimating a depen
 Thus, how does [!sml] actually compare to [!ts]?
 There are two main answers to that, in our view, crucial question, one is epistemological, the other practical.
 While [!ts] infers models that _explain_ how an outcome is generated with unbiased and consistent estimators, [!sml] does not care about interpretability.
-While the coefficients are the most interesting part of regressions for social scientists, the features are of little to no interest for typical [!ml] use cases.\todo[author=JS]{See previous comment. Would be good to use a small (perhaps fictious) example to illustrate the differences.}
+While the coefficients are the most interesting part of regressions for social scientists, the features are of little to no interest for typical [!ml] use cases.\todo[author=JS]{RHH: See previous comment. Would be good to use a small (perhaps fictious) example to illustrate the differences.}
 Instead, the main goal of [!sml] is how to best forecast the outcome.
 Thus, [!sml] models do not need to care about meaningful interpretations or unbiased estimators.
 This is a crucial epistemological difference and yields many practical consequences.
 
-Foremost, the prioritization of predictions affords "out-of-sample" testing, i.e., the ability of models to predict unknown and, hence, unlabelled, observations.
+Foremost, the prioritization of predictions affords 'out-of-sample' testing, i.e., the ability of models to predict unknown and, hence, unlabelled, observations.
 Thus, unlike most social scientists using _one_ data set for modelling efforts, SML consists of at least two data sets: training and test data.
 The training data is used to develop the model, the second to test its predictive capacity on out-of-sample data.
 Often, the train and test sets are randomly sampled from the same data set which is split, e.g., 50/50.
@@ -169,23 +171,23 @@ Of course, firms with digital business models profit most from [!sml<]'s predict
 Consider, for instance, a company that sells wine online.
 Given a certain record of orders and a large enough customer base, the company can use the characteristics of their data (e.g., price, grape, origin, quality, vineyard, etc.) to make recommendations for further purchases.
 Those suggestions might also be based on information about what other customers might have bought.
-In any case, the wine shop will mostly be interested to develop models "that work", i.e., engineers or consultants might typically approach this task without any concern for theory or explain _why_ somebody bought something.
+In any case, the wine shop will mostly be interested to develop models 'that work', i.e., engineers or consultants might typically approach this task without any concern for theory or explain _why_ somebody bought something.
 It suffices to make suitable recommendations (i.e., predictions) to improve sales.
 
 Given the priority of prediction, many restrictions of [!ts] are no longer concerns of [!ml] researchers.
 If interpretation (or explanation) is not the aim, the use of powerful “black-boxes” like multi-layer neural networks or high-orders of interaction effects becomes an attractive option.
 Almost all deep-learning efforts rest on such black-boxes, which are only of limited use for social scientists.
 The same is true for using thousands of (potentially co-linear) variables in a model.
-This practical approach also allows regularization of variance\todo[author=JS]{What does that mean? “Regularizing variance”?} and empirical tuning of parameters [@mullainathanMachineLearningApplied2017].
+This practical approach also allows regularization of variance (c.f. Section @sec:shrinkage)\todo[author=JS]{RHH: What does that mean? “Regularizing variance”?} and empirical tuning of parameters [@mullainathanMachineLearningApplied2017].
 Instead of being prone to overfitting (like [!ts] models), [!sml] uses the training data and tunes regularisers to fit the data at hand (number and effect differing by algorithm).
 
 We will illustrate such a typical [!sml] workflow by using two examples in the remainder of this contribution.
-We will focus on illustrating the use of [!ml] for "classifications" instead of "regressions" in order to keep the analysis as comprehensible as possible.[^language]
+We will focus on illustrating the use of [!ml] for 'classifications' instead of 'regressions' in order to keep the analysis as comprehensible as possible.[^language]
 In particular, confusion matrices (see below) for binary outcomes have the advantage to yield relatively simple indicators for model performance.
 Nevertheless, those are among the most common concepts of [!ml] and provide a useful case for the purposes of this contribution.
-All derived conclusions, however, do apply for "regressions" (in the [!ml] sense) too.
+All derived conclusions, however, do apply for 'regressions' (in the [!ml] sense) too.
 
-[^language]: In the language of [!ml], this translates into using a categorical, often binary, dependent variable (i.e., solving a "classification" problem), while employing "regressions" refers to techniques that use continuous outcomes. This might be a bit confusing for social scientists first.
+[^language]: In the language of [!ml], this translates into using a categorical, often binary, dependent variable (i.e., solving a 'classification' problem), while employing 'regressions' refers to techniques that use continuous outcomes. This might be a bit confusing for social scientists at first.
 
 # A comparison by example: Immigration in Europe
 
@@ -199,22 +201,22 @@ To illustrate the epistemological differences, we will use an exemplary model an
 The chosen model is loosely based on the approach by @davidov:ExplainingAttitudesImmigration.2012 and has been used by others in a similar way [e.g., @sagiv:Valueprioritiesreadiness.1995].
 The model investigates the well-known effect of human values on attitudes toward immigration.
 
-Our data comes from the first round (2002) of the European Social Survey (ESS).
+Our data comes from the first round [-@ESS.2002] of the European Social Survey (ESS).
 The explanandum, our dependent variable which we will call _reject_, is a measure that represents **attitudes towards immigration**.
 It is constructed as a mean index consisting of three variables[^av] which have been shown to load strongly on a single dimension in a confirmatory factor analysis [@davidov:ExplainingAttitudesImmigration.2012, 764].
-To show the [!ml] workflow in its simplest form, binary classification, the resulting variable is dichotomized at the scale's mean value.\todo[author=JS]{Clarification needed. Explain what 0 and 1 means in that constructed binary variable. 0=more positive attitudes versus 1 more negative attitudes? Thus, 1 would indicate an attitudinal position towards more rejecting immigration? }
+To show the [!ml] workflow in its simplest form, binary classification, the resulting variable is dichotomized at the scale's mean value so that 1 indicates more negative attitudes towards immigration.
 To measure human values, we use the theory of basic human values [@schwartz:UniversalsContentStructure.1992] which is captured in the [!ess] surveys.
 The theory describes 10 basic values that are structured in two dimensions[^schwartz]: _conservation_ and _self-transcendence_.
 
 Some theoretically founded expectations of this model can be formulated.
-Conservation values "that include appreciation of stability of society, and respect, commitment and acceptance of the customs and ideas that traditional culture or religion provide. In other words, the arrival of immigrants is coupled with potential societal changes that are opposite to the preferences of conservative individuals" [@davidov:ExplainingAttitudesImmigration.2012, 761].
+Conservation values 'that include appreciation of stability of society, and respect, commitment and acceptance of the customs and ideas that traditional culture or religion provide. In other words, the arrival of immigrants is coupled with potential societal changes that are opposite to the preferences of conservative individuals' [@davidov:ExplainingAttitudesImmigration.2012, 761].
 Therefore, more conservative individuals are expected to reject immigration.
-In contrast, "self-transcendence values include understanding, appreciation, tolerance and protection for the welfare of people and for nature. The arrival of immigrants provides opportunities for individuals to realise these self-transcendent values. In other words, the arrival of immigrants is coupled with potential societal changes that are in harmony with the preferences of self-transcendent individuals" [@davidov:ExplainingAttitudesImmigration.2012, 761].
+In contrast, 'self-transcendence values include understanding, appreciation, tolerance and protection for the welfare of people and for nature. The arrival of immigrants provides opportunities for individuals to realise these self-transcendent values. In other words, the arrival of immigrants is coupled with potential societal changes that are in harmony with the preferences of self-transcendent individuals' [@davidov:ExplainingAttitudesImmigration.2012, 761].
 Hence, we expect more self-transcendent people to support immigration.
 
-We control for _income_, which is measured by a variable measuring respondents' feeling about the household's present income (four-point scale from 1 "Living comfortably" to 4 "very difficult" on present income).
+We control for _income_, which is measured by a variable measuring respondents' feeling about the household's present income (four-point scale from 1 'Living comfortably' to 4 'very difficult' on present income).
 Subjective income is chosen over the objective household income for the pragmatic reason of reducing the number of missing values.
-Additionally, we control for _age_ (in years), _religiosity_ (11-point scale from 0 "not at all religious" to 10 "very religious"), years of full-time _education_, self-position on a _left-right scale_ (11-point scale from 0 "left" to 10 "right"), _gender_ (dummy variable coded 0 for male and 1 for female), and country via dummy variables.
+Additionally, we control for _age_ (in years), _religiosity_ (11-point scale from 0 'not at all religious' to 10 'very religious'), years of full-time _education_, self-position on a _left-right scale_ (11-point scale from 0 'left' to 10 'right'), _gender_ (dummy variable coded 0 for male and 1 for female), and country via dummy variables.
 See Table @tbl:desc (appendix) for descriptive statistics on variables.
 
 [^av]:
@@ -229,7 +231,6 @@ We see highly significant effects for all variables except gender with age, self
 Except for the non-significance of gender, our results are similar to @davidov:ExplainingAttitudesImmigration.2012.
 That said, we use a drastically simplified model and would not advise drawing any substantial conclusions from it.
 We use this model only for didactic purposes to compare methods of [!ts] to [!ml].
-
 \todo{LE: fix table}
 
 ```{.table #tbl:logreg}
@@ -248,17 +249,24 @@ markdown: true
 Social scientists use a plethora of (pseudo) $R^2$ measures to assess the goodness of fit of a model, or the Akaike / Bayesian information criterion (AIC/BIC) to compare and select models at their disposal.
 The basic idea behind these procedures is always the same: utilize all data available to optimize the model and tell us how well our model fits the underlying data.
 Herein lies probably the biggest difference to machine learners' aims.
-While [!ml] needs to _predict_, social scientists tend to _overfit_ their models.\todo[author=JS]{That seems to be crucial here but is a bit hard to follow. Elaborate a bit more on the problem of overfitting.}
-Yet, overfitted models can only rarely be replicated in other samples (i.e., are bad in predicting unseen data), because they fit the data at hand "too good" and are prone to "p-hacking".\todo[author=JS]{Explain what p-hacking means either in parentheses or in an endnote.}
+While [!ml] needs to _predict_, social scientists tend to _overfit_ their models.<!--\todo[author=JS]{That seems to be crucial here but is a bit hard to follow. Elaborate a bit more on the problem of overfitting.}-->
+We speak of overfitting when a model is fit very well to the underlying data, but fails to predict unseen examples.
+It therefore has learned random _noise_ instead of the true correlations in the data set at hand. 
+Yet, overfitted models can only rarely be replicated in other samples (i.e., are bad in predicting unseen data), because they fit the data at hand 'too good' and are prone to 'p-hacking'.[^phack]
+<!--\todo[author=JS]{Explain what p-hacking means either in parentheses or in an endnote-->
 That creates considerable uncertainty about such models' merits and casts considerable doubts if those explanations should be even considered as scientific [@wattsCommonSenseSociological2014].
 
+[^phack]: _P_-hacking is when a researcher looks at many relationships to find a statistically significant result (p < .05), and then only reports significant findings.
+
 To overcome the obstacle of overfitting, it has become customary to split the data set into multiple parts and only to use part of the data to train the model and the rest of the data to evaluate the predictive performance.
-We call this the _train-test-split_.\todo[author=JS]{Clarify better. You split the data set into (A) a train subset and (B) into a test subset? }
-It allows us to evaluate if our models only learn the noise (unexplained variance) in our data in a way that it can predict data that it has never seen before.\todo[author=JS]{What is “it”? Reference unclear.}
+We call this the _train-test-split_, with the _training set_ being the former and the _test set_ being the latter subset of our data.
+<!--\todo[author=JS]{Clarify better. You split the data set into (A) a train subset and (B) into a test subset? }-->
+This procedure allows us to evaluate whether our models only learn the noise (unexplained variance) in our data or if they are able to predict data that they have never seen before.<!--\todo[author=JS]{What is “it”? Reference unclear.}-->
 A drawback of this procedure, of course, is that we are not able to evaluate the model on the whole data set, so there is a trade-off to be made when deciding on how large the test set should be.
 Larger test sets usually mean higher confidence in the validation results but they come at the price of reduced available data for the training step.
-In the case at hand, 20\% of the data (5432 cases of an overall number of 27,164 cases) is separated into the test set.\todo[author=JS]{Did I get that correctly? 80% of the dataset is then the training subset (see above) und 20% is the test subset? Perhaps make a bit clearer.}
+In the case at hand, 20\% of the data (5432 cases of an overall number of 27,164 cases) is separated into the test set.
 This data will only be used for model inspection and evaluation.
+The remaining 80\% will be used as training set.
 
 Classification models are evaluated using a so-called _confusion matrix_;\todo[author=JS]{How is the confusion matrix calculated? We use the model parameters estimated from the training set to make predictions based on the case and covariate distribution of the test set?} a cross-tabulation of the actual (true) and the predicted outcomes.\todo[author=JS]{How do you predict binary values 0 and 1 in the example? Using a threshold of .5? Like say if the predicted probability is > .5, then we predict a 1, and if <= .5 we predict a 0?}
 Table @tbl:confmat depicts its formal representation for binary classifications.
@@ -277,7 +285,7 @@ true 0, TN (true negative), FP (false positive)
 true 1, FN (false negative), TP (true positive)
 ```
 
-[!+^tn] represent the number of correct predictions for the "negative class" (e.g., the absence of a class, most often 0), [!+tp] the number of correct predictions for the positive class, respectively.
+[!+^tn] represent the number of correct predictions for the 'negative class' (e.g., the absence of a class, most often 0), [!+tp] the number of correct predictions for the positive class, respectively.
 [!+^fn] show the number of incorrect predictions for the negative class, whereas [!+fp] depict the number of incorrect positive predictions.
 Many important goodness-of-fit metrics can be derived from this matrix.
 We will illustrate two of the most common measures: **accuracy** and the **F1-score**.
@@ -300,7 +308,7 @@ Precision = \frac{TP}{TP + FP}
 $$
 
 Precision (also called _positive predictive value_) describes the proportion of correct positive predictions over all positive predictions.
-Hence, it answers the question: "how many of my positive predictions are actually correct?".
+Hence, it answers the question: 'how many of my positive predictions are actually correct?'.
 This metric is commonly supplemented by another: _recall_ which is defined as:
 
 $$
@@ -308,7 +316,7 @@ Recall = \frac{TP}{TP + FN}
 $$
 
 Recall (also known as _sensitivity_) describes the fraction of correct positive predictions over all cases for which a positive prediction would have been correct.
-It thereby answers the question: "how many positive predictions did I miss?".
+It thereby answers the question: 'how many positive predictions did I miss?'.
 
 Both measurements are usually merged into one metric, the _F1-score_.
 It is defined as the harmonic mean of both and therefore penalizes extremely low values in either:
@@ -368,7 +376,7 @@ To handle a high amount of variables, or high dimensionality, a common technique
 These add a constraint parameter to the regression equation that penalizes the model for having too many parameters [@james:introductionstatisticallearning.2013; @bruce:Practicalstatisticsdata.2017].
 This is also known as _shrinkage_ or _regularization_.
 
-### Shrinkage methods
+### Shrinkage methods {#sec:shrinkage}
 
 One method for penalized regressions is called _lasso_ (least absolute shrinkage operator).
 Lasso shrinks all coefficients by some constant factor $\lambda$, truncating at zero.
@@ -489,12 +497,12 @@ Also please provide a high-res format for the plot (e.g., PDF) and if possible a
 This allows assessing whether the relationship between a selected feature and the outcome is linear, monotonic, or more complex.
 Figure @fig:rf_pdp shows the [!+ale] for all numerical features in the [!rf] model.\todo[author=JS]{It would be very helpful if you could briefly explain how to read that plot. E.g., what exactly does the y-axis show? (see comment in the figure as well).}
 Compared to the results of the logistic regression earlier (see Table @tbl:logreg), the linear trends of the [!rf] model point in the same directions.
-Additionally, however, the [!rf] reveals some non-linear relationships in our data.\todo[author=JS]{That’s really fascinating!}
+Additionally, however, the [!rf] reveals some non-linear relationships in our data.<!--\todo[author=JS]{That’s really fascinating!}-->
 According to our model, self-transcendence and conservation are only changing the predicted outcome once their values become positive.
 In a way, it looks like it does not matter too much *how* negative the values are but only *if* they are negative.
 A similar effect can be seen when looking at the self-placement on the left-right scale which is starting to increase at roughly the value of 4.
 The effect of education seems to be of a more dichotomous fashion, with low values indicating more tendencies towards a rejection of immigrations whereas high values indicate the opposite.
-Again, the exact amount does not seem to drive the predictions, but rather whether someone has received much or little education is decisive.\todo[author=JS]{That’s a fantastic insight!}
+Again, the exact amount does not seem to drive the predictions, but rather whether someone has received much or little education is decisive.<!--\todo[author=JS]{That’s a fantastic insight!}-->
 The effect of religiosity looks like a slightly skewed inverse u-shape rather than being linearly negative, as the logistic regression would suggest, with the highest predicted probabilities for rejection of immigrants at around 5 on the religiosity scale.
 
 # Discussion
@@ -514,14 +522,14 @@ This contribution tried to illustrate similarities and differences between appro
 Social scientists face a trade-off when it comes to using [!ml].
 On the downside, features (i.e., independent variables) can only be ranked by importance. This stands in contrast to more fine-grained information provided by a typical regression coefficient, in particular, its direction, but also the strength of effects.
 On the upside, focusing on models' predictive capabilities, like in any [!ml] application, shifts the attention to explanations that are closer to scientific reasoning and less prone to mirror common sense [@wattsCommonSenseSociological2014].
-It is "this potential predictive force which gives scientific explanations its importance" [@hempelStudiesLogicExplanation1948, 138], which is inherently neglected by goodness of fit measures solely relying on in-sample observations.
+It is 'this potential predictive force which gives scientific explanations its importance' [@hempelStudiesLogicExplanation1948, 138], which is inherently neglected by goodness of fit measures solely relying on in-sample observations.
 Instead, using out-of-sample is a crucial part of any [!sml] procedure, i.e., applying the trained model to unseen test data.
 Integrating this inherent property of [!ml] would at least reduce an important weakness of [!ts] and could even boost, following Watts' line of argumentation, social scientists reasoning more generally.
 
 Those important benefits notwithstanding, we would like to emphasize that [!ml] is no cheat code, it is all statistics.
 Everybody with a professional background in quantitative social science has learned many [!ml] tools, be it [!uml] like cluster analysis or [!sml] like logistic regressions.
 Yet, how those methods are used (and promoted) in [!ml] contexts, might starkly differ from common social science approaches and researchers' training.
-Regardless of which features drive a model and how an outcome could be explained, the main interest of [!ml] researchers in industry and science is that "the model works", i.e., that the model provides good predictions.
+Regardless of which features drive a model and how an outcome could be explained, the main interest of [!ml] researchers in industry and science is that 'the model works', i.e., that the model provides good predictions.
 This is an important, though merely _epistemological_, difference to statistical models used in social science.
 
 Going further, it might be helpful for social scientists to acknowledge the differences laid out in this paper and pay closer attention to the predictive power of [!ts] models.
@@ -529,6 +537,6 @@ In addition, non-linear effects could be explored by tools like [!rf] and, hence
 Both advantages might provide fruitful ways to _complement_ existing regression models.
 Hopefully, this contribution showed interested readers what can and what cannot be done with [!ml] methods and how to apply those parts of the [!ml] universe that are actually useful to us when it comes to predicting an outcome.
 
-\todo[author=LE]{Jan hat alle Orte in der Lit eingefügt. Er will daher vmtl. APA6 und nicht APA7. ändern.}
+\todo[author=LE]{Jan hat alle Orte in der Lit eingefügt. Er will daher vmtl. APA6 und nicht APA7. Check cites.}
 \todo[author=LE]{convert footnotes to endnotes}
 \todo{LE: fix appendix table}
