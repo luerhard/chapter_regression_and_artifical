@@ -313,8 +313,23 @@ summary(model)</code></pre>
   as.data.frame() %&gt;%
   filter(!grepl(&quot;^country&quot;, row.names(.))) %&gt;%
   arrange(row.names(.)) %&gt;%
-  mutate_if(is.numeric, ~signif(., digits = 3)) %&gt;%
-  select(Estimate, `Std. Error`, `Pr(&gt;|z|)`)
+  mutate_if(is.numeric, round, digits = 3) %&gt;%
+  select(Estimate, `Std. Error`, `Pr(&gt;|z|)`) %&gt;%
+  rename(Coefficient = Estimate, `Standard Error` = `Std. Error`, `p-value` = `Pr(&gt;|z|)`) %&gt;%
+  mutate(`p-value` = str_replace(as.character(`p-value`), &quot;^0$&quot;, &quot;&lt; .001&quot;) %&gt;% str_replace(., &quot;^0.&quot;, &quot;.&quot;))
+
+renamed &lt;- row.names(coefs) %&gt;%
+  {sub(&quot;(Intercept)&quot;, &quot;Intercept&quot;, ., fixed = T)} %&gt;%
+  {sub(&quot;age&quot;, &quot;Age&quot;, ., fixed = T)} %&gt;%
+  {sub(&quot;educ&quot;, &quot;Education&quot;, ., fixed = T)} %&gt;%
+  {sub(&quot;relig&quot;, &quot;Religiosity&quot;, ., fixed = T)} %&gt;%
+  {sub(&quot;genderFemale&quot;, &quot;Female&quot;, ., fixed = T)} %&gt;%
+  {sub(&quot;income&quot;, &quot;Income&quot;, ., fixed = T)} %&gt;%
+  {sub(&quot;left_right&quot;, &quot;Left-Right&quot;, ., fixed = T)} %&gt;%
+  {sub(&quot;s_dim_conservation&quot;, &quot;Conservation&quot;, ., fixed = T)} %&gt;%
+  {sub(&quot;s_dim_transcendence&quot;, &quot;Self-Transcendence&quot;, ., fixed = T)}
+
+row.names(coefs) &lt;- renamed
 
 write.csv(coefs, here::here(&quot;rsc&quot;, &quot;tables&quot;, &quot;logreg.csv&quot;))</code></pre>
 <pre class="r"><code>pred &lt;- predict(model, df, type = &quot;response&quot;)

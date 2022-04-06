@@ -100,8 +100,23 @@ coefs <- summary(model)$coef %>%
   as.data.frame() %>%
   filter(!grepl("^country", row.names(.))) %>%
   arrange(row.names(.)) %>%
-  mutate_if(is.numeric, ~ signif(., digits = 3)) %>%
-  select(Estimate, `Std. Error`, `Pr(>|z|)`)
+  mutate_if(is.numeric, round, digits = 3) %>%
+  select(Estimate, `Std. Error`, `Pr(>|z|)`) %>%
+  rename(Coefficient = Estimate, `Standard Error` = `Std. Error`, `p-value` = `Pr(>|z|)`) %>%
+  mutate(`p-value` = str_replace(as.character(`p-value`), "^0$", "< .001") %>% str_replace(., "^0.", "."))
+
+renamed <- row.names(coefs) %>%
+  {sub("(Intercept)", "Intercept", ., fixed = T)} %>%
+  {sub("age", "Age", ., fixed = T)} %>%
+  {sub("educ", "Education", ., fixed = T)} %>%
+  {sub("relig", "Religiosity", ., fixed = T)} %>%
+  {sub("genderFemale", "Female", ., fixed = T)} %>%
+  {sub("income", "Income", ., fixed = T)} %>%
+  {sub("left_right", "Left-Right", ., fixed = T)} %>%
+  {sub("s_dim_conservation", "Conservation", ., fixed = T)} %>%
+  {sub("s_dim_transcendence", "Self-Transcendence", ., fixed = T)}
+
+row.names(coefs) <- renamed
 
 write.csv(coefs, here::here("rsc", "tables", "logreg.csv"))
 ```

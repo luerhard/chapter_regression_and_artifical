@@ -55,8 +55,21 @@ feat_importance <- tibble(names = names(imp), importance = imp) %>%
   mutate(names = fct_inorder(names)) %>%
   filter(!grepl("^country", names))
 
+feat_importance$names <- feat_importance$names %>%
+  {sub("(Intercept)", "Intercept", ., fixed = T)} %>%
+  {sub("age", "Age", ., fixed = T)} %>%
+  {sub("educ", "Education", ., fixed = T)} %>%
+  {sub("relig", "Religiosity", ., fixed = T)} %>%
+  {sub("genderFemale", "Female", ., fixed = T)} %>%
+  {sub("income", "Income", ., fixed = T)} %>%
+  {sub("left_right", "Left-Right", ., fixed = T)} %>%
+  {sub("s_dim_conservation", "Conservation", ., fixed = T)} %>%
+  {sub("s_dim_transcendence", "Self-Transcendence", ., fixed = T)}
+
 ggplot(feat_importance, aes(x = importance, y = names)) +
-  geom_bar(stat = "identity", show.legend = FALSE, width = .2)
+  geom_bar(stat = "identity", show.legend = FALSE, width = .2) +
+  xlab("Importance") +
+  ylab("Features")
 
 ggsave(here::here("rsc", "images", "rf_feature_imp.pdf"))
 ```
@@ -80,35 +93,43 @@ pred <- Predictor$new(
 ```{r}
 eff_tran <- FeatureEffect$new(pred, feature = "s_dim_transcendence", method = "ale") %>% 
   plot() + 
-  theme(axis.title.y = element_blank())
+  theme(axis.title.y = element_blank()) +
+  xlab("Self-Transcendence")
 
 eff_cons <- FeatureEffect$new(pred, feature = "s_dim_conservation", method = "ale") %>% 
   plot() + 
-  theme(axis.title.y = element_blank())
+  theme(axis.title.y = element_blank()) +
+  xlab("Conservation")
 
 eff_age <- FeatureEffect$new(pred, feature = "age", method = "ale") %>% 
   plot() + 
-  theme(axis.title.y = element_blank())
+  theme(axis.title.y = element_blank()) +
+  xlab("Age")
 
 eff_lr <- FeatureEffect$new(pred, feature = "left_right", method = "ale") %>% 
   plot() + 
-  theme(axis.title.y = element_blank())
+  theme(axis.title.y = element_blank()) +
+  xlab("Left-Right")
 
 eff_income <- FeatureEffect$new(pred, feature = "income", method = "ale") %>% 
   plot() + 
-  theme(axis.title.y = element_blank())
+  theme(axis.title.y = element_blank()) +
+  xlab("Income")
 
 eff_educ <- FeatureEffect$new(pred, feature = "educ", method = "ale") %>% 
   plot() +
-  theme(axis.title.y = element_blank())
+  theme(axis.title.y = element_blank()) +
+  xlab("Education")
 
 eff_relig <- FeatureEffect$new(pred, feature = "relig", method = "ale") %>% 
   plot() + 
-  theme(axis.title.y = element_blank())
+  theme(axis.title.y = element_blank()) +
+  xlab("Religiosity")
 
 eff_gender <- FeatureEffect$new(pred, feature = "gender", method = "ale") %>% 
   plot() + 
-  theme(axis.title.y = element_blank())
+  theme(axis.title.y = element_blank()) +
+  xlab("Female")
 ```
 
 ```{r}
