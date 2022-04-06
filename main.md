@@ -231,7 +231,6 @@ We see highly significant effects for all variables except gender with age, self
 Except for the non-significance of gender, our results are similar to @davidov:ExplainingAttitudesImmigration.2012.
 That said, we use a drastically simplified model and would not advise drawing any substantial conclusions from it.
 We use this model only for didactic purposes to compare methods of [!ts] to [!ml].
-\todo{LE: fix table}
 
 ```{.table #tbl:logreg}
 ---
@@ -268,10 +267,11 @@ In the case at hand, 20\% of the data (5432 cases of an overall number of 27,164
 This data will only be used for model inspection and evaluation.
 The remaining 80\% will be used as training set.
 
-Classification models are evaluated using a so-called _confusion matrix_;\todo[author=JS]{How is the confusion matrix calculated? We use the model parameters estimated from the training set to make predictions based on the case and covariate distribution of the test set?} a cross-tabulation of the actual (true) and the predicted outcomes.\todo[author=JS]{How do you predict binary values 0 and 1 in the example? Using a threshold of .5? Like say if the predicted probability is > .5, then we predict a 1, and if <= .5 we predict a 0?}
+Classification models are evaluated using a so-called _confusion matrix_.
+<!--\todo[author=JS]{How is the confusion matrix calculated? We use the model parameters estimated from the training set to make predictions based on the case and covariate distribution of the test set?}-->
+It is a table that compares the model's predicted values to the actual (true) values from our test.
+\todo[author=JS]{How do you predict binary values 0 and 1 in the example? Using a threshold of .5? Like say if the predicted probability is > .5, then we predict a 1, and if <= .5 we predict a 0? LE: ignore? Unser RF-Classifier gibt tatsächlich binary values aus; Regression nicht; ist also immer anders und spielt an dieser Stelle egtl. keine Rolle}
 Table @tbl:confmat depicts its formal representation for binary classifications.
-
-\todo{LE: fix table}
 
 ```{.table #tbl:confmat}
 ---
@@ -327,8 +327,6 @@ $$
 
 To be comparable to the models presented below, we reran the logistic regression from above on the training data set (80\% of the initial data set)and evaluated it on the test set (20\% of the initial data set).
 The results are shown in the confusion matrix in Table @tbl:logregconfmat.
-
-\todo{LE: fix table}
 
 ```{.table #tbl:logregconfmat}
 ---
@@ -460,15 +458,6 @@ Figure @fig:rf_feature_importance shows the relative feature importance of all p
 These paint a similar picture as our logistic regression with the two human values dimensions (self-transcendence and conservation) being the most important predictors, followed by age and education.
 Religiosity and self-placement on the left-right scale contribute roughly half as much to the prediction compared to the human values dimensions.
 
-\todo{LE: fix image. see markdown comment}
-<!--
-Use variables labels in line with Table 1. 
-Replace “names” (y-axis label) with “Features”. 
-Replace “importance” (x-axis label) with “Importance”. 
-
-Also please provide a high-res format for the plot (e.g., PDF) and if possible an editable version as well (e.g., svg, excel). 
--->
-
 ![Feature importances of all non-country features in [!rf].](rsc/images/rf_feature_imp.png){#fig:rf_feature_importance .center width="100%"}
 
 The feature importances are easy to compute but have two major drawbacks. First, due to the relativity of the measure, one cannot draw any conclusion about the _absolute contribution_ of each feature to the prediction.
@@ -483,14 +472,7 @@ The same can be done for [!ml] models.
 Traditionally, this was done using [!+pdp], which serve exactly this purpose but suffer from another drawback: [!+pdp] tend to show non-sensical effects if the features are correlated.
 Therefore, a more advanced technique is the inspection of [!ale] plots [@molnar:InterpretableMachineLearning.2019], which serve the same purpose but are, in contrast to [!+pdp], still correct if the respective features are correlated.\todo[author=JS]{Perhaps below, explain a bit better how the interpretation of an ALE works. (see comments below as well)}
 
-\todo{LE: fix image, see also markdown comment}
-<!--
-Use variables labels in line with Table 1. 
-
-Have a label for the y-axis or explain what the y-axis shows in the Figure note. 
-
-Also please provide a high-res format for the plot (e.g., PDF) and if possible an editable version as well (e.g., svg, excel). 
--->
+\todo[author=JS]{Explain what the y-axis shows in the Figure note. }
 
 ![[!^ale!] plots for features of interest in RF.](rsc/images/rf_ale.png){#fig:rf_pdp .center width="100%"}
 
@@ -537,6 +519,7 @@ In addition, non-linear effects could be explored by tools like [!rf] and, hence
 Both advantages might provide fruitful ways to _complement_ existing regression models.
 Hopefully, this contribution showed interested readers what can and what cannot be done with [!ml] methods and how to apply those parts of the [!ml] universe that are actually useful to us when it comes to predicting an outcome.
 
-\todo[author=LE]{Jan hat alle Orte in der Lit eingefügt. Er will daher vmtl. APA6 und nicht APA7. Check cites.}
+<!--\todo[author=LE]{Jan hat alle Orte in der Lit eingefügt. Er will daher vmtl. APA6 und nicht APA7. Check cites.}-->
 \todo[author=LE]{convert footnotes to endnotes}
-\todo{LE: fix appendix table}
+\todo{LE: fix all tables in word}
+\todo{LE: provide high-res images}
