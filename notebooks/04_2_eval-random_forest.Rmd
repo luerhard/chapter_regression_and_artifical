@@ -66,7 +66,7 @@ feat_importance$names <- feat_importance$names %>%
   {sub("s_dim_conservation", "Conservation", ., fixed = T)} %>%
   {sub("s_dim_transcendence", "Self-Transcendence", ., fixed = T)}
 
-ggplot(feat_importance, aes(x = importance, y = names)) +
+ggplot(feat_importance, aes(x = importance, y = reorder(names, importance))) +
   geom_bar(stat = "identity", show.legend = FALSE, width = .2) +
   xlab("Importance") +
   ylab("Features")
