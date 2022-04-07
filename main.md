@@ -243,7 +243,7 @@ markdown: true
 
 [^schwartz]: The measures are constructed according to the ESS website. All items were recorded so that higher levels indicate more agreement.
 
-## Evaluating model performance
+## Evaluating model performance {#sec:model_performance}
 
 Social scientists use a plethora of (pseudo) $R^2$ measures to assess the goodness of fit of a model, or the Akaike / Bayesian information criterion (AIC/BIC) to compare and select models at their disposal.
 The basic idea behind these procedures is always the same: utilize all data available to optimize the model and tell us how well our model fits the underlying data.
@@ -297,7 +297,8 @@ $$
 Accuracy = \frac{TP + TN}{TP + FP + FN + TN}
 $$
 
-Accuracy is a valuable general measure if the data contains roughly equal amounts of [!tp] and [!tn], but it is very susceptible to **class imbalance** (meaning that one class\todo[author=JS]{What do you mean by ‘class’?} has a higher prevalence in the actual data than the other).
+Accuracy is a valuable general measure if the data contains roughly equal amounts of [!tp] and [!tn], but it is very susceptible to **class imbalance** (meaning that one category of our categorical variable, in [!ml] terms usually referred to as 'classes', has a higher prevalence in the actual data than the other).
+<!--\todo[author=JS]{What do you mean by ‘class’?}-->
 Take, for example, a data set containing a rare outcome with $TN = 90$ and $TP = 10$; a model that only predicts $0$ would achieve an accuracy of .9 as it will predict 90\% of all cases correctly, even though it is most certainly not a very good model.
 
 Hence, there is a need for metrics that take imbalanced classes into account.
@@ -341,7 +342,12 @@ markdown: true
 **sum**, **2969**, **2463**, **5432**
 ```
 
-From this data, an accuracy of 68.85\%, recall of .7743, precision of .6923, and a resulting F1-score of .731 can be computed.\todo[author=JS]{Can we somehow interpret these values? Like is accuracy “good” or “reasonable”? Or are those values only useful for comparison.}
+From this data, we can compute an accuracy of .6885, meaning that we were able to predict 68.85\% of all cases in the test set correctly.
+Additionally, we can calculate a recall of .7743.
+This indicates that we were able to identify 77.43\% of all cases in our test set that have negative attitudes towards immigrants (that is, a value of 1 in our dependent variable).
+Furthermore, the precision of .6923 tells us that 69.23\% of all predictions we made on the test set with the result of the case having negative attitudes towards immigrants, 69.23\% were actually correct.\todo[author=LE]{RHH: Bitte umformulieren, hab gerade einen Knoten im Hirn und kriegs nicht besser hin.}
+The harmonic mean of precision and recall, the F1-score is .731. This has no special interpretation but is useful for a comprehensive model comparison.
+<!--\todo[author=JS]{Can we somehow interpret these values? Like is accuracy “good” or “reasonable”? Or are those values only useful for comparison.}-->
 These numbers will be compared to the alternative [!ml] models below.
 
 ## Penalized Regression
@@ -384,7 +390,8 @@ It utilizes $L_2$ regularization and does a proportional shrinkage of the coeffi
 The amount of shrinkage ($\lambda$) is a parameter of the model itself, which needs to be optimized during the model fitting process (see Section @sec:hyperparameter on hyperparameter tuning).
 
 As a rule of thumb, ridge regression tends to be used when multicollinearity is a problem in the data, whereas lasso is used if the number of features is very large [@deshpande:ArtificialIntelligencebig.2018, 73].
-In practice, however, it is often useful to try both variants and use the one that performs better.\todo[author=JS]{How is “performance” evaluated/measured? How do we know which method “performs” better? }
+In practice, however, it is often useful to try both variants and use the one that performs better (see Section @sec:model_performance).
+<!--\todo[author=JS]{How is “performance” evaluated/measured? How do we know which method “performs” better? }-->
 This was also done in the present case and ridge regression was chosen because it performed slightly better.
 There also exists a mixture of both variants where the _shrinkage penalty_ itself is an additional parameter of the model to optimize which is called _elastic net_ regression.
 If the hyperparameter, usually called $\alpha$, is 0, elastic net reduces to a ridge regression and if $\alpha$ is 1, elastic net regressions are equivalent to lasso regressions.
@@ -470,14 +477,19 @@ Random forests, however, are highly non-linear by design, meaning that each feat
 In [!ts] non-linear effects (often introduced by interaction effects in regression models) are oftentimes visualized using marginal effects.
 The same can be done for [!ml] models.
 Traditionally, this was done using [!+pdp], which serve exactly this purpose but suffer from another drawback: [!+pdp] tend to show non-sensical effects if the features are correlated.
-Therefore, a more advanced technique is the inspection of [!ale] plots [@molnar:InterpretableMachineLearning.2019], which serve the same purpose but are, in contrast to [!+pdp], still correct if the respective features are correlated.\todo[author=JS]{Perhaps below, explain a bit better how the interpretation of an ALE works. (see comments below as well)}
+Therefore, a more advanced technique is the inspection of [!ale] plots [@apley:Visualizingeffectspredictor.2020], which serve the same purpose but are, in contrast to [!+pdp], still correct if the respective features are correlated.
+[!^ale] plots are centred around zero on depict the relative effect of a variable on the predicted outcome.
+<!--\todo[author=JS]{Perhaps below, explain a bit better how the interpretation of an ALE works. (see comments below as well)}-->
 
-\todo[author=JS]{Explain what the y-axis shows in the Figure note. }
-
-![[!^ale!] plots for features of interest in RF.](rsc/images/rf_ale.png){#fig:rf_pdp .center width="100%"}
+![[!^ale!] plots for features of interest in RF. The y-axes depict the [!ale] values.](rsc/images/rf_ale.png){#fig:rf_pdp .center width="100%"}
 
 This allows assessing whether the relationship between a selected feature and the outcome is linear, monotonic, or more complex.
-Figure @fig:rf_pdp shows the [!+ale] for all numerical features in the [!rf] model.\todo[author=JS]{It would be very helpful if you could briefly explain how to read that plot. E.g., what exactly does the y-axis show? (see comment in the figure as well).}
+Figure @fig:rf_pdp shows the [!+ale] for all numerical features in the [!rf] model.
+The value depicted on the y-axis (the ALE) 'can be interpreted as the main effect of the feature at a certain value compared to the average prediction of the data' [@molnar:InterpretableMachineLearning.2019, 131].
+A ALE value of around .2 for 5 years of full-time education, for example, indicates that the predicted outcome is .2 higher (a 20\% increase in probability of negative attitudes in this case) than the average prediction.
+The black vertical bars at the bottom of the numerical features indicate the number of cases that the ALE calculations are based on and are a measure of how confident one can be in these values.
+For example, the small number of cases with 'Self-Transcendence' values of less than -1,is an indication the results in this feature range should be treated with extreme caution.
+<!--\todo[author=JS]{It would be very helpful if you could briefly explain how to read that plot. E.g., what exactly does the y-axis show? (see comment in the figure as well).}-->
 Compared to the results of the logistic regression earlier (see Table @tbl:logreg), the linear trends of the [!rf] model point in the same directions.
 Additionally, however, the [!rf] reveals some non-linear relationships in our data.<!--\todo[author=JS]{That’s really fascinating!}-->
 According to our model, self-transcendence and conservation are only changing the predicted outcome once their values become positive.
@@ -489,7 +501,7 @@ The effect of religiosity looks like a slightly skewed inverse u-shape rather th
 
 # Discussion
 
-\todo[author=JS]{see markdown comment regarding discussion}
+\todo[author=JS]{regarding discussion: see markdown comment}
 <!--
 Very nice discussion! 
 
