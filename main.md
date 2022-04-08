@@ -94,8 +94,11 @@ Most often, however, we do not know much about users' characteristics, or how th
 In addition, the efficient estimation and interpretation of regression coefficients relies on non-independent and identically distributed observations.
 This is often not the case for samples from digital data, e.g., when it comes to all data gathered on social networks (of which dependency is an inherent property).
 
-Another important challenge for [!ts] analysing digital data relates to the ubiquity of _linear_ models [@abbott:TranscendingGeneralLinear.1988].
-But what if relationships are non-linear?<!--\todo[author=JS]{as it’s currently presented, many would disagree. See comment in markdown. LE: Wenn Änderung ok, gerne löschen}-->
+Another important challenge for [!ts] analyzing digital data relates to the ubiquity of _linear_ models [@abbott:TranscendingGeneralLinear.1988].
+Even if the predictor is non-linearly related to the outcome as in, for instance, logistic regressions ($log(y) = b0 + b1*x1$), almost all [!ts] models assume "linearity-in-the-predictor".
+The advantage of linear predictors is that it facilitates the interpretation, yet, it also obscures potential non-linear relationships. 
+Social scientists only rarely formulate models with complex, non-linear predictors like $f(y) = b0/sqrt(b1*x1)*b2^x2$.
+<!--\todo[author=JS]{as it’s currently presented, many would disagree. See comment in markdown. RHH: ich hab es nochmal etwas umgeschrieben. check gerne nochmal}-->
 <!-- 
 I really love this point! However, as it’s currently presented, many would disagree. 
 Indeed, TS provides ample tools for the analysis of non-linear relationships. For instance, you have “non-linear models” such as log-linear regression models (e.g. taking the log of income), logistic regression (modelling the non-linear relationship between predictors and a probability), or Poisson models (modelling non-linear relationships between predictors and count outcomes). Furthermore, you can model non-linear functional forms such as Age and Age2 (on the predictor side). 
@@ -107,13 +110,12 @@ Hence, what TS usually never does is formulating models that are complex and non
 $f(y) = b0/sqrt(b1*x1)*b2^x2$
 Perhaps you might sharpen the argument a bit to make it more precise/convincing.
 -->
-It is very difficult to explore non-linear relationships with standard models from [!ts].
-While it is possible to model these relationships in [!ts] using, for example generalized linear models (GLMs), researchers are bound to have strong assumptions on where the non-linearity is hidden.
-On the other hand, the modelling of non-linearity is inherent to many [!ml] techniques (e.g., Random Forests, see below), making it possible to find these relationships without prior knowledge.  
-Some argue that is because of the omission of counterfactual language [@pearlBookWhyNew2018, 329-35], while others may point to the problem of overfitting when introducing polynomial terms in linear regressions [@molina:MachineLearningSociology.2019].
-In any case, the consequence is that theories and results in social sciences can almost never, methodologically, consider non-linear relations\todo[author=JS]{RHH: See my previous point.}.
 A circumstance that is astonishing, given the complexity of social phenomena.
-One of the great promises of [!ml], in contrast, is to offer ways to measure non-linear effects, as we will discuss below.
+Some argue that is because of the omission of counterfactual language [@pearlBookWhyNew2018, 329-35], while others may point to the problem of overfitting when introducing polynomial terms in linear regressions [@molina:MachineLearningSociology.2019].
+As a consequence, theories and results in social sciences almost never consider non-linear relations in the above sense.
+One of the great promises of [!ml] is to offer ways to measure such non-linear effects.
+Modeling non-linearity is actually inherent to many [!ml] techniques, making it feasible to consider complex relationships between variables without prior knowledge on the shape of these relations. 
+We will exemplify this down below by presenting the properties of Random Forests, a popular instance of [!ml] tools.
 
 # Machine Learning in the social sciences
 
