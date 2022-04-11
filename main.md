@@ -166,7 +166,7 @@ Given the priority of prediction, many restrictions of [!ts] are no longer conce
 If interpretation (or explanation) is not the aim, the use of powerful “black-boxes” like multi-layer neural networks or higher-order interaction effects becomes an attractive option.
 Almost all deep-learning efforts rest on such black boxes, which are only of limited use for social scientists.
 The same is true for using thousands of (potentially co-linear) variables in a model.
-This practical approach also allows regularization of variance [^regularization] (cf. Section @sec:shrinkage) and empirical tuning of parameters [@mullainathanMachineLearningApplied2017].
+This practical approach also allows regularisation of variance [^regularisation] (cf. Section @sec:shrinkage) and empirical tuning of parameters [@mullainathanMachineLearningApplied2017].
 Instead of being prone to overfitting (like [!ts] models), [!sml] uses the training data and tunes regularisers to fit the data at hand (number and effect differing by algorithm).
 
 We will illustrate such a typical [!sml] workflow by using two examples in the remainder of this contribution.
@@ -175,7 +175,7 @@ In particular, confusion matrices (see below) for binary outcomes have the advan
 Nevertheless, those are among the most common concepts of [!ml] and provide a useful case for the purposes of this contribution.
 All derived conclusions, however, do apply for 'regressions' (in the [!ml] sense) too.
 
-[^regularization]: Regularization in [!ml] helps researchers to dea with the noise in training data, i.e., it tunes down correlations that are not representative of the data's true properties. More technically, this is done by using loss functions like the residual sum of squares during the fitting procedure. The coefficients are chosen in such a way that the loss function is minimized and "penalizes", for instance, high coefficients.
+[^regularisation]: Regularisation in [!ml] helps researchers to dea with the noise in training data, i.e., it tunes down correlations that are not representative of the data's true properties. More technically, this is done by using loss functions like the residual sum of squares during the fitting procedure. The coefficients are chosen in such a way that the loss function is minimized and "penalizes", for instance, high coefficients.
 [^language]: In the language of [!ml], this translates into using a categorical, often binary, dependent variable (i.e., solving a 'classification' problem), while employing 'regressions' refers to techniques that use continuous outcomes. This might be a bit confusing for social scientists at first.
 
 # A comparison by example: Immigration in Europe
@@ -365,15 +365,15 @@ After removing all features without any variance (111), as they cannot possibly 
 
 To handle a high amount of variables, or high dimensionality, a common technique in [!ml] is to use _penalized regressions_.
 These add a constraint parameter to the regression equation that penalizes the model for having too many parameters [@james:introductionstatisticallearning.2013; @bruce:Practicalstatisticsdata.2017].
-This is also known as _shrinkage_ or _regularization_.
+This is also known as _shrinkage_ or _regularisation_.
 
 ### Shrinkage methods {#sec:shrinkage}
 
 One method for penalized regressions is called _lasso_ (least absolute shrinkage operator).
 Lasso shrinks all coefficients by some constant factor $\lambda$, truncating at zero.
-This is also known as $L_1$ regularization and leads to a reduced number of coefficients to be considered in the regression.
+This is also known as $L_1$ regularisation and leads to a reduced number of coefficients to be considered in the regression.
 Another method is called _ridge regression_.
-It utilizes $L_2$ regularization and does a proportional shrinkage of the coefficients, imposing a penalty on their size [@hastie:ElementsStatisticalLearning.2009, 61-73].
+It utilizes $L_2$ regularisation and does a proportional shrinkage of the coefficients, imposing a penalty on their size [@hastie:ElementsStatisticalLearning.2009, 61-73].
 The amount of shrinkage ($\lambda$) is a parameter of the model itself, which needs to be optimized during the model fitting process (see Section @sec:hyperparameter on hyperparameter tuning).
 
 As a rule of thumb, ridge regression tends to be used when multicollinearity is a problem in the data, whereas lasso is used if the number of features is very large [@deshpande:ArtificialIntelligencebig.2018, 73].
