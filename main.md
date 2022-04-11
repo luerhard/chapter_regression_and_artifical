@@ -125,18 +125,19 @@ In contrast to the usage of inferential statistics, the application of [!ml] doe
 
 In general, we can distinguish two paradigms when it comes to [!ml]: _[!sml!]_ and _[!uml!]_ [e.g., @jordan:MachineLearning.2015].
 [!^sml] uses _labelled_ data. We speak of labelled data if the values of the dependent variable (DV) are known.
-Models are then fit to predict previously unseen data of which we know all variable values _except_ the one of the DV.
-These techniques are grouped into regression (if the DV is scaled numerically) and classification (if the DV is categorical).
-[!uml] uses _unlabelled_ data, that is data where the 'correct' answer cannot be learned from known observations.
-It instead derives patterns in (unlabelled) observations by exploiting statistical properties of the data.
-Common groups of [!uml] techniques are dimension reduction (e.g., Principal Component Analysis) and clustering (e.g., K-Means clustering).<!--\todo[author=JS]{The concepts of labelled and unlabelled deserve some explanation. What do you mean by that? LE: Besser? Dann comment löschen.}-->
+That is the case for all typical regression analyses in the social sciences: trying to relate predictors to the values of a DV. 
+The difference in [!slm] is then that the statistical models are then fit to predict *previously unseen* data of which we know the predictors, but not the DV.
+These techniques are, in computer sciences, grouped into  "regressions" (for a continuous DV) and "classifications" (for categorical DV).
 
+In contrast, [!uml] uses _unlabelled_ data, that is, data where the 'correct' answer cannot be learned from known observations.
+It instead derives patterns of (unlabelled) observations by exploiting statistical properties of the data.
+Common groups of [!uml] techniques are dimension reduction (e.g., Principal Component Analysis) or clustering (e.g., K-Means clustering).
 [!uml], in essence, aims to create categorization schemes or typologies.
+In social sciences, most people would refer to this as "inductive exploration". 
 Researchers so inductively define types along derived dimensions and represent each case relative to the types given its underlying values.
 Resulting (ideal-)types are arguably among the most important methodological tools of social scientists and have been used for a long-time.
-Prominent [!uml] techniques comprise cluster analysis, principal components, or latent class analysis.
 [!uml]’s main purpose is therefore to explore data and reduce its complexity.
-Researchers might use the output as input for further analysis [@heibergerFacetsSpecializationIts2021] or to develop theoretical models [e.g., @hallIntroductionVarietiesCapitalism2001].
+Researchers might then use the output of [!uml] as input for further analysis [@heibergerFacetsSpecializationIts2021] or to develop theoretical models [e.g., @hallIntroductionVarietiesCapitalism2001].
 
 Those exploratory techniques are by no means new to social sciences.
 However, [!uml] does provide novel ways to analyse large amounts of text and social networks, both kinds of data often associated with the digital age and computational social science [@heibergerInstallingComputationalSocial2016].
@@ -144,10 +145,7 @@ In particular, the 'automatic' categorization of large corpora has found many ap
 Topic models, for instance, represent one of the most used [!nlp] tools in the social sciences [@mcfarland:DifferentiatingLanguageUsage.2013; @heibergerFacetsSpecializationIts2021].
 In addition, the detection of communities in networks resembles prominent ideas of social groups [@fortunato:CommunityDetectionGraphs.2010].
 
-The importance of [!uml] notwithstanding, our chapter's focus is on [!sml].\todo[author=JS]{RHH: missing here is some brief reasoning on how SML is different from UML; see comment in markdown}
-<!--
-What is somewhat missing here is some brief reasoning on how SML is different from UML (inductive relation to theory, exploratory / data mining in terms data analysis). In contrast, what is the purpose of SML? What does it do? Can you perhaps make an example just to briefly illustrate the use of a SML? Perhaps the brief example could be used as well to delineate the difference between TS and SML further down.
--->
+The importance of [!uml] notwithstanding, our chapter's focus is on [!sml].
 Many people might first think of [!sml] when it comes to [!ml].
 Methods under the umbrella of [!sml] also witnessed the largest performance boost due to increases in the availability of digital data.
 Methodologically speaking, almost all instances of [!ai] are [!sml], i.e., models intended to predict an outcome with a given set of features.
@@ -156,12 +154,12 @@ That is the same principle as when social scientists speak of estimating a depen
 Thus, how does [!sml] actually compare to [!ts]?
 There are two main answers to that, in our view, crucial question, one is epistemological, the other practical.
 While [!ts] infers models that _explain_ how an outcome is generated with unbiased and consistent estimators, [!sml] does not care about interpretability.
-While the coefficients are the most interesting part of regressions for social scientists, the features are of little to no interest for typical [!ml] use cases.\todo[author=JS]{RHH: See previous comment. Would be good to use a small (perhaps fictious) example to illustrate the differences.}
+While the coefficients are the most interesting part of regressions for social scientists, the features are of little to no interest for typical [!ml] use cases (cf. section X).\todo[author=rhh]{reicht hier der verweis auf die sections bzw das wein-bsp unten? da sagen wir ja genau das nochmal, oder?}
 Instead, the main goal of [!sml] is how to best forecast the outcome.
 Thus, [!sml] models do not need to care about meaningful interpretations or unbiased estimators.
 This is a crucial epistemological difference and yields many practical consequences.
 
-Foremost, the prioritization of predictions affords 'out-of-sample' testing, i.e., the ability of models to predict unknown and, hence, unlabelled, observations.
+Foremost, the prioritization of predictions affords 'out-of-sample' testing, i.e., the ability of models to predict unknown observations.
 Thus, unlike most social scientists using _one_ data set for modelling efforts, SML consists of at least two data sets: training and test data.
 The training data is used to develop the model, the second to test its predictive capacity on out-of-sample data.
 Often, the train and test sets are randomly sampled from the same data set which is split, e.g., 50/50.
@@ -173,14 +171,14 @@ Of course, firms with digital business models profit most from [!sml<]'s predict
 Consider, for instance, a company that sells wine online.
 Given a certain record of orders and a large enough customer base, the company can use the characteristics of their data (e.g., price, grape, origin, quality, vineyard, etc.) to make recommendations for further purchases.
 Those suggestions might also be based on information about what other customers might have bought.
-In any case, the wine shop will mostly be interested to develop models 'that work', i.e., engineers or consultants might typically approach this task without any concern for theory or explain _why_ somebody bought something.
-It suffices to make suitable recommendations (i.e., predictions) to improve sales.
+In any case, the wine shop will mostly be interested to develop models 'that work', i.e., engineers or consultants might typically approach this task without any concern for theory or explain _why_ somebody bought something in the sense that previous choices of grapes are two times as important for current choices than the vineyard.
+In other words, the strength and direction of coefficients are of no importance, it suffices to make suitable recommendations (i.e., predictions) to improve sales.
 
 Given the priority of prediction, many restrictions of [!ts] are no longer concerns of [!ml] researchers.
 If interpretation (or explanation) is not the aim, the use of powerful “black-boxes” like multi-layer neural networks or high-orders of interaction effects becomes an attractive option.
 Almost all deep-learning efforts rest on such black-boxes, which are only of limited use for social scientists.
 The same is true for using thousands of (potentially co-linear) variables in a model.
-This practical approach also allows regularization of variance (c.f. Section @sec:shrinkage)\todo[author=JS]{RHH: What does that mean? “Regularizing variance”?} and empirical tuning of parameters [@mullainathanMachineLearningApplied2017].
+This practical approach also allows regularization of variance [^regularization] (c.f. Section @sec:shrinkage)\todo[author=JS]{RHH: Makes sense? oder nur verweis auf section genug?} and empirical tuning of parameters [@mullainathanMachineLearningApplied2017].
 Instead of being prone to overfitting (like [!ts] models), [!sml] uses the training data and tunes regularisers to fit the data at hand (number and effect differing by algorithm).
 
 We will illustrate such a typical [!sml] workflow by using two examples in the remainder of this contribution.
@@ -189,6 +187,7 @@ In particular, confusion matrices (see below) for binary outcomes have the advan
 Nevertheless, those are among the most common concepts of [!ml] and provide a useful case for the purposes of this contribution.
 All derived conclusions, however, do apply for 'regressions' (in the [!ml] sense) too.
 
+[^regularization]: Regularization in [!ml] helps researchers to dea with the noise in training data, i.e., it tunes down correlations that are not representative of the data's true properties. More technically, this is done by using loss functions like the residual sum of squares during the fitting procedure. The coefficients are chosen in such a way that the loss function is minimized and "penalizes", for instance, high coefficients.
 [^language]: In the language of [!ml], this translates into using a categorical, often binary, dependent variable (i.e., solving a 'classification' problem), while employing 'regressions' refers to techniques that use continuous outcomes. This might be a bit confusing for social scientists at first.
 
 # A comparison by example: Immigration in Europe
@@ -206,7 +205,7 @@ The model investigates the well-known effect of human values on attitudes toward
 Our data comes from the first round [-@ESS.2002] of the European Social Survey (ESS).
 The explanandum, our dependent variable which we will call _reject_, is a measure that represents **attitudes towards immigration**.
 It is constructed as a mean index consisting of three variables[^av] which have been shown to load strongly on a single dimension in a confirmatory factor analysis [@davidov:ExplainingAttitudesImmigration.2012, 764].
-To show the [!ml] workflow in its simplest form, binary classification, the resulting variable is dichotomized at the scale's mean value so that 1 indicates more negative attitudes towards immigration.
+To show the [!ml] workflow in its simplest form, binary classification, the resulting variable is dichotomized at the scale's mean value so that 1 indicates negative attitudes towards immigration (simply put: "rejecting immigration").
 To measure human values, we use the theory of basic human values [@schwartz:UniversalsContentStructure.1992] which is captured in the [!ess] surveys.
 The theory describes 10 basic values that are structured in two dimensions[^schwartz]: _conservation_ and _self-transcendence_.
 
@@ -226,7 +225,7 @@ See Table @tbl:desc (appendix) for descriptive statistics on variables.
     All items are recoded so that higher levels indicate more accepted immigrants.
 
 
-## Anaysis using traditional statistics
+## Analysis using traditional statistics
 
 Table @tbl:logreg reveals the results of the logistic regression.
 We see highly significant effects for all variables except gender with age, self-placement on the left-right scale, and conservation being positively correlated whereas education, satisfaction with income, religiosity, and self-transcendence are negatively correlated with the rejection of immigration.
@@ -250,29 +249,26 @@ markdown: true
 Social scientists use a plethora of (pseudo) $R^2$ measures to assess the goodness of fit of a model, or the Akaike / Bayesian information criterion (AIC/BIC) to compare and select models at their disposal.
 The basic idea behind these procedures is always the same: utilize all data available to optimize the model and tell us how well our model fits the underlying data.
 Herein lies probably the biggest difference to machine learners' aims.
-While [!ml] needs to _predict_, social scientists tend to _overfit_ their models.<!--\todo[author=JS]{That seems to be crucial here but is a bit hard to follow. Elaborate a bit more on the problem of overfitting.}-->
+While [!ml] needs to _predict_, social scientists tend to _overfit_ their models.
 We speak of overfitting when a model is fit very well to the underlying data, but fails to predict unseen examples.
 It therefore has learned random _noise_ instead of the true correlations in the data set at hand. 
-Yet, overfitted models can only rarely be replicated in other samples (i.e., are bad in predicting unseen data), because they fit the data at hand 'too good' and are prone to 'p-hacking'.[^phack]
-<!--\todo[author=JS]{Explain what p-hacking means either in parentheses or in an endnote-->
+As a consequence, overfitted models can only rarely be replicated in other samples (i.e., are bad in predicting unseen data), because they fit the data 'too good' and are prone to 'p-hacking'.[^phack]
 That creates considerable uncertainty about such models' merits and casts considerable doubts if those explanations should be even considered as scientific [@wattsCommonSenseSociological2014].
 
 [^phack]: _P_-hacking is when a researcher looks at many relationships to find a statistically significant result (p < .05), and then only reports significant findings.
 
 To overcome the obstacle of overfitting, it has become customary to split the data set into multiple parts and only to use part of the data to train the model and the rest of the data to evaluate the predictive performance.
 We call this the _train-test-split_, with the _training set_ being the former and the _test set_ being the latter subset of our data.
-<!--\todo[author=JS]{Clarify better. You split the data set into (A) a train subset and (B) into a test subset? }-->
-This procedure allows us to evaluate whether our models only learn the noise (unexplained variance) in our data or if they are able to predict data that they have never seen before.<!--\todo[author=JS]{What is “it”? Reference unclear.}-->
+This procedure allows us to evaluate whether our models only learn the noise (unexplained variance) in our data or if they are able to predict data that they have not seen before.
 A drawback of this procedure, of course, is that we are not able to evaluate the model on the whole data set, so there is a trade-off to be made when deciding on how large the test set should be.
+Hence, the need for "Big Data".
 Larger test sets usually mean higher confidence in the validation results but they come at the price of reduced available data for the training step.
 In the case at hand, 20\% of the data (5432 cases of an overall number of 27,164 cases) is separated into the test set.
 This data will only be used for model inspection and evaluation.
 The remaining 80\% will be used as training set.
 
 Classification models are evaluated using a so-called _confusion matrix_.
-<!--\todo[author=JS]{How is the confusion matrix calculated? We use the model parameters estimated from the training set to make predictions based on the case and covariate distribution of the test set?}-->
-It is a table that compares the model's predicted values to the actual (true) values from our test.
-\todo[author=JS]{How do you predict binary values 0 and 1 in the example? Using a threshold of .5? Like say if the predicted probability is > .5, then we predict a 1, and if <= .5 we predict a 0? LE: ignore? Unser RF-Classifier gibt tatsächlich binary values aus; Regression nicht; ist also immer anders und spielt an dieser Stelle egtl. keine Rolle}
+A confusion matrix compares the predicted values from a model to the actual (true) values from our test data.
 Table @tbl:confmat depicts its formal representation for binary classifications.
 
 ```{.table #tbl:confmat}
@@ -287,7 +283,8 @@ true 0, TN (true negative), FP (false positive)
 true 1, FN (false negative), TP (true positive)
 ```
 
-[!+^tn] represent the number of correct predictions for the 'negative class' (e.g., the absence of a class, most often 0), [!+tp] the number of correct predictions for the positive class, respectively.
+[!+^tn] represent the number of correct predictions for the 'negative class' (e.g., the absence of a class, most often 0; in our case, if somebody is having no negative attitudes against immigration).
+[!+tp] is the number of correct predictions for the positive class (in our case: if somebody is having negative attitudes against immigration), respectively.
 [!+^fn] show the number of incorrect predictions for the negative class, whereas [!+fp] depict the number of incorrect positive predictions.
 Many important goodness-of-fit metrics can be derived from this matrix.
 We will illustrate two of the most common measures: **accuracy** and the **F1-score**.
@@ -299,8 +296,7 @@ $$
 Accuracy = \frac{TP + TN}{TP + FP + FN + TN}
 $$
 
-Accuracy is a valuable general measure if the data contains roughly equal amounts of [!tp] and [!tn], but it is very susceptible to **class imbalance** (meaning that one category of our categorical variable, in [!ml] terms usually referred to as 'classes', has a higher prevalence in the actual data than the other).
-<!--\todo[author=JS]{What do you mean by ‘class’?}-->
+Accuracy is a valuable measure if the data contains roughly equal amounts of [!tp] and [!tn], but it is very susceptible to **class imbalance** (meaning that one category of our categorical variable, in [!ml] terms usually referred to as 'classes', has a higher prevalence in the actual data than the other).
 Take, for example, a data set containing a rare outcome with $TN = 90$ and $TP = 10$; a model that only predicts $0$ would achieve an accuracy of .9 as it will predict 90\% of all cases correctly, even though it is most certainly not a very good model.
 
 Hence, there is a need for metrics that take imbalanced classes into account.
@@ -347,17 +343,18 @@ markdown: true
 From this data, we can compute an accuracy of .6885, meaning that we were able to predict 68.85\% of all cases in the test set correctly.
 Additionally, we can calculate a recall of .7743.
 This indicates that we were able to identify 77.43\% of all cases in our test set that have negative attitudes towards immigrants (that is, a value of 1 in our dependent variable).
-Furthermore, the precision of .6923 tells us that 69.23\% of all predictions we made on the test set with the result of the case having negative attitudes towards immigrants, 69.23\% were actually correct.\todo[author=LE]{RHH: Bitte umformulieren, hab gerade einen Knoten im Hirn und kriegs nicht besser hin.}
-The harmonic mean of precision and recall, the F1-score is .731. This has no special interpretation but is useful for a comprehensive model comparison.
-<!--\todo[author=JS]{Can we somehow interpret these values? Like is accuracy “good” or “reasonable”? Or are those values only useful for comparison.}-->
-These numbers will be compared to the alternative [!ml] models below.
+Furthermore, the precision of .6923 tells us the proportion of correct positive predictions. 
+Thus, we predict 69.23\% of all positive predictions correctly.
+The harmonic mean of precision and recall, the F1-score, is .731. This has no special interpretation but is often used for a comprehensive model comparison considering precision and recall.
+Typically, these numbers are compared across different models (or model setups) in our to find the most predictive model.
+We exemplify this below with our example. 
 
 ## Penalized Regression
 
 Common applications in [!ml] have not only to deal with a lot of observations, but also frequently with a large number of variables or, in the language of [!ml], 'features'.
 To imitate that, and to show an often-used procedure, all two-way and three-way interactions between all variables are calculated and added to the data set.
 Interactions are often called 'polynomial features' in the [!ml] realm.
-In our example, this ‘polynomialization’\todo[author=JS]{Is that an actual word? ;-); see also markdown comment} results in 870 features (i.e., variables).
+In our example, this ‘polynomialization’\todo[author=JS]{Is that an actual word? ;-); see also markdown comment ;RH: die combinatorial rule rein? ich würde sagen ja, in fußnote} results in 870 features (i.e., variables).
 <!--
 Correct? You may explain in an endnote how the number comes together. 
 
@@ -392,8 +389,7 @@ It utilizes $L_2$ regularization and does a proportional shrinkage of the coeffi
 The amount of shrinkage ($\lambda$) is a parameter of the model itself, which needs to be optimized during the model fitting process (see Section @sec:hyperparameter on hyperparameter tuning).
 
 As a rule of thumb, ridge regression tends to be used when multicollinearity is a problem in the data, whereas lasso is used if the number of features is very large [@deshpande:ArtificialIntelligencebig.2018, 73].
-In practice, however, it is often useful to try both variants and use the one that performs better (see Section @sec:model_performance).
-<!--\todo[author=JS]{How is “performance” evaluated/measured? How do we know which method “performs” better? }-->
+In practice, however, it is often useful to try both variants and use the one that performs better along the metrics explained above (see Section @sec:model_performance).
 This was also done in the present case and ridge regression was chosen because it performed slightly better.
 There also exists a mixture of both variants where the _shrinkage penalty_ itself is an additional parameter of the model to optimize which is called _elastic net_ regression.
 If the hyperparameter, usually called $\alpha$, is 0, elastic net reduces to a ridge regression and if $\alpha$ is 1, elastic net regressions are equivalent to lasso regressions.
@@ -503,7 +499,7 @@ The effect of religiosity looks like a slightly skewed inverse u-shape rather th
 
 # Discussion
 
-\todo[author=JS]{regarding discussion: see markdown comment}
+\todo[author=JS]{regarding discussion: see markdown comment; RH: ist der erste block v JS comments hier addressiert?}
 <!--
 Very nice discussion! 
 
@@ -527,8 +523,10 @@ Everybody with a professional background in quantitative social science has lear
 Yet, how those methods are used (and promoted) in [!ml] contexts, might starkly differ from common social science approaches and researchers' training.
 Regardless of which features drive a model and how an outcome could be explained, the main interest of [!ml] researchers in industry and science is that 'the model works', i.e., that the model provides good predictions.
 This is an important, though merely _epistemological_, difference to statistical models used in social science.
+One consequence for future social scientists might be, at the very least, to engage with the ideas of [!ml]; a knowledge resource that is only slowly trickling into social science curricula. 
+Already knowing of the epistemological framework of [!ml] might therefore provide important insights for social scientists.
 
-Going further, it might be helpful for social scientists to acknowledge the differences laid out in this paper and pay closer attention to the predictive power of [!ts] models.
+Going further, it might also be helpful for social scientists to acknowledge the differences laid out in this paper and pay closer attention to the predictive power of [!ts] models.
 In addition, non-linear effects could be explored by tools like [!rf] and, hence, also inform theory-building [@grimmer:MachineLearningSocial.2021].
 Both advantages might provide fruitful ways to _complement_ existing regression models.
 Hopefully, this contribution showed interested readers what can and what cannot be done with [!ml] methods and how to apply those parts of the [!ml] universe that are actually useful to us when it comes to predicting an outcome.
