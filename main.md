@@ -31,6 +31,18 @@ toc: true # Table of contents
 \listoftodos
 \newpage
 
+<!--
+TODOs für LE vor Einreichung:
+- convert footnotes to endnotes
+- fix all tables in word
+- provide high-res images
+- check publisher locations for books
+
+Notes to editors:
+- changed citation style from APA7 to APA6
+- 
+-->
+
 # Introduction
 
 Research in the social sciences has been shifting towards a new era.
@@ -385,8 +397,11 @@ In all these methods, it becomes apparent that we modify the coefficients to enh
 
 ### Hyperparameter tuning and Grid Search Cross-Validation {#sec:hyperparameter}
 
-An important aspect of most [!ml] models is to tune so-called _hyperparameters_.\todo[author=JS]{The whole section relates to penalized regression right? Perhaps hat could be made a bit clearer.}
+An important aspect of most [!ml] models is to tune so-called _hyperparameters_.
+<!--\todo[author=JS]{The whole section relates to penalized regression right? Perhaps hat could be made a bit clearer.}-->
 These are parameters that influence the way the models are trained and choosing these can have a great impact on model performance.
+Almost all ML models have these hyperparameters that need to be optimized to become the best possible model.
+We present here the general procedure using ridge regression introduced above.
 _Hyperparameter tuning_ describes the process of estimating models with multiple different combinations of the hyperparameters on the training data and choosing the hyperparameter combinations with the most predictive power.
 This process usually includes two elements: _cross-validation_ and _grid-search_.
 
@@ -410,8 +425,8 @@ The differences in recall and precision tell us, that the ridge regression model
 
 ## Random Forest
 
-\todo[author=JS]{I am wondering how this relates to penalized regression just discussed. Are PR and RF two different techniques or do they somehow come together in one analysis? }
-
+<!--\todo[author=JS]{I am wondering how this relates to penalized regression just discussed. Are PR and RF two different techniques or do they somehow come together in one analysis? }-->
+We now turn to another family of models: random forests.
 [!^rf!] is an algorithm from the family of ensemble methods, meaning it is a compound of multiple algorithms called _Decision Trees_.
 Ensemble methods exploit the concept of majority voting, where multiple simple models are trained to capture different aspects of the data and the prediction is the outcome most models agree upon [@bonaccorso:MachineLearningAlgorithms.2017, 154].
 
@@ -487,8 +502,9 @@ The effect of religiosity looks like a slightly skewed inverse u-shape rather th
 
 # Discussion
 
-\todo[author=JS]{regarding discussion: see markdown comment; RH: ist der erste block v JS comments hier addressiert?}
 <!--
+\todo[author=JS]{regarding discussion: see markdown comment; RH: ist der erste block v JS comments hier addressiert?}
+
 Very nice discussion! 
 
 Perhaps clarify better when (e.g. for which types of research questions) somebody would turn to ML rather than TS. Furthermore, is it possible to some how combine findings obtained from ML and TS to bundle each methods strengths and mitigate/compensate each one’s weakness? 
@@ -516,10 +532,5 @@ Already knowing about the epistemological framework of [!ml] might therefore pro
 
 Going further, it might also be helpful for social scientists to acknowledge the differences laid out in this paper and pay closer attention to the predictive power of [!ts] models.
 In addition, non-linear effects could be explored by tools like [!rf] and, hence, also inform theory-building [@grimmer:MachineLearningSocial.2021].
-Both advantages might provide fruitful ways to _complement_ existing regression models.
+We are **not** advocating for [!ml] to replace [!ts] but rather suggest that social scientists familiarize themselves with these new methods as the might provide fruitful ways to _complement_ existing regression models.
 Hopefully, this contribution showed interested readers what can and what cannot be done with [!ml] methods and how to apply those parts of the [!ml] universe that are actually useful to us when it comes to predicting an outcome.
-
-<!--\todo[author=LE]{Jan hat alle Orte in der Lit eingefügt. Er will daher vmtl. APA6 und nicht APA7. Check cites.}-->
-\todo[author=LE]{convert footnotes to endnotes}
-\todo{LE: fix all tables in word}
-\todo{LE: provide high-res images}
