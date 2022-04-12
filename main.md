@@ -25,7 +25,7 @@ abstract: Machine learning (ML) techniques have become one of the most successfu
 keywords: regression analysis, machine learning, ess, ridge regression, random forest
 
 titlepage: true
-toc: true # Table of contents
+toc: false # Table of contents
 ---
 
 \listoftodos
@@ -40,7 +40,8 @@ TODOs für LE vor Einreichung:
 
 Notes to editors:
 - changed citation style from APA7 to APA6
-- 
+- used single quotes where applicable
+- changed spellings to BE
 -->
 
 # Introduction
@@ -91,7 +92,7 @@ For more than a decade, the internet has changed the lives of most people in ind
 
 Compared to computer scientists and engineers who have embraced the analysis of large social data and actively developed research programs to 'conquer' this domain [@conteManifestoComputationalSocial2012], social scientists have been rather slow to utilize the possibilities of new data and computational methods [@heibergerInstallingComputationalSocial2016].
 Part of the explanation may be sought in the underlying research program of [!ts] that dominates quantitative research in the social sciences.
-It builds on inferential statistics and Karl Popper's formalizations [@popper:LogicScientificDiscovery.1968], i.e., testing falsifiable hypotheses, derived from (general) theories.
+It builds on inferential statistics and Karl Popper's formalisations [@popper:LogicScientificDiscovery.1968], i.e., testing falsifiable hypotheses, derived from (general) theories.
 This foundation of testing theory-based assumptions describes a way of generating knowledge about a small part of a population and generalizing it to its entirety [@krzywinski:Importancebeinguncertain.2013].
 One main pillar of this approach is to calculate the probability of this generalization being wrong (like the probability of a false-positive or alpha error as represented by the p-value).
 Hence, social scientists rely heavily on thresholds upon which we accept or reject hypotheses, most often considered to be at the conventional but arbitrary significance level of 5 per cent.
@@ -324,7 +325,7 @@ $$
 F1 = 2 * \frac{Precision * Recall}{Precision + Recall}
 $$
 
-To be comparable to the models presented below, we reran the logistic regression from above on the training data set (80\% of the initial data set)and evaluated it on the test set (20\% of the initial data set).
+To be comparable to the models presented below, we reran the logistic regression from above on the training data set (80\% of the initial data set) and evaluated it on the test set (20\% of the initial data set).
 The results are shown in the confusion matrix in Table @tbl:logregconfmat.
 
 ```{.table #tbl:logregconfmat}
@@ -354,25 +355,7 @@ We exemplify this below with our example.
 Common applications in [!ml] have not only to deal with a lot of observations, but also frequently with a large number of variables or, in the language of [!ml], 'features'.
 To imitate that, and to show an often-used procedure, all two-way and three-way interactions between all variables are calculated and added to the data set.
 Interactions are often called 'polynomial features' in the [!ml] realm.
-In our example, this ‘polynomialization’\todo[author=JS]{Is that an actual word? ;-); see also markdown comment ;RH: die combinatorial rule rein? ich würde sagen ja, in fußnote} results in 870 features (i.e., variables).
-<!--
-Correct? You may explain in an endnote how the number comes together. 
-
-Perhaps provide also the combinatorial rule. Example: you have 8 independent variables (not counted country as I don’t know how many dummies there are). 
-
-Then you have 
-
-Number of main effects 
-k = 8 
-
-number of 2-way interaction terms  
-k*(k-1)/2 = 28 
-
-number of 3-way interaction terms 
-k*(k-1)*(k-2) / (k*(k-1)/2) = (k-2)*2 = 12
-
-Hence, in total 8+28+12 = 48 ‘features’? Is that right?
--->
+In our example, this ‘automatic feature engineering' results in 870 features (i.e., variables).
 After removing all features without any variance (111), as they cannot possibly be useful in any model, the resulting data set contains 759 remaining variables, much more than regular models in social science.
 
 To handle a high amount of variables, or high dimensionality, a common technique in [!ml] is to use _penalized regressions_.
