@@ -112,11 +112,11 @@ Even if the predictor is non-linearly related to the outcome as in, for instance
 The advantage of linear predictors is that it facilitates the interpretation, yet, it also obscures potential non-linear relationships. 
 Social scientists only rarely formulate models with complex, non-linear predictors like $f(y) = b0/sqrt(b1*x1)*b2^x2$.
 A circumstance that is astonishing, given the complexity of social phenomena.
-Some argue that is because of the omission of counterfactual language [@pearlBookWhyNew2018, 329-35], while others may point to the problem of overfitting when introducing polynomial terms in linear regressions [@molina:MachineLearningSociology.2019].
+Some argue that is because of the omission of counterfactual language [@pearlBookWhyNew2018, 329-35], while others may point to the problem of overfitting and interpretation when introducing polynomial terms in linear regressions [@molina:MachineLearningSociology.2019].
 As a consequence, theories and results in social sciences almost never consider non-linear relations in the above sense.
 One of the great promises of [!ml] is to offer ways to measure such non-linear effects.
 Modelling non-linearity is actually inherent to many [!ml] techniques, making it feasible to consider complex relationships between variables without prior knowledge of the shape of these relations. 
-We will exemplify this down below by presenting the properties of Random Forests, a popular instance of [!ml] tools.
+We will exemplify this by presenting the properties of Random Forests, a popular instance of [!ml] tools.
 
 # Machine Learning in the social sciences {#sec:ml_in_soc}
 
@@ -134,7 +134,7 @@ In contrast, [!uml] uses _unlabelled_ data, that is, data where the 'correct' an
 It instead derives patterns of (unlabelled) observations by exploiting the statistical properties of the data.
 Common groups of [!uml] techniques are dimension reduction (e.g., Principal Component Analysis) or clustering (e.g., K-Means clustering).
 [!uml], in essence, aims to create categorization schemes or typologies.
-In social sciences, most people would refer to this as "inductive exploration". 
+In social sciences, most people would refer to this as "exploration". 
 Researchers so inductively define types along derived dimensions and represent each case relative to the types given its underlying values.
 Resulting (ideal-)types are arguably among the most important methodological tools of social scientists and have been used for a long-time.
 [!uml]’s main purpose is therefore to explore data and reduce its complexity.
@@ -143,7 +143,7 @@ Researchers might then use the output of [!uml] as input for further analysis [@
 Those exploratory techniques are by no means new to social sciences.
 However, [!uml] does provide novel ways to analyse large amounts of text and social networks, both kinds of data often associated with the digital age and computational social science [@heibergerInstallingComputationalSocial2016].
 In particular, the 'automatic' categorization of large corpora has found many applications to social phenomena [@evans:MachineTranslationMining.2016].
-Topic models, for instance, represent one of the most used [!nlp] tools in the social sciences [@mcfarland:DifferentiatingLanguageUsage.2013; @heibergerFacetsSpecializationIts2021].
+Topic models, for instance, represent one of the most used [!nlp] tools in the social sciences [@mcfarland:DifferentiatingLanguageUsage.2013].
 In addition, the detection of communities in networks resembles prominent ideas of social groups [@fortunato:CommunityDetectionGraphs.2010].
 
 The importance of [!uml] notwithstanding, our chapter's focus is on [!sml].
@@ -188,7 +188,7 @@ In particular, confusion matrices (see below) for binary outcomes have the advan
 Nevertheless, those are among the most common concepts of [!ml] and provide a useful case for the purposes of this contribution.
 All derived conclusions, however, do apply for 'regressions' (in the [!ml] sense) too.
 
-[^regularisation]: Regularisation in [!ml] helps researchers to dea with the noise in training data, i.e., it tunes down correlations that are not representative of the data's true properties. More technically, this is done by using loss functions like the residual sum of squares during the fitting procedure. The coefficients are chosen in such a way that the loss function is minimized and "penalizes", for instance, high coefficients.
+[^regularisation]: Regularisation in [!ml] helps researchers to deal with noise in training data, i.e., it tunes down correlations that are not representative of the data's true properties. More technically, this is done by using loss functions like the residual sum of squares during the fitting procedure. The coefficients are then chosen in such a way that the loss function is minimized and "penalizes", for instance, high coefficients.
 [^language]: In the language of [!ml], this translates into using a categorical, often binary, dependent variable (i.e., solving a 'classification' problem), while employing 'regressions' refers to techniques that use continuous outcomes. This might be a bit confusing for social scientists at first.
 
 # A comparison by example: Immigration in Europe
@@ -231,7 +231,7 @@ See Table @tbl:desc (appendix) for descriptive statistics on variables.
 Table @tbl:logreg reveals the results of the logistic regression.
 We see highly significant effects for all variables except gender with age, self-placement on the left-right scale, and conservation being positively correlated whereas education, satisfaction with income, religiosity, and self-transcendence are negatively correlated with the rejection of immigration.
 Except for the non-significance of gender, our results are similar to @davidov:ExplainingAttitudesImmigration.2012.
-That said, we use a drastically simplified model and would not advise drawing any substantial conclusions from it.
+That said, we use a simplified model and would not advise drawing any substantial conclusions from it.
 We use this model only for didactic purposes to compare methods of [!ts] to [!ml].
 
 ```{.table #tbl:logreg}
@@ -409,7 +409,7 @@ The differences in recall and precision tell us, that the ridge regression model
 ## Random Forest
 
 <!--\todo[author=JS]{I am wondering how this relates to penalized regression just discussed. Are PR and RF two different techniques or do they somehow come together in one analysis? }-->
-We now turn to another family of models: random forests.
+We now turn to another imoprtant group of [!ml] models: random forests.
 [!^rf!] is an algorithm from the family of ensemble methods, meaning it is a compound of multiple algorithms called _Decision Trees_.
 Ensemble methods exploit the concept of majority voting, where multiple simple models are trained to capture different aspects of the data and the prediction is the outcome most models agree upon [@bonaccorso:MachineLearningAlgorithms.2017, 154].
 
@@ -499,7 +499,8 @@ Furthermore, it would be nice if you could perhaps (at the very end) refer the r
 
 This contribution tried to illustrate similarities and differences between approaches using [!ts] or [!ml].
 Social scientists face a trade-off when it comes to using [!ml].
-On the downside, features (i.e., independent variables) can only be ranked by importance. This stands in contrast to more fine-grained information provided by a typical regression coefficient, in particular, its direction, but also the strength of effects.
+On the downside, features (i.e., independent variables) can only be ranked by importance. 
+This stands in contrast to more fine-grained information provided by a typical regression coefficient, in particular, its direction, but also the strength of effects.
 On the upside, focusing on models' predictive capabilities, like in any [!ml] application, shifts the attention to explanations that are closer to scientific reasoning and less prone to mirror common sense [@wattsCommonSenseSociological2014].
 It is 'this potential predictive force which gives scientific explanations its importance' [@hempelStudiesLogicExplanation1948, 138], which is inherently neglected by goodness of fit measures solely relying on in-sample observations.
 Instead, using out-of-sample is a crucial part of any [!sml] procedure, i.e., applying the trained model to unseen test data.
@@ -515,5 +516,6 @@ Already knowing about the epistemological framework of [!ml] might therefore pro
 
 Going further, it might also be helpful for social scientists to acknowledge the differences laid out in this paper and pay closer attention to the predictive power of [!ts] models.
 In addition, non-linear effects could be explored by tools like [!rf] and, hence, also inform theory-building [@grimmer:MachineLearningSocial.2021].
-We are **not** advocating for [!ml] to replace [!ts] but rather suggest that social scientists familiarize themselves with these new methods as the might provide fruitful ways to _complement_ existing regression models.
-Hopefully, this contribution showed interested readers what can and what cannot be done with [!ml] methods and how to apply those parts of the [!ml] universe that are actually useful to us when it comes to predicting an outcome.
+To be sure, we are **not** advocating for [!ml] to replace [!ts], but rather suggest that social scientists familiarize themselves with these new methods and way of thinking. 
+This might provide fruitful paths to _complement_ existing regression models.
+Hopefully, this contribution showed interested readers what can and what cannot be done with [!ml] methods and how to apply those parts of the [!ml] universe that are useful to us as social scientists when it comes to predictive power and non-linearity.
