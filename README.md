@@ -1,46 +1,6 @@
-# Simple usage
+# Machine Learning and Regressions
 
-1. Write your article in report/main.md and your appendix in reports/appendix.md
-2. Push to main
-3. View your results in the Actions Tab
+This is the accompanying repository for the following book chapter:
 
-# run with docker
+- Erhard, L., & Heiberger, R. (2023). Regression and machine learning. In J. Skopek (Ed.), Research Handbook on Digital Sociology (pp. 129–144). Edward Elgar Publishing. https://www.e-elgar.com/shop/gbp/research-handbook-on-digital-sociology-9781789906752.html
 
-```bash
-# to run normally
-docker run --rm -v $(pwd):/wrk lerhard/pandoc
-
-# create custom diff (where 5 is an arbitrary number of commits)
-docker run --rm -v $(pwd):/wrk --entrypoint="" lerhard/pandoc make diff depth=5
-```
-
-# local dependencies
-
-If you want to install the software directly on your system, the following dependencies are needed:
-
-```
-- make
-- TexLive 2020
-- pandoc 2.16 (lower versions may work)
-- python3
-
-pypi (pip) dependencies:
-- panflute
-- pandoc-fignos
-- pandoc-secnos
-```
-
-# possible make commands
-```bash
-# create pdf, docx and diff with depth=1
-make 
-
-# create a pdf
-make pdf
-
-# create a word document
-make docx
-
-# create a diff pdf where depth is the number of commits to compare
-make diff depth=5
-```
